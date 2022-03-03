@@ -9,6 +9,9 @@ public class Slide{
 
     ArrayList<SlideComponent> components;
 
+    /**
+     * Constructs an empty slide for the slide deck.
+     */
     public Slide(){
         components = new ArrayList<SlideComponent>();
     }
