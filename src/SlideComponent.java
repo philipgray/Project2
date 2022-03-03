@@ -7,4 +7,5 @@
  */
 public interface SlideComponent {
     void setXCoord(int xCoord);
+    void setYCoord(int yCoord);
 }
