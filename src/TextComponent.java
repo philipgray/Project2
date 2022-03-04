@@ -13,4 +13,9 @@ public abstract class TextComponent {
      */
     public abstract String getText();
 
+    /**
+     * Changes the text in the TextComponent
+     * @param text the new text for the text box
+     */
+    public abstract void setText(String text);
 }

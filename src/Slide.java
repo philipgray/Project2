@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 /**
  * A slide for a presentation. Contains multiple slide components
  * 

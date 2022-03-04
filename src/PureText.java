@@ -29,4 +29,9 @@ public class PureText extends TextComponent {
         return this.text;
     }
 
+    @Override
+    public void setText(String text){
+        this.text = text;
+    }
+
 }
