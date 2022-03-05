@@ -5,7 +5,12 @@
  * @author Alex Wills
  * @date 2 March 2022
  */
-public interface SlideComponent {
-    void setXCoord(int xCoord);
-    void setYCoord(int yCoord);
+public abstract class SlideComponent {
+
+    protected int topLeftXCoord;
+    protected int topLeftYCoord;
+    protected int bottomRightXCoord;
+    protected int bottomRightYCoord;
+
+    
 }

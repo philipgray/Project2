@@ -7,6 +7,8 @@
  */
 public abstract class TextComponent {
     
+
+
     /**
      * Returns a string containing the TextComponent's text
      * @return the text representation of the string
