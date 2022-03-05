@@ -14,6 +14,7 @@ public class PureText extends TextComponent {
      * @param startingText the initial text 
      */
     public PureText(String startingText){
+        super(0, 0, 0, 0);
         text = startingText;
     }
 

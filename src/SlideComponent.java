@@ -13,6 +13,40 @@ public abstract class SlideComponent {
     protected int bottomRightYCoord;
 
     /**
+     * Initializes slide component with coordinates for the corners
+     * @param topLeftX X coord of top left corner
+     * @param topLeftY Y coord of top left corner
+     * @param bottomRightX X coord of bottom right corner
+     * @param bottomRightY Y coord of bottom right corner
+     */
+    public SlideComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY){
+        this.setTopLeftCoord(topLeftX, topLeftY);
+        this.setBottomRightCoord(bottomRightX, bottomRightY);
+    }
+
+    /**
+     * Calculates whether the given coordinates are within this text component's bounds.
+     * NOTE: Uses top left corner of the window as 0,0
+     * Example: Pass in the mouse coordinates to see if the mouse is over this object
+     * 
+     * @param x the x coordinate to check
+     * @param y the y coordinate to check
+     * @return true if the coordinates are within this object's bounds, false otherwise
+     */
+    public boolean isColliding(int x, int y){
+        boolean isColliding = false;
+
+        // True if x is between two corners, and y is between two corners
+        if(x >= topLeftXCoord && x <= bottomRightXCoord){
+            if(y >= topLeftYCoord && y <= bottomRightYCoord){
+                isColliding = true;
+            }
+        }
+
+        return isColliding;
+    }
+
+    /**
      * Clones this component by value
      * 
      * @return a clone of this component that can be modified independently

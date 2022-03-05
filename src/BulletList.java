@@ -17,6 +17,8 @@ public class BulletList extends TextComponent {
      * Creates an empty bulleted list
      */
     public BulletList(){
+        // Default without coordinates
+        super(0, 0, 0, 0);
         listItems = new ArrayList<TextComponent>();
         bullet = "-";
     }

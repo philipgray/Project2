@@ -8,6 +8,16 @@
 public abstract class TextComponent extends SlideComponent {
     
 
+    /**
+     * Initialize text component with top left and bottom right coordinates
+     * @param topLeftX
+     * @param topLeftY
+     * @param bottomRightX
+     * @param bottomRightY
+     */
+    public TextComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY) {
+        super(topLeftX, topLeftY, bottomRightX, bottomRightY);
+    }
 
     /**
      * Returns a string containing the TextComponent's text
