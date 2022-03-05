@@ -16,7 +16,7 @@ public abstract class TextComponent extends SlideComponent {
      * @param bottomRightY
      */
     public TextComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY) {
-        super(topLeftX, topLeftY, bottomRightX, bottomRightY);
+        super(topLeftX, topLeftY, bottomRightX, bottomRightY, ComponentType.Text);
     }
 
     /**

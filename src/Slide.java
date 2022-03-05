@@ -10,12 +10,14 @@ import java.util.Iterator;
 public class Slide implements Iterable<SlideComponent> {
 
     private ArrayList<SlideComponent> components;
+    private ArrayList<TextComponent> textComponents;
 
     /**
      * Constructs an empty slide for the slide deck.
      */
     public Slide(){
         components = new ArrayList<SlideComponent>();
+        textComponents = new ArrayList<TextComponent>();
     }
 
 
@@ -26,6 +28,11 @@ public class Slide implements Iterable<SlideComponent> {
      */
     public void addComponent(SlideComponent newComponent){
         this.components.add(newComponent);
+
+        // Add component to a list based on its type
+        if (newComponent.getType() == ComponentType.Text){
+            this.textComponents.add( (TextComponent) newComponent);
+        }
     }
 
     /**
@@ -37,6 +44,7 @@ public class Slide implements Iterable<SlideComponent> {
     public SlideComponent getComponent(int index){
         return this.components.get(index);
     }
+
 
     /**
      * Clones this slide and returns a copy.
@@ -53,6 +61,16 @@ public class Slide implements Iterable<SlideComponent> {
         }
 
         return clone;
+    }
+
+    /**
+     * Returns a list of this slide's text components.
+     * Example use: to draw all of the text to the screen, you can use this method and iterate over the array list.
+     * 
+     * @return an ArrayList containing all of this slide's text components
+     */
+    public ArrayList<TextComponent> getTextComponents(){
+        return textComponents;
     }
 
     // Iterable interface

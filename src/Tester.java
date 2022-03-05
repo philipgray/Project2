@@ -10,9 +10,9 @@ public class Tester {
 
     public static void main(String[] args){
         // testBulletList();
-        // testSlideComponentIteration();
+        testSlideComponentIteration();
         // testSlide();
-        testSlideDeck();
+        // testSlideDeck();
     }
 
     private static void testSlideDeck(){
@@ -56,9 +56,10 @@ public class Tester {
         list.addItem(new PureText("List item 1"));
         list.addItem(new PureText());
 
-        // Print out and iterate all components
-        System.out.println("Printing slide components: ");
-        for(SlideComponent s : slide){
+        // Print out and iterate all text components
+        // Example of .getTextComponents
+        System.out.println("Printing text components: ");
+        for(TextComponent s : slide.getTextComponents()){
             System.out.println(s);
         }
 
@@ -108,6 +109,11 @@ public class Tester {
         // Print every slide component
         for(SlideComponent component : slide){
             System.out.println("component: " + component);
+        }
+
+        // Print every text component specifically
+        for(TextComponent text : slide.getTextComponents()){
+            System.out.println("Text: " + text.getText());
         }
     }
 

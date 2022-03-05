@@ -12,16 +12,31 @@ public abstract class SlideComponent {
     protected int bottomRightXCoord;
     protected int bottomRightYCoord;
 
+    protected ComponentType componentType;
+
     /**
      * Initializes slide component with coordinates for the corners
      * @param topLeftX X coord of top left corner
      * @param topLeftY Y coord of top left corner
      * @param bottomRightX X coord of bottom right corner
      * @param bottomRightY Y coord of bottom right corner
+     * @param ComponentType the type of component this object is
      */
-    public SlideComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY){
+    public SlideComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, ComponentType type){
         this.setTopLeftCoord(topLeftX, topLeftY);
         this.setBottomRightCoord(bottomRightX, bottomRightY);
+        this.componentType = type;
+    }
+
+    /**
+     * Returns the type of component this object is. This method lets you know what types of Components
+     * you can cast this object into.
+     * 
+     * @return this object's component type
+     * @see ComponentType.java
+     */
+    public ComponentType getType(){
+        return this.componentType;
     }
 
     /**
