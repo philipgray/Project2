@@ -1,4 +1,3 @@
-import java.util.Iterator;
 
 /**
  * Interfeace to define a slide component
@@ -12,6 +11,13 @@ public abstract class SlideComponent {
     protected int topLeftYCoord;
     protected int bottomRightXCoord;
     protected int bottomRightYCoord;
+
+    /**
+     * Clones this component by value
+     * 
+     * @return a clone of this component that can be modified independently
+     */
+    public abstract SlideComponent cloneComponent();
 
     /**
      * Set the top left coordinate of this component

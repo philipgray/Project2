@@ -1,2 +1,5 @@
 JSON Files - for saving our slide deck to the computer - provided by Karl
 https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
+
+Iterator API - for making the slides and slide components iterable
+https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Iterator.html

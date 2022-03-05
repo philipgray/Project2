@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A list of text components, organized with bullets
@@ -61,6 +60,22 @@ public class BulletList extends TextComponent {
     }
 
     
+    /**
+     * Copy the bullet list in its entirety
+     */
+    @Override
+    public BulletList cloneComponent(){
+        // Create a new list, set the bullet, and copy every element in the list
+        BulletList list = new BulletList();
+        list.setBullet(list.bullet);
+
+        // Copy all of the text components
+        for(TextComponent entry : this.listItems){
+            list.addItem( (TextComponent) entry.cloneComponent() );
+        }
+
+        return list;
+    }
 
 
     //TODO: Rework nested lists

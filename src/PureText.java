@@ -34,4 +34,9 @@ public class PureText extends TextComponent {
         this.text = text;
     }
 
+    @Override
+    public TextComponent cloneComponent() {
+        return new PureText( getText() );
+    }
+
 }

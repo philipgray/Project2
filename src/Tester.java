@@ -9,10 +9,83 @@ public class Tester {
     
 
     public static void main(String[] args){
-        //testBulletList();
-        testSlideComponentIteration();
+        // testBulletList();
+        // testSlideComponentIteration();
+        // testSlide();
+        testSlideDeck();
     }
 
+    private static void testSlideDeck(){
+        SlideDeck deck1 = new SlideDeck();
+
+        System.out.println("Empty slide deck:\n" + deck1);
+
+        deck1.addNewSlide();
+        deck1.addNewSlide();
+
+        System.out.println("Deck with 3 empty slides:\n" + deck1);
+        
+        Slide selectedSlide = deck1.getSlide(1);
+        selectedSlide.addComponent(new PureText());
+
+        System.out.println("Modified slide 1 to have a text component:\n" + deck1);
+    }
+
+    /**
+     * Test the slide class
+     */
+    private static void testSlide(){
+        Slide slide = new Slide();
+
+        // Add some guys to the slide
+        slide.addComponent(new PureText("Text 1"));
+        slide.addComponent(new PureText("Text 2"));
+        slide.addComponent(new BulletList());
+    
+        BulletList list = (BulletList) slide.getComponent(2);
+        list.addItem(new PureText("List item 1"));
+        list.addItem(new PureText());
+
+        // Print out and iterate all components
+        System.out.println("Printing slide components: ");
+        for(SlideComponent s : slide){
+            System.out.println(s);
+        }
+
+        // Clone slide
+        Slide slide2 = slide.cloneSlide();
+        // Fake clone slide (to make sure the clone function isnt useless)
+        Slide sameSlide = slide2;
+
+        System.out.println("Printing slide2 components: ");
+        for(SlideComponent s : slide2){
+            System.out.println(s);
+        }
+
+        TextComponent text = (TextComponent)(slide2.getComponent(0));
+        text.setText("CHANGED TEXT");
+
+        // Confirm two separate slides
+        System.out.println("Printing original slide components: ");
+        for(SlideComponent s : slide){
+            System.out.println(s);
+        }
+
+        // slide2 was cloned with the clone function. It is independent from the original slide
+        System.out.println("Printing slide2 components (changed first text component): ");
+        for(SlideComponent s : slide2){
+            System.out.println(s);
+        }
+
+        // sameSlide was copied by reference, before the text was changed. It is not independent from slide2
+        System.out.println("Printing sameSlide components (should be the same as slide2): ");
+        for(SlideComponent s : sameSlide){
+            System.out.println(s);
+        }
+
+        // Test slide's toString method
+        System.out.println("Slide.toString() = \n" + slide);
+    }
 
     /**
      * Test the Iterator functionality for Slides

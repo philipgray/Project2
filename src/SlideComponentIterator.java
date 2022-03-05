@@ -16,6 +16,7 @@ public class SlideComponentIterator implements Iterator<SlideComponent>{
 
     /**
      * Creates an iterator for SlideComponents
+     * 
      * @param components list of slide components to iterate over
      */
     public SlideComponentIterator(ArrayList<SlideComponent> components){
