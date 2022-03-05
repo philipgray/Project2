@@ -5,7 +5,7 @@
  * @author Alex Wills
  * @date 3 March 2022
  */
-public abstract class TextComponent {
+public abstract class TextComponent extends SlideComponent {
     
 
 
@@ -20,4 +20,12 @@ public abstract class TextComponent {
      * @param text the new text for the text box
      */
     public abstract void setText(String text);
+
+    /**
+     * TextComponents return their text-representation
+     */
+    @Override
+    public String toString(){
+        return getText();
+    }
 }

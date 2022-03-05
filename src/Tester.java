@@ -9,9 +9,24 @@ public class Tester {
     
 
     public static void main(String[] args){
-        testBulletList();
+        //testBulletList();
+        testSlideComponentIteration();
     }
 
+
+    /**
+     * Test the Iterator functionality for Slides
+     */
+    private static void testSlideComponentIteration(){
+        Slide slide = new Slide();
+        slide.addComponent(new PureText("test"));
+        slide.addComponent(new BulletList());
+
+        // Print every slide component
+        for(SlideComponent component : slide){
+            System.out.println("component: " + component);
+        }
+    }
 
     /**
      * Test all functionality of the BulletList class
@@ -50,8 +65,6 @@ public class Tester {
         sublist.addItem(new PureText("Hiya there!"));
 
         System.out.println("List with a sublist in index 1: \n" + bullets.getText());
-
-
 
     }
 }

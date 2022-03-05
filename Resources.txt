@@ -1,0 +1,2 @@
+JSON Files - for saving our slide deck to the computer - provided by Karl
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON

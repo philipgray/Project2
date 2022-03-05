@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A list of text components, organized with bullets
@@ -62,6 +63,7 @@ public class BulletList extends TextComponent {
     
 
 
+    //TODO: Rework nested lists
     @Override
     public String getText() {
         
@@ -84,4 +86,6 @@ public class BulletList extends TextComponent {
     public void setText(String text){
         this.setBullet(text);
     }
+
+    
 }
