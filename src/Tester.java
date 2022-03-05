@@ -29,6 +29,16 @@ public class Tester {
         selectedSlide.addComponent(new PureText());
 
         System.out.println("Modified slide 1 to have a text component:\n" + deck1);
+
+        selectedSlide = selectedSlide.cloneSlide();
+        SlideDeck deck2 = new SlideDeck(selectedSlide);
+        deck2.addNewSlide();
+        deck2.addNewSlide();
+        
+        System.out.println("New slide deck with a cutsom default slide:\n" + deck2);
+        selectedSlide.addComponent(new PureText("SECOND ELEMENT OF DEFAULT SLIDE"));
+        deck2.addNewSlide();
+        System.out.println("Changed default slide and added new slide:\n" + deck2);
     }
 
     /**
