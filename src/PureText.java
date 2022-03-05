@@ -14,6 +14,7 @@ public class PureText extends TextComponent {
      * @param startingText the initial text 
      */
     public PureText(String startingText){
+        super(0, 0, 0, 0);
         text = startingText;
     }
 
@@ -27,6 +28,16 @@ public class PureText extends TextComponent {
     @Override
     public String getText(){
         return this.text;
+    }
+
+    @Override
+    public void setText(String text){
+        this.text = text;
+    }
+
+    @Override
+    public TextComponent cloneComponent() {
+        return new PureText( getText() );
     }
 
 }
