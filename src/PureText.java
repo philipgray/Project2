@@ -40,4 +40,14 @@ public class PureText extends TextComponent {
         return new PureText( getText() );
     }
 
+    @Override
+    public void setContent(String content) {
+        setText(content);        
+    }
+
+    @Override
+    public String getContent() {
+        return getText();
+    }
+
 }

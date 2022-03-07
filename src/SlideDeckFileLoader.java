@@ -5,7 +5,7 @@ import java.io.FileReader;
 import org.json.simple.parser.JSONParser;
 
 /**
- * Class to manage loading files. Loads a JSON file to create a SlideDeck object.
+ * Class to manage loading files. Loads a JSON file to create a SlideDeck object.z
  * 
  * @author Alex Wills
  * @date 5 March 2022
@@ -34,6 +34,8 @@ public class SlideDeckFileLoader {
         } catch (Exception e) {
             // If the JSON file does not load properly, the slide deck will be empty.
             e.printStackTrace();
+            System.out.println( e.getCause() );
+          
         }
 
         return deck;
@@ -74,17 +76,14 @@ public class SlideDeckFileLoader {
      */
     private static void decodeSlideDeckJSON(JSONObject slideFileIn, SlideDeck slideDeckOut){
         
-        // This object will be used to parse JSON objects into slides
-        JSONObject slide;
-
         // Set the default slide
-        slide = (JSONObject) slideFileIn.get("defaultSlide");
-        slideDeckOut.setDefaultSlide( decodeSlideJSON(slide) );
+        JSONObject defaultSlide = (JSONObject) slideFileIn.get("defaultSlide");
+        slideDeckOut.setDefaultSlide( decodeSlideJSON(defaultSlide) );
 
-        // Add slides to the deck
+        // Add all slides to the deck
         JSONArray slides = (JSONArray) slideFileIn.get("slides");
         for(Object jsonObj : slides){
-            slide = (JSONObject) jsonObj;
+            JSONObject slide = (JSONObject) jsonObj;
             slideDeckOut.addSlide( decodeSlideJSON(slide));
         }
         
@@ -139,12 +138,13 @@ public class SlideDeckFileLoader {
         // Create component based on what the type is
         // NOTE: This is a good place for the command pattern
         // Encapsulating methods so that when you add new component types, you can easily add the decoding logic for the JSON
-        if(type.equals("text")){
+        if(type.equals("Text")){
             newComponent = new PureText((String) content);
 
 
         } else {
-            newComponent = null;
+            // For defaulting purposes, unsupported comopnent types will display an error as a text object
+            newComponent = new PureText("Could not load this object from the save.");
         }
 
         // Set component coordinates

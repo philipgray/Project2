@@ -16,3 +16,6 @@ https://stackoverflow.com/questions/4355303/how-can-i-convert-a-long-to-int-in-j
 Why BufferedReader and BufferedWriter are sometimes better than non buffered IO
 https://medium.com/@isaacjumba/why-use-bufferedreader-and-bufferedwriter-classses-in-java-39074ee1a966
 
+Opening a link on the computer's browser!
+https://www.geeksforgeeks.org/java-program-to-open-input-url-in-system-default-browser-in-windows/
+

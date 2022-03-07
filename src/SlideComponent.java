@@ -69,6 +69,21 @@ public abstract class SlideComponent {
     public abstract SlideComponent cloneComponent();
 
     /**
+     * Set the content of this component. Primarily used for saving/loading 
+     * 
+     * @param content the new content of the component, in string form
+     */
+    public abstract void setContent(String content);
+
+    /**
+     * Get the content of this component in string form. Primarily used for saving/loading
+     * 
+     * @return the content of the component, in string form.
+     */
+    public abstract String getContent();
+
+
+    /**
      * Set the top left coordinate of this component
      * 
      * @param x x coordinate of top left corner

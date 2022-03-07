@@ -9,7 +9,7 @@ public abstract class TextComponent extends SlideComponent {
     
 
     /**
-     * Initialize text component with top left and bottom right coordinates
+     * Initialize text component with top left and bottom right coordinates 
      * @param topLeftX
      * @param topLeftY
      * @param bottomRightX

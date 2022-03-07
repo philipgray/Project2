@@ -9,8 +9,12 @@ import java.util.Iterator;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
+
+import java.awt.Desktop;
+import java.net.URI;
+
 /**
- * Class made purely for testing and debugging other files
+ * Class made purely for testing and debugging other files 
  * 
  * @author Alex Wills
  * @date 3 March 2022
@@ -26,10 +30,56 @@ public class Tester {
 
         // testJson();
 
-        testFileLoading();
+        // testFileLoading();
+
+        // testLinksInBrowser();
+
+        testFileLoadEditSave();
     }
 
+    /**
+     * Open up youtube in the users browser
+     */
+    private static void testLinksInBrowser(){
+        Desktop desk = Desktop.getDesktop();
 
+        try{
+
+            desk.browse(new URI("https://youtube.com"));
+        } catch (Exception e){
+
+        }
+    }
+
+    /**
+     * Loads the default file, edits the first slide, and saves it
+     */
+    private static void testFileLoadEditSave(){
+
+        // Load file
+        File file = new File("saved_slides/defaultSlide.json");
+        file = file.getAbsoluteFile();
+        SlideDeck deck = SlideDeckFileLoader.loadSlideDeck(file);
+
+        
+        // Edit file
+        System.out.println("Before edit: " + deck);
+        Slide selectedSlide = deck.getSlide(1);
+        selectedSlide.addComponent(new PureText("New component!!!"));
+
+        // Save file
+        File outFile = new File("saved_slides/example_output.json");
+        outFile = outFile.getAbsoluteFile();
+        SlideDeckFileSaver.saveSlideDeck(deck, outFile);
+
+        // Confirm save by loading file again
+        SlideDeck loaded = SlideDeckFileLoader.loadSlideDeck(outFile);
+        System.out.println("Saved file after edit: " + loaded);
+    }
+
+    /**
+     * Strictly tests files loading
+     */
     private static void testFileLoading(){
 
         File file = new File("saved_slides/defaultSlide.json");
@@ -37,9 +87,12 @@ public class Tester {
 
         SlideDeck deck = SlideDeckFileLoader.loadSlideDeck(file);
 
-        System.out.println(deck);
+        System.out.println("Loaded slides: " + deck);
     }
 
+    /**
+     * Test to see how manipulating JSON works
+     */
     private static void testJson(){
 
         // Reading JSON -----------------------------
@@ -76,6 +129,9 @@ public class Tester {
 
     }
 
+    /**
+     * Test core slide deck functionality
+     */
     private static void testSlideDeck(){
         SlideDeck deck1 = new SlideDeck();
 

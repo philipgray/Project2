@@ -44,6 +44,15 @@ public class SlideDeck implements Iterable<Slide> {
     }
 
     /**
+     * Returns the default slide 
+     * 
+     * @return the default slide
+     */
+    public Slide getDefaultSlide(){
+        return this.defaultSlide;
+    }
+
+    /**
      * Adds a new empty slide to the slide deck, a copy of the defaultSlide
      */
     public void addNewSlide(){
