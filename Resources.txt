@@ -3,3 +3,16 @@ https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
 
 Iterator API - for making the slides and slide components iterable
 https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Iterator.html
+
+JSON simple library
+https://github.com/fangyidong/json-simple
+
+Reading and Writing JSON (example)
+https://mkyong.com/java/json-simple-example-read-and-write-json/
+
+Converting Long to int
+https://stackoverflow.com/questions/4355303/how-can-i-convert-a-long-to-int-in-java
+
+Why BufferedReader and BufferedWriter are sometimes better than non buffered IO
+https://medium.com/@isaacjumba/why-use-bufferedreader-and-bufferedwriter-classses-in-java-39074ee1a966
+

@@ -36,6 +36,6 @@ public abstract class TextComponent extends SlideComponent {
      */
     @Override
     public String toString(){
-        return getText();
+        return super.toString() + "\n" + getText();
     }
 }

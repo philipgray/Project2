@@ -105,4 +105,13 @@ public abstract class SlideComponent {
     public int[] getBottomRightCoord(){
         return new int[] {bottomRightXCoord, bottomRightYCoord};
     }
+
+    @Override
+    public String toString(){
+        String str = "Component type: " + this.componentType;
+        str += "\nTopLeft: " + this.getTopLeftCoord()[0] + ", " + this.getTopLeftCoord()[1];
+        str += "\nBottomRight: " + this.getBottomRightCoord()[0] + ", " + this.getBottomRightCoord()[1];
+
+        return str;
+    }
 }

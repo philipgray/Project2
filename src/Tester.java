@@ -1,3 +1,13 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Iterator;
+
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
 
 /**
  * Class made purely for testing and debugging other files
@@ -10,9 +20,60 @@ public class Tester {
 
     public static void main(String[] args){
         // testBulletList();
-        testSlideComponentIteration();
+        // testSlideComponentIteration();
         // testSlide();
         // testSlideDeck();
+
+        // testJson();
+
+        testFileLoading();
+    }
+
+
+    private static void testFileLoading(){
+
+        File file = new File("saved_slides/defaultSlide.json");
+        file = file.getAbsoluteFile();
+
+        SlideDeck deck = SlideDeckFileLoader.loadSlideDeck(file);
+
+        System.out.println(deck);
+    }
+
+    private static void testJson(){
+
+        // Reading JSON -----------------------------
+        // This is how you can get the absolute path. This way the JSON parser can use the file
+        File file = new File("saved_slides/defaultSlide.json");
+        file = file.getAbsoluteFile();
+
+        FileReader fileReader;
+        try {
+            fileReader = new FileReader(file);
+
+            JSONParser parser = new JSONParser();
+            JSONObject slideDeckJSON = (JSONObject) parser.parse(fileReader);
+
+            JSONObject defaultslide = (JSONObject)slideDeckJSON.get("defaultSlide");
+            System.out.println(defaultslide);
+
+            JSONArray slides = (JSONArray) slideDeckJSON.get("slides");
+            
+            Iterator<JSONObject> components = slides.iterator();
+
+        // There's 3 exceptions to catch haha
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (org.json.simple.parser.ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+        // Writing JSON -----------------------------------
+
     }
 
     private static void testSlideDeck(){

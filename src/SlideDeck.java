@@ -23,7 +23,6 @@ public class SlideDeck implements Iterable<Slide> {
     public SlideDeck(Slide defaultSlide){
         slides = new ArrayList<Slide>();
         this.defaultSlide = defaultSlide;
-        this.addNewSlide();
     }
 
     /**
@@ -45,20 +44,60 @@ public class SlideDeck implements Iterable<Slide> {
     }
 
     /**
-     * Adds a new slide to the slide deck, a copy of the defaultSlide
+     * Adds a new empty slide to the slide deck, a copy of the defaultSlide
      */
     public void addNewSlide(){
         this.slides.add( defaultSlide.cloneSlide() );
     }
 
     /**
+     * Adds an existing slide to the slide deck
+     * 
+     * @param newSlide the slide to add to the deck
+     */
+    public void addSlide(Slide newSlide){
+        this.slides.add(newSlide);
+    }
+
+    /**
+     * Adds a new slide to a specific index in the deck
+     * 
+     * @param index the index to add the new slide
+     * @param newSlide the slide to add to the deck
+     */
+    public void addSlide(int index, Slide newSlide){
+        this.slides.add(index, newSlide);
+    }
+
+    /**
      * Access a slide in this slide deck
+     * 
      * @param index the index of the slide
      * @return the slide at the given index
      */
     public Slide getSlide(int index){
         return slides.get(index);
     }
+
+
+    /**
+     * Removes a slide at a particular index
+     * 
+     * @param index the index of the slide to remove
+     */
+    public void removeSlide(int index){
+        this.slides.remove(index);
+    }
+
+    /**
+     * Removes a particular slide
+     * 
+     * @param toRemove the slide to remove
+     */
+    public void removeSlide(Slide toRemove){
+        this.slides.remove(toRemove);
+    }
+    
 
     // Iterator interface
     @Override
