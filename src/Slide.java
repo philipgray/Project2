@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.image.BufferedImage;
 
 /**
  * A slide for a presentation. Contains multiple slide components
@@ -18,6 +19,9 @@ public class Slide implements Iterable<SlideComponent> {
     private ArrayList<SlideComponent> remainingComponents;
 
     private Background background;
+
+    // True if the slide should have a small numer at the bottom of the screen.
+    private boolean showNumber = true;
 
     /**
      * Constructs an empty slide for the slide deck.
@@ -99,6 +103,58 @@ public class Slide implements Iterable<SlideComponent> {
         return this.background;
     }
 
+    /**
+     * Should this slide have a number at the bottom of the screen?
+     * The number is determined by the SlideDeck array list index.
+     * 
+     * @return true if the slide should have a number at the bottom of the slide
+     */
+    public boolean shouldShowNumber(){
+        return showNumber;
+    }
+
+    /**
+     * Set the slide to not show its number at the bottom of the screen.
+     * (Only changes the showNumber variable)
+     */
+    public void hideNumber(){
+        showNumber = false;
+    }
+
+    /**
+     * Sets the slide to show its number at the bottom of the screen.
+     * (Only changes the showNubmer variable)
+     */
+    public void showNumber(){
+        showNumber = true;
+    }
+
+    /**
+     * Toggles the slide's showNumber field
+     */
+    public void toggleShowNumber(){
+        showNumber = !showNumber;
+    }
+
+
+    /**
+     * Draws the slide as a buffered image and returns the product for presenting and thumbnails.
+     * 
+     * @return BufferedImage representation of the slide
+     */
+    public BufferedImage getSlideImage(int slideNumber, int width, int height){
+        //TODO: Slide as buffered image
+        // Store the slide in a BufferedImage
+        BufferedImage slideImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+
+        // If we are showing the number, add a small number at the bottom
+        if(showNumber){
+
+        }
+
+        return slideImg;
+    }
 
     /**
      * Clones this slide and returns a copy.

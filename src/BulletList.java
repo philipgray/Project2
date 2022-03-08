@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import org.json.simple.ItemList;
+
 /**
  * A list of text components, organized with bullets
  * 
@@ -10,8 +12,15 @@ public class BulletList extends TextComponent {
 
     // Ordered list of items in the bullet list.
     private ArrayList<TextComponent> listItems;
+    // This list contains the level of each component (instead of pairing the level directly with the text component)
+    private ArrayList<Integer> listLevels;
     // The string to use as a bullet (e.g. "-", "~", etc.)
     private String bullet;
+
+    // When editing a bullet list, you select a component to edit.
+    private TextComponent selected;
+    private int selectedLevel;
+    private int selectedIndex;
 
     /**
      * Creates an empty bulleted list
@@ -20,7 +29,94 @@ public class BulletList extends TextComponent {
         // Default without coordinates
         super(0, 0, 0, 0);
         listItems = new ArrayList<TextComponent>();
+
+        listLevels = new ArrayList<Integer>();
+
+        selectedLevel = 0;
+        selected = null;
         bullet = "-";
+
+        // Mark as a bullet list
+        this.componentType = ComponentType.BulletList;
+    }
+
+
+    /**
+     * Call this method to begin editing the list. 
+     * It will return the last TextComponent in the list and internally prepare
+     * the list to be edited. 
+     * 
+     * After calling this method, the last item in the list will be "selected".
+     * You can call methods to navigate up and down the list, and you can call a method to 
+     * indent the currently selected item as part of a sublist. 
+     * You can also call a metho to add to the list, which will add an element at the same 
+     * sublevel as the currently selected one.
+     * 
+     * @return the last item in the list, or null if there is no item to select
+     */
+    public TextComponent selectList(){
+        // If the list is empty, there is nothing to select. You will be able to add items to this list.
+        if(listItems.size() != 0){
+
+            // Select the last item in the list
+            selectedIndex = listItems.size() - 1;
+            selected = listItems.get(selectedIndex);
+            selectedLevel = listLevels.get(selectedIndex);
+
+        } else {
+            // If the list is empty, ensure the selected values are correct
+            selected = null;
+            selectedLevel = 0;
+        }
+
+        return selected;
+    }
+
+    /**
+     * When an item is selected, you can call this method to move up in the list.
+     * 
+     * @return the element above the currently selected item. It returns the same item that was 
+     * previously selected if it is at the top of the list (i.e. nothing happens)
+     */
+    public TextComponent moveUp(){
+        
+        // Only move up if it is possible to do so
+        if(selectedIndex > 0){
+            selectedIndex--;
+            selected = listItems.get(selectedIndex);
+            selectedLevel = listLevels.get(selectedIndex);
+        }
+
+        return selected;
+    }
+
+    /**
+     * When an item is selected, call this method to move down in the list.
+     * 
+     * @return the element below the currently selected item. It returns the same item
+     * that was previously selected if it is at the bottom of the list.
+     */
+    public TextComponent moveDown(){
+
+        // Only move down if there is an element below the selected one. 
+        if(selectedIndex + 1 < listItems.size()){
+            selectedIndex++;
+            selected = listItems.get(selectedIndex);
+            selectedLevel = listLevels.get(selectedIndex);
+        }
+
+        return selected;
+    }
+
+    /**
+     * Adds a text component underneath the currently selected component.
+     * Also selects this element in the list, so that you can moveUp(), moveDown(),
+     * indent(), and deleteSelected()
+     * 
+     * @param toAdd the text component to add
+     */
+    public void insertItem(TextComponent toAdd){
+        
     }
 
     /**
@@ -30,35 +126,6 @@ public class BulletList extends TextComponent {
      */
     public void setBullet(String newBullet){
         this.bullet = newBullet;
-    }
-
-    /**
-     * Adds a new item to the bullet list in a specific location
-     * 
-     * @param index the index for the new item in the list
-     * @param newItem the item to add to the list
-     */
-    public void addItem(int index, TextComponent newItem){
-        listItems.add(index, newItem);
-    }
-
-    /**
-     * Adds a new item to the end of the bullet list
-     * 
-     * @param newItem the item to add to the list
-     */
-    public void addItem(TextComponent newItem){
-        listItems.add(newItem);
-    }
-
-    /**
-     * Gets a specific element of the list
-     * 
-     * @param index the index of the element you would like to access
-     * @return the text component at that index
-     */
-    public TextComponent getItem(int index){
-        return listItems.get(index);
     }
 
     

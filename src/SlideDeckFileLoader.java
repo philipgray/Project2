@@ -1,4 +1,6 @@
 import org.json.simple.*;
+
+import java.awt.Color;
 import java.io.File;
 import java.io.FileReader;
 
@@ -115,8 +117,14 @@ public class SlideDeckFileLoader {
         }
 
         // Get the background, or create a blank one
-        component = (JSONObject) slideJSON.get("background");
-        newSlide.setBackground( (Background) decodeComponentJSON( component ));
+        if(slideJSON.containsKey("background") && slideJSON.get("background") != null){
+            component = (JSONObject) slideJSON.get("background");
+            newSlide.setBackground( (Background) decodeComponentJSON( component ));
+
+        } else {
+            // If there is no background in the save file, make a plain background
+            newSlide.setBackground(new ColorBackground(Color.WHITE));
+        }
 
         return newSlide;
     }
