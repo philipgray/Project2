@@ -12,16 +12,31 @@ public abstract class SlideComponent {
     protected int bottomRightXCoord;
     protected int bottomRightYCoord;
 
+    protected ComponentType componentType;
+
     /**
      * Initializes slide component with coordinates for the corners
      * @param topLeftX X coord of top left corner
      * @param topLeftY Y coord of top left corner
      * @param bottomRightX X coord of bottom right corner
      * @param bottomRightY Y coord of bottom right corner
+     * @param ComponentType the type of component this object is
      */
-    public SlideComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY){
+    public SlideComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, ComponentType type){
         this.setTopLeftCoord(topLeftX, topLeftY);
         this.setBottomRightCoord(bottomRightX, bottomRightY);
+        this.componentType = type;
+    }
+
+    /**
+     * Returns the type of component this object is. This method lets you know what types of Components
+     * you can cast this object into.
+     * 
+     * @return this object's component type
+     * @see ComponentType.java
+     */
+    public ComponentType getType(){
+        return this.componentType;
     }
 
     /**
@@ -52,6 +67,21 @@ public abstract class SlideComponent {
      * @return a clone of this component that can be modified independently
      */
     public abstract SlideComponent cloneComponent();
+
+    /**
+     * Set the content of this component. Primarily used for saving/loading 
+     * 
+     * @param content the new content of the component, in string form
+     */
+    public abstract void setContent(String content);
+
+    /**
+     * Get the content of this component in string form. Primarily used for saving/loading
+     * 
+     * @return the content of the component, in string form.
+     */
+    public abstract String getContent();
+
 
     /**
      * Set the top left coordinate of this component
@@ -89,5 +119,14 @@ public abstract class SlideComponent {
      */
     public int[] getBottomRightCoord(){
         return new int[] {bottomRightXCoord, bottomRightYCoord};
+    }
+
+    @Override
+    public String toString(){
+        String str = "Component type: " + this.componentType;
+        str += "\nTopLeft: " + this.getTopLeftCoord()[0] + ", " + this.getTopLeftCoord()[1];
+        str += "\nBottomRight: " + this.getBottomRightCoord()[0] + ", " + this.getBottomRightCoord()[1];
+
+        return str;
     }
 }

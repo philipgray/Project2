@@ -9,13 +9,24 @@ import java.util.Iterator;
  */
 public class Slide implements Iterable<SlideComponent> {
 
+    // Array list containing all components
     private ArrayList<SlideComponent> components;
+
+    // Array lists containing specific components
+    private ArrayList<TextComponent> textComponents;
+    private ArrayList<ImageComponent> imageComponents;
+    private ArrayList<SlideComponent> remainingComponents;
+
+    private Background background;
 
     /**
      * Constructs an empty slide for the slide deck.
      */
     public Slide(){
         components = new ArrayList<SlideComponent>();
+        textComponents = new ArrayList<TextComponent>();
+        imageComponents = new ArrayList<ImageComponent>();
+        remainingComponents = new ArrayList<SlideComponent>();
     }
 
 
@@ -26,6 +37,38 @@ public class Slide implements Iterable<SlideComponent> {
      */
     public void addComponent(SlideComponent newComponent){
         this.components.add(newComponent);
+
+        // Add component to a list based on its type
+        if (newComponent.getType() == ComponentType.Text){
+            this.textComponents.add( (TextComponent) newComponent);
+
+        } else if (newComponent.getType() == ComponentType.Image){
+            this.imageComponents.add( (ImageComponent) newComponent);
+
+        } else {
+            this.remainingComponents.add( newComponent );
+        }
+    }
+
+    /**
+     * Removes a component from the slide
+     * 
+     * @param component the component to remove from the slide
+     */
+    public void removeComponent(SlideComponent toRemove){
+
+        this.components.remove(toRemove);
+
+        // Remove the component from its sublist
+        if (toRemove.getType() == ComponentType.Text){
+            this.textComponents.remove(toRemove);
+
+        } else if (toRemove.getType() == ComponentType.Image){
+            this.imageComponents.remove(toRemove);
+
+        } else {
+            this.remainingComponents.remove(toRemove);
+        }
     }
 
     /**
@@ -39,6 +82,25 @@ public class Slide implements Iterable<SlideComponent> {
     }
 
     /**
+     * Sets the background for this slide
+     * 
+     * @param bg the new background for the slide
+     */
+    public void setBackground(Background bg){
+        this.background = bg;
+    }
+
+    /**
+     * Get the background of this slide
+     * 
+     * @return the background of this slide
+     */
+    public Background getBackground(){
+        return this.background;
+    }
+
+
+    /**
      * Clones this slide and returns a copy.
      * The slide is copied by value, not reference, so this slide and the copy can be edited separately
      * 
@@ -49,10 +111,47 @@ public class Slide implements Iterable<SlideComponent> {
 
         // Add a copy of every component
         for(SlideComponent component : this){
-            clone.addComponent( component.cloneComponent() );
+            SlideComponent duplicateComp = component.cloneComponent();
+
+            // Copy the component to the same location
+            duplicateComp.setTopLeftCoord(component.getTopLeftCoord()[0], component.getTopLeftCoord()[1]);
+            duplicateComp.setBottomRightCoord(component.getBottomRightCoord()[0], component.getBottomRightCoord()[1]);
+            clone.addComponent( duplicateComp );
         }
 
+        // Copy the background
+        clone.setBackground((Background) this.background.cloneComponent());
+
         return clone;
+    }
+
+    /**
+     * Returns a list of this slide's text components.
+     * Example use: to draw all of the text to the screen, you can use this method and iterate over the array list.
+     * 
+     * @return an ArrayList containing all of this slide's text components
+     */
+    public ArrayList<TextComponent> getTextComponents(){
+        return textComponents;
+    }
+
+    /**
+     * Returns a list of this slide's image components.
+     * All image components have a method to return a buffered image.
+     * 
+     * @return ArrayList of all ImageComponents on this slide
+     */
+    public ArrayList<ImageComponent> getImageComponents(){
+        return imageComponents;
+    }
+
+    /**
+     * Returns a list of this slide's components that are not in any specific sublists.
+     * 
+     * @return ArrayList of all slide components that are not in any other sublists
+     */
+    public ArrayList<SlideComponent> getNonspecificComponents(){
+        return remainingComponents;
     }
 
     // Iterable interface
@@ -66,7 +165,7 @@ public class Slide implements Iterable<SlideComponent> {
      */
     @Override
     public String toString(){
-        String representation = "Slide: \n\tComponents:";
+        String representation = "\nSlide: \nComponents:";
         for(SlideComponent s : this){
             representation += "\n\t" + s;
         }
