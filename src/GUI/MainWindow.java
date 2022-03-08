@@ -41,6 +41,7 @@ public class MainWindow {
     public void openPresentationWindow() {
         currentPanel = new PresentationWindow(this);
         frame.setContentPane(currentPanel);
+        frame.setLocationRelativeTo(null); // centers the frame in the middle of the user's screen
         frame.pack();
     }
 

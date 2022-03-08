@@ -131,6 +131,7 @@ public class TemplateWindow extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == blankPresentation) {
             System.out.println("blankPresentation!");
+            mw.openPresentationWindow();
         } else if (event.getSource() == back) {
             System.out.println("back!");
             mw.openStartWindow();
