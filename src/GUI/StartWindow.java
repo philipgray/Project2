@@ -10,10 +10,28 @@ import java.io.File;
 
 public class StartWindow extends JPanel implements ActionListener {
     protected JButton open, load;
+    protected JLabel title;
+    protected MainWindow mw;
 
 
-    public StartWindow() {
+    public StartWindow(MainWindow mw) {
+        this.mw = mw;
+        BorderLayout layout = new BorderLayout(25, 25);
+        setLayout(layout);
+        setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
+        // Title Button ------------------------------------------------------
+
+        // Add in image
+        ImageIcon icon = new ImageIcon("images/jcc.png");
+        title = new JLabel("Join Climbing Club!\n<Insert Join Climbing Club here in Bengali>", icon, JLabel.CENTER);
+        // Format the text
+        title.setHorizontalTextPosition(JLabel.CENTER);
+        title.setVerticalTextPosition(JLabel.BOTTOM);
+
+        add(title, BorderLayout.PAGE_START);
+
+        // Open Button ----------------------------------------------------------
         open = new JButton("New Presentation");
         open.setVerticalTextPosition(AbstractButton.CENTER);
         open.setHorizontalTextPosition(AbstractButton.LEADING);
@@ -23,6 +41,9 @@ public class StartWindow extends JPanel implements ActionListener {
         open.setActionCommand("open");
         open.addActionListener(this);
 
+        add(open, BorderLayout.LINE_START);
+
+        // Load Button --------------------------------------------------------------------------------
         load = new JButton("Load Presentation");
         load.setVerticalTextPosition(AbstractButton.CENTER);
         load.setHorizontalTextPosition(AbstractButton.LEADING);
@@ -32,9 +53,7 @@ public class StartWindow extends JPanel implements ActionListener {
         load.setActionCommand("load");
         load.addActionListener(this);
 
-
-        add(open);
-        add(load);
+        add(load, BorderLayout.LINE_END);
     }
 
     /**
@@ -43,7 +62,8 @@ public class StartWindow extends JPanel implements ActionListener {
      */
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("open")) {
-            System.out.println("clicked open");
+            System.out.println("clicked open!");
+            mw.openTemplateWindow();
 
         } else if (event.getSource() == load) {
             System.out.println("clicked load");
@@ -51,10 +71,9 @@ public class StartWindow extends JPanel implements ActionListener {
             int returnVal = fileChooser.showOpenDialog(StartWindow.this);
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                System.out.println("hi");
+                // TODO: Call Load method here
                 File file = fileChooser.getSelectedFile();
-                open.removeActionListener(this);
-                load.removeActionListener(this);
+                System.out.println(file.getAbsolutePath());
             } else {
                 System.out.println("closed window");
             }
