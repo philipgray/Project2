@@ -38,4 +38,14 @@ public abstract class TextComponent extends SlideComponent {
     public String toString(){
         return super.toString() + "\n" + getText();
     }
+
+    @Override
+    public void setContent(String content) {
+        setText(content);        
+    }
+
+    @Override
+    public String getContent() {
+        return getText();
+    }
 }

@@ -63,6 +63,8 @@ public class SlideDeckFileLoader {
         // Try accessing the file
         fileReader = new FileReader(inFile);
         slideFileIn = (JSONObject) parser.parse(fileReader);
+
+        fileReader.close();
         
         return slideFileIn;
     }
@@ -112,6 +114,10 @@ public class SlideDeckFileLoader {
             newSlide.addComponent( decodeComponentJSON(component) );
         }
 
+        // Get the background, or create a blank one
+        component = (JSONObject) slideJSON.get("background");
+        newSlide.setBackground( decodeComponentJSON( component ));
+
         return newSlide;
     }
 
@@ -133,15 +139,17 @@ public class SlideDeckFileLoader {
         
         int bottomX = Math.toIntExact((long) componentJSON.get("bottomX"));
         int bottomY = Math.toIntExact((long) componentJSON.get("bottomY"));
-        Object content = componentJSON.get("content");
+        String content = (String) componentJSON.get("content");
 
         // Create component based on what the type is
         // NOTE: This is a good place for the command pattern
         // Encapsulating methods so that when you add new component types, you can easily add the decoding logic for the JSON
         if(type.equals("Text")){
-            newComponent = new PureText((String) content);
+            newComponent = new PureText(content);
 
-
+        else if (type.equals("Color")){
+            newComponent = new ColorBackground(content);
+            
         } else {
             // For defaulting purposes, unsupported comopnent types will display an error as a text object
             newComponent = new PureText("Could not load this object from the save.");

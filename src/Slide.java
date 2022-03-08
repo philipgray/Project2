@@ -11,6 +11,7 @@ public class Slide implements Iterable<SlideComponent> {
 
     private ArrayList<SlideComponent> components;
     private ArrayList<TextComponent> textComponents;
+    private Background background;
 
     /**
      * Constructs an empty slide for the slide deck.
@@ -45,6 +46,24 @@ public class Slide implements Iterable<SlideComponent> {
         return this.components.get(index);
     }
 
+    /**
+     * Sets the background for this slide
+     * 
+     * @param bg the new background for the slide
+     */
+    public void setBackground(Background bg){
+        this.background = bg;
+    }
+
+    /**
+     * Get the background of this slide
+     * 
+     * @return the background of this slide
+     */
+    public Background getBackground(){
+        return this.background;
+    }
+
 
     /**
      * Clones this slide and returns a copy.
@@ -59,6 +78,9 @@ public class Slide implements Iterable<SlideComponent> {
         for(SlideComponent component : this){
             clone.addComponent( component.cloneComponent() );
         }
+
+        // Copy the background
+        clone.setBackground(this.background.cloneComponent());
 
         return clone;
     }

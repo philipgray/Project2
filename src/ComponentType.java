@@ -8,5 +8,5 @@
  * @date 5 March 2022
  */
 public enum ComponentType {
-    Text, Image;
+    Text, Image, Color;
 }
