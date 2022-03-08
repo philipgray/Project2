@@ -104,5 +104,25 @@ public class BulletList extends TextComponent {
         this.setBullet(text);
     }
 
+    /**
+     * Sets the entire bullet list, using a string as content.
+     * \n represents a new entry in the list, \t represents nested lists.
+     * A bullet is specified at the beginning.
+     * 
+     * @param content the list in string form. Begin the list with the bullet, \n and then the list.
+     * Separate items in the list with \n, and use \t to specify sublevels of the list.
+     */
+    @Override
+    public void setContent(String content) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getContent() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     
 }

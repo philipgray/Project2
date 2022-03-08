@@ -1,0 +1,31 @@
+Note: this is a debugging file. It should not be deleted or edited. It contains a default JSON template in case the actual file is deleted.
+
+{
+    "defaultSlide":
+    {
+        "components":
+        [
+            {
+                "topY":0,
+                "topX":0,
+                "bottomX":0,
+                "bottomY":0,
+                "type":"Text",
+                "content":"Click to edit text."
+            }
+        ],
+        "background":
+        {
+            "topY":0,
+            "topX":0,
+            "bottomX":0,
+            "bottomY":0,
+            "type":"Color",
+            "content":"200 200 200"
+        }
+    },
+    "slides":
+    [
+
+    ]
+}

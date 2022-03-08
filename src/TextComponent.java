@@ -9,14 +9,14 @@ public abstract class TextComponent extends SlideComponent {
     
 
     /**
-     * Initialize text component with top left and bottom right coordinates
+     * Initialize text component with top left and bottom right coordinates 
      * @param topLeftX
      * @param topLeftY
      * @param bottomRightX
      * @param bottomRightY
      */
     public TextComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY) {
-        super(topLeftX, topLeftY, bottomRightX, bottomRightY);
+        super(topLeftX, topLeftY, bottomRightX, bottomRightY, ComponentType.Text);
     }
 
     /**
@@ -36,6 +36,16 @@ public abstract class TextComponent extends SlideComponent {
      */
     @Override
     public String toString(){
+        return super.toString() + "\n" + getText();
+    }
+
+    @Override
+    public void setContent(String content) {
+        setText(content);        
+    }
+
+    @Override
+    public String getContent() {
         return getText();
     }
 }
