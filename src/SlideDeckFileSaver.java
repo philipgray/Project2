@@ -89,7 +89,7 @@ public class SlideDeckFileSaver {
 
         // Add components to the slide object
         jsonSlide.put("components", jsonComponents);
-        type = slide.getBackground().getType().toString()
+        type = slide.getBackground().getType().toString();
         jsonSlide.put("background", encodeSingleComponent(slide.getBackground(), type));
 
         return jsonSlide;

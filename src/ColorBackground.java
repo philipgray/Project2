@@ -70,7 +70,7 @@ public class ColorBackground extends Background {
     @Override
     public String getContent() {
         String colorStr = this.color.getRed() + " " + this.color.getGreen() + " " + this.color.getBlue();
-        return colorStr
+        return colorStr;
     }
 
     @Override

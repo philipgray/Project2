@@ -116,7 +116,7 @@ public class SlideDeckFileLoader {
 
         // Get the background, or create a blank one
         component = (JSONObject) slideJSON.get("background");
-        newSlide.setBackground( decodeComponentJSON( component ));
+        newSlide.setBackground( (Background) decodeComponentJSON( component ));
 
         return newSlide;
     }
@@ -146,9 +146,10 @@ public class SlideDeckFileLoader {
         // Encapsulating methods so that when you add new component types, you can easily add the decoding logic for the JSON
         if(type.equals("Text")){
             newComponent = new PureText(content);
-
+        }
         else if (type.equals("Color")){
-            newComponent = new ColorBackground(content);
+            newComponent = new ColorBackground(0, 0, 0);
+            newComponent.setContent(content);
             
         } else {
             // For defaulting purposes, unsupported comopnent types will display an error as a text object

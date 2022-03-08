@@ -1,3 +1,5 @@
+Note: this is a debugging file. It should not be deleted or edited. It contains a default JSON template in case the actual file is deleted.
+
 {
     "defaultSlide":
     {

@@ -80,7 +80,7 @@ public class Slide implements Iterable<SlideComponent> {
         }
 
         // Copy the background
-        clone.setBackground(this.background.cloneComponent());
+        clone.setBackground((Background) this.background.cloneComponent());
 
         return clone;
     }

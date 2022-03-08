@@ -65,6 +65,9 @@ public class Tester {
         
         // Edit file
         System.out.println("Before edit: " + deck);
+
+        deck.addNewSlide();
+        deck.addNewSlide();
         Slide selectedSlide = deck.getSlide(1);
         selectedSlide.addComponent(new PureText("New component!!!"));
 
