@@ -13,6 +13,8 @@ import org.json.simple.parser.JSONParser;
 import java.awt.Desktop;
 import java.net.URI;
 
+import GUI.*;
+
 /**
  * Class made purely for testing and debugging other files 
  * 
@@ -34,7 +36,13 @@ public class Tester {
 
         // testLinksInBrowser();
 
-        testFileLoadEditSave();
+        // testFileLoadEditSave();
+
+        testGUIPrototype();
+    }
+
+
+    private static void testGUIPrototype(){
         
     }
 
