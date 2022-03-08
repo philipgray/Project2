@@ -19,3 +19,5 @@ https://medium.com/@isaacjumba/why-use-bufferedreader-and-bufferedwriter-classse
 Opening a link on the computer's browser!
 https://www.geeksforgeeks.org/java-program-to-open-input-url-in-system-default-browser-in-windows/
 
+BufferedImage use:
+Lab 3 from Professor Eaton's OOP class in 2021
