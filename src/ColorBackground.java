@@ -10,11 +10,23 @@ public class ColorBackground extends Background {
     
     private Color color;
 
+    /**
+     * Creates a color background with rgb values
+     * 
+     * @param r red value, from 0 - 255
+     * @param g green value, from 0 - 255
+     * @param b blue value, from 0 - 255
+     */
     public ColorBackground(int r, int g, int b){
         super(ComponentType.Color);
         color = new Color(r, g, b);
     }
 
+    /**
+     * Creates a color background with a Color object
+     * 
+     * @param color the color object for the background
+     */
     public ColorBackground(Color color){
         super(ComponentType.Color);
         this.color = new Color(color.getRed(), color.getGreen(), color.getBlue());
