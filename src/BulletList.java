@@ -111,12 +111,88 @@ public class BulletList extends TextComponent {
     /**
      * Adds a text component underneath the currently selected component.
      * Also selects this element in the list, so that you can moveUp(), moveDown(),
-     * indent(), and deleteSelected()
+     * indentItem(), and deleteSelected()
      * 
      * @param toAdd the text component to add
      */
     public void insertItem(TextComponent toAdd){
         
+        // Do not add lists to lists
+        if(toAdd.componentType != ComponentType.BulletList){
+
+            // If list is empty, add the first element
+            if(listItems.size() == 0){
+                listItems.add(toAdd);
+                listLevels.add(0);
+                // Select this new element
+                selectList();
+    
+            } else {
+                // Add element below the current one
+                listItems.add(selectedIndex + 1, toAdd);
+                listLevels.add(selectedIndex + 1, selectedLevel);
+    
+                // Select the new element
+                this.moveDown();
+            }
+        }
+    }
+
+    /**
+     * Indent the currently selected item to the next level of the list
+     */
+    public void indentItem(){
+
+        // Only indent if there is a selected item
+        if(selected != null){
+            selectedLevel++;
+            listLevels.set(selectedIndex, selectedLevel);
+        }
+    }
+
+    /**
+     * Take the currently selected item out of its current level into the level above (as long as there is a level above)
+     */
+    public void unIndentItem(){
+
+        // Only go back a level if an item is selected and the level is not at the top
+        if(selected != null && selectedLevel > 0){
+            selectedLevel--;
+            listLevels.set(selectedIndex, selectedLevel);
+        }
+    }
+
+
+    /**
+     * Deletes the currently selected element
+     */
+    public void deleteSelected(){
+
+        // Ensure list is not empty
+        if(selected != null){
+
+            // Remove the item from the lists
+            listItems.remove(selectedIndex);
+            listLevels.remove(selectedIndex);
+    
+            // Lower the index
+            if(selectedIndex > 0) {
+                selectedIndex--;
+            } else {
+                selectedIndex = 0;
+            }
+    
+            // Select the item above if there is one
+            if(listItems.size() > 0){
+                selected = listItems.get(selectedIndex);
+                selectedLevel = listLevels.get(selectedIndex);
+    
+            } else {
+                // If the list is empty, set the selected to null
+                selected = null;
+                selectedLevel = 0;
+            }
+        }
     }
 
     /**
@@ -128,6 +204,18 @@ public class BulletList extends TextComponent {
         this.bullet = newBullet;
     }
 
+
+
+    /**
+     * Internally add an item to the list (for use in cloning)
+     * 
+     * @param toAdd the text component to add
+     * @param level the level of the text component to add
+     */
+    private void addItem(TextComponent toAdd, int level){
+        this.listItems.add(toAdd);
+        this.listLevels.add(level);
+    }
     
     /**
      * Copy the bullet list in its entirety
@@ -138,9 +226,10 @@ public class BulletList extends TextComponent {
         BulletList list = new BulletList();
         list.setBullet(list.bullet);
 
+        // TODO: cloning
         // Copy all of the text components
         for(TextComponent entry : this.listItems){
-            list.addItem( (TextComponent) entry.cloneComponent() );
+            //list.addItem( (TextComponent) entry.cloneComponent() );
         }
 
         return list;
@@ -154,8 +243,15 @@ public class BulletList extends TextComponent {
         String finalString = "";
 
         // Add each item to the list one by one
-        for(TextComponent item : listItems){
-            finalString += "\t" + this.bullet + " " + item.getText() + "\n";
+        for(int i = 0; i < listItems.size(); i++){
+            // Indent enough times
+            for(int j = 0; j < listLevels.get(i); j++){
+                finalString += "\t";
+            }
+
+            // Add the text and its bullet
+            finalString += bullet + " " + listItems.get(i).getText() + "\n";
+
         }
 
         return finalString;

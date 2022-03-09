@@ -25,7 +25,7 @@ public class Tester {
     
 
     public static void main(String[] args){
-        // testBulletList();
+        testBulletList();
         // testSlideComponentIteration();
         // testSlide();
         // testSlideDeck();
@@ -38,7 +38,7 @@ public class Tester {
 
         // testFileLoadEditSave();
 
-        testGUIPrototype();
+        // testGUIPrototype();
     }
 
 
@@ -181,9 +181,9 @@ public class Tester {
         slide.addComponent(new PureText("Text 2"));
         slide.addComponent(new BulletList());
     
-        BulletList list = (BulletList) slide.getComponent(2);
-        list.addItem(new PureText("List item 1"));
-        list.addItem(new PureText());
+        // BulletList list = (BulletList) slide.getComponent(2);
+        // list.addItem(new PureText("List item 1"));
+        // list.addItem(new PureText());
 
         // Print out and iterate all text components
         // Example of .getTextComponents
@@ -253,36 +253,68 @@ public class Tester {
         BulletList bullets = new BulletList();
         System.out.println("Empty Bullet list: \n" + bullets.getText());
 
-        // Add three text items
-        bullets.addItem(new PureText());
-        bullets.addItem(new PureText());
-        bullets.addItem(new PureText());
+        bullets.insertItem(new PureText("Item 1"));
+        bullets.insertItem(new PureText("Item 2"));
 
+        System.out.println("List with 2 items: \n" + bullets.getText());
 
-        System.out.println("List with 3 empty text boxes: \n" + bullets.getText());
+        bullets.indentItem();
 
-        // Select an item
-        TextComponent selected = bullets.getItem(1);
-        selected.setText("Item number 1!");
+        System.out.println("Indented item 2: \n" + bullets.getText());
 
-        System.out.println("List with item 1 edited: \n" + bullets.getText());
+        bullets.unIndentItem();
+        bullets.unIndentItem();
+        bullets.unIndentItem();
 
-        // Change bullets
-        bullets.setBullet("~~~");
-        System.out.println("List with new bullets: \n" + bullets.getText());
+        TextComponent selected = bullets.moveUp();
+        selected.setText("New Item 1");
 
-        // Nest another list
-        bullets.addItem(1, new BulletList());
+        bullets.indentItem();
+        bullets.indentItem();
 
-        // TODO: (backend) Rethink the architecture. Selected sublist is complex, and printing sublist is buggy.
-        // Select and cast the sublist
-        selected = bullets.getItem(1);
-        BulletList sublist = (BulletList)(selected);
+        System.out.println("Unindented item 2 3 times, item 1 edited, item 1 indented twice:\n" + bullets.getText());
 
-        sublist.addItem(new PureText());
-        sublist.addItem(new PureText("Hiya there!"));
+        bullets.deleteSelected();
 
-        System.out.println("List with a sublist in index 1: \n" + bullets.getText());
+        System.out.println("Deleted item 1: \n" + bullets.getText());
+
+        bullets.deleteSelected();
+        bullets.deleteSelected();
+
+        System.out.println("Deleted item twice: \n" + bullets.getText());
+
+        // Add lots of elements
+        bullets.insertItem(new PureText("Item 1"));
+        bullets.insertItem(new PureText("Item 2"));
+        bullets.insertItem(new PureText("Item 3"));
+        bullets.insertItem(new PureText("Item 4"));
+        bullets.insertItem(new PureText("Item 5"));
+        bullets.insertItem(new PureText("Item 6"));
+        bullets.insertItem(new PureText("Item 7"));
+        bullets.insertItem(new PureText("Item 8"));
+
+        // Try to organize them
+        bullets.moveUp();
+        bullets.moveUp();
+        bullets.moveUp();
+        bullets.insertItem(new PureText("Item a"));
+        bullets.indentItem();
+
+        bullets.insertItem(new PureText("Item I"));
+        bullets.indentItem();
+        bullets.moveDown();
+
+        bullets.insertItem(new PureText("Item a"));
+        bullets.indentItem();
+
+        bullets.moveDown();
+
+        bullets.insertItem(new PureText("Item I"));
+        bullets.indentItem();
+        bullets.indentItem();
+
+        System.out.println("New list: \n" + bullets.getText());
+
 
     }
 }

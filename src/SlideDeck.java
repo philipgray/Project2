@@ -25,6 +25,10 @@ public class SlideDeck implements Iterable<Slide> {
         this.defaultSlide = defaultSlide;
     }
 
+    /*
+    * Font, Fontsize, 
+    */
+
     /**
      * Creates a slide deck without a specific defaultSlide.
      * The defaultSlide will be set to a blank slide.
