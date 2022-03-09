@@ -236,7 +236,6 @@ public class BulletList extends TextComponent {
     }
 
 
-    //TODO: Rework nested lists
     @Override
     public String getText() {
         
