@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import org.json.simple.ItemList;
-
 /**
  * A list of text components, organized with bullets
  * 
@@ -204,19 +202,6 @@ public class BulletList extends TextComponent {
         this.bullet = newBullet;
     }
 
-
-
-    /**
-     * Internally add an item to the list (for use in cloning)
-     * 
-     * @param toAdd the text component to add
-     * @param level the level of the text component to add
-     */
-    private void addItem(TextComponent toAdd, int level){
-        this.listItems.add(toAdd);
-        this.listLevels.add(level);
-    }
-    
     /**
      * Copy the bullet list in its entirety
      */
@@ -226,11 +211,8 @@ public class BulletList extends TextComponent {
         BulletList list = new BulletList();
         list.setBullet(list.bullet);
 
-        // TODO: cloning
-        // Copy all of the text components
-        for(TextComponent entry : this.listItems){
-            //list.addItem( (TextComponent) entry.cloneComponent() );
-        }
+        // Copy the content of this list
+        list.setContent(this.getContent());
 
         return list;
     }

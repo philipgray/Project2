@@ -32,11 +32,11 @@ public class Tester {
 
         // testJson();
 
-        testFileLoading();
+        // testFileLoading();
 
         // testLinksInBrowser();
 
-        // testFileLoadEditSave();
+        testFileLoadEditSave();
 
         // testGUIPrototype();
     }
@@ -100,6 +100,10 @@ public class Tester {
         list.indentItem();
 
         list.setFontSize(20);
+
+        deck.setDefaultSlide(selectedSlide);
+
+        deck.addNewSlide();
 
         // Save file
         File outFile = new File("saved_slides/example_output.json");
