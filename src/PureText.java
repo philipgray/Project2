@@ -37,7 +37,10 @@ public class PureText extends TextComponent {
 
     @Override
     public TextComponent cloneComponent() {
-        return new PureText( getText() );
+        PureText clone = new PureText();
+        clone.setContent(this.getContent());
+        
+        return clone;
     }
 
 }

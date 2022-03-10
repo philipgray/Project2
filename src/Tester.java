@@ -25,14 +25,14 @@ public class Tester {
     
 
     public static void main(String[] args){
-        testBulletList();
+        // testBulletList();
         // testSlideComponentIteration();
         // testSlide();
         // testSlideDeck();
 
         // testJson();
 
-        // testFileLoading();
+        testFileLoading();
 
         // testLinksInBrowser();
 
@@ -98,6 +98,7 @@ public class Tester {
         file = file.getAbsoluteFile();
 
         SlideDeck deck = SlideDeckFileLoader.loadSlideDeck(file);
+        deck.addNewSlide();
 
         System.out.println("Loaded slides: " + deck);
     }

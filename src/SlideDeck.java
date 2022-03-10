@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.Font;
 
 /**
  * SlideDecks are made up of many slides
@@ -14,6 +15,8 @@ public class SlideDeck implements Iterable<Slide> {
     // When a new slide is created, this defaultSlide is copied to the list.
     // This defaultSlide is determined by the template, and can be changed.
     private Slide defaultSlide;
+
+    private Font slideFont;
 
     /**
      * Creates a slide deck with a specific defaultSlide
