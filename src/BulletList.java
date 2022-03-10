@@ -276,14 +276,51 @@ public class BulletList extends TextComponent {
      */
     @Override
     public void setContent(String content) {
-        // TODO Auto-generated method stub
         
+        // Clear current values
+        listItems.clear();
+        listLevels.clear();
+        selected = null;
+        selectedIndex = 0;
+        selectedLevel = 0;
+
+        // Get all of the entries
+        String[] entries = content.split("\n");
+        String[] tabCounter;
+        int entryLevel;
+        PureText textEntry;
+        
+        for(String entry : entries){
+            // Count the tabs
+            tabCounter = entry.split("\t");
+            entryLevel = tabCounter.length - 1;
+            listLevels.add(entryLevel);
+            
+            textEntry = new PureText();
+            // The text entry is after all of the tabs -- at the end of this list
+            textEntry.setContent(tabCounter[ tabCounter.length - 1 ]);
+            listItems.add(textEntry);
+        }
+
     }
 
     @Override
     public String getContent() {
-        // TODO Auto-generated method stub
-        return null;
+        String content = "";
+        
+
+        // Iterate through the list
+        for(int i = 0; i < listItems.size(); i++){
+            
+            // Add the proper number of tabs to represent the level
+            for(int tab = 0; tab < listLevels.get(i); tab++){
+                content += "\t";
+            }
+            // Now add the content
+            content += listItems.get(i).getContent() + "\n";
+        }
+
+        return content;
     }
 
     

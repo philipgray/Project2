@@ -78,6 +78,28 @@ public class Tester {
         deck.addNewSlide();
         Slide selectedSlide = deck.getSlide(1);
         selectedSlide.addComponent(new PureText("New component!!!"));
+        selectedSlide.getTextComponents().get(0).setFontSize(45);
+
+        // add bullet list
+        SlideComponent selectedComp = new BulletList();
+        selectedSlide.addComponent(selectedComp);
+
+        BulletList list = (BulletList) selectedComp;
+        list.selectList();
+        list.insertItem(new PureText("Shopping List"));
+        list.insertItem(new PureText("Apples"));
+        list.indentItem();
+        list.insertItem(new PureText("BANANA"));
+        list.insertItem(new PureText("Pudding?"));
+        list.indentItem();
+        list.insertItem(new PureText("Banana bread?"));
+        list.insertItem(new PureText("TODO"));
+        list.unIndentItem();
+        list.unIndentItem();
+        list.insertItem(new PureText("Go to store"));
+        list.indentItem();
+
+        list.setFontSize(20);
 
         // Save file
         File outFile = new File("saved_slides/example_output.json");
@@ -94,11 +116,10 @@ public class Tester {
      */
     private static void testFileLoading(){
 
-        File file = new File("saved_slides/defaultSlide.json");
+        File file = new File("saved_slides/example_output.json");
         file = file.getAbsoluteFile();
 
         SlideDeck deck = SlideDeckFileLoader.loadSlideDeck(file);
-        deck.addNewSlide();
 
         System.out.println("Loaded slides: " + deck);
     }

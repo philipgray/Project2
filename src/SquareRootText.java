@@ -1,3 +1,7 @@
-public class SquareRootText {
-    
+
+/**
+ * 
+ */
+public class SquareRootText extends PureText {
+
 }

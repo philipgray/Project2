@@ -153,12 +153,17 @@ public class SlideDeckFileLoader {
         // NOTE: This is a good place for the command pattern
         // Encapsulating methods so that when you add new component types, you can easily add the decoding logic for the JSON
         if(type.equals("Text")){
-            newComponent = new PureText(content);
+            newComponent = new PureText();
+            newComponent.setContent(content);
         }
         else if (type.equals("Color")){
             newComponent = new ColorBackground(0, 0, 0);
             newComponent.setContent(content);
             
+        } else if (type.equals("BulletList")){
+            newComponent = new BulletList();
+            newComponent.setContent(content);
+
         } else {
             // For defaulting purposes, unsupported comopnent types will display an error as a text object
             newComponent = new PureText("Could not load this object from the save.");

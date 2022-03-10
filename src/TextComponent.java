@@ -67,9 +67,9 @@ public abstract class TextComponent extends SlideComponent {
     @Override
     public void setContent(String content) {
         
+
         // If a font size is specified, set the font size
         if(content.contains("/fs=")){
-            System.out.println("Custom font size");
             // Get the font size
             int fontSizeIndex = content.indexOf("/fs=") + 4;    
             int fontSizeEndIndex = content.indexOf("/", fontSizeIndex);
