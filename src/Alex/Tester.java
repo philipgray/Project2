@@ -76,7 +76,7 @@ public class Tester {
 
         deck.addNewSlide();
         deck.addNewSlide();
-        Slide selectedSlide = deck.getSlide(1);
+        Slide selectedSlide = deck.getCurrentSlide();
         selectedSlide.addComponent(new PureText("New component!!!"));
         selectedSlide.getTextComponents().get(0).setFontSize(45);
 

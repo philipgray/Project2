@@ -92,6 +92,12 @@ public class SlideDeckFileLoader {
             JSONObject slide = (JSONObject) jsonObj;
             slideDeckOut.addSlide( decodeSlideJSON(slide));
         }
+
+        // Select the slide you left off on
+        if(slideFileIn.containsKey("selectedSlide")){
+            int selectedIndex = (int) slideFileIn.get("selectedSlide");
+            slideDeckOut.getSlide(selectedIndex);
+        }
         
     }
 

@@ -20,7 +20,10 @@ public class Slide implements Iterable<SlideComponent> {
     private ArrayList<ImageComponent> imageComponents;
     private ArrayList<BulletList> listComponents;
     private ArrayList<SlideComponent> remainingComponents;
-    
+
+    /*
+     * TODO: store information about current font, color 
+     * */
 
     private Background background;
 

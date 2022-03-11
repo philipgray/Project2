@@ -189,12 +189,6 @@ public class SlideDeck implements Iterable<Slide> {
         return currentSlide;
     }
 
-    /*
-    * Font, Fontsize, 
-    */
-
-
-
     /**
      * Updates the default slide (used to change the template)
      * 
@@ -215,6 +209,8 @@ public class SlideDeck implements Iterable<Slide> {
 
     /**
      * Adds a new empty slide to the slide deck, a copy of the defaultSlide
+     * 
+     * @see <code> addNewSlideHere() </code> for adding a slide after the currently selected slide
      */
     public void addNewSlide(){
         this.slides.add( defaultSlide.cloneSlide() );
@@ -254,13 +250,19 @@ public class SlideDeck implements Iterable<Slide> {
     }
 
     /**
-     * Access a slide in this slide deck
+     * Access and select a slide in this slide deck
      * 
      * @param index the index of the slide
      * @return the slide at the given index
      */
     public Slide getSlide(int index){
-        return slides.get(index);
+        
+        if(index >= 0 && index < slides.size()){
+            currentIndex = index;
+            currentSlide = slides.get(currentIndex);
+        }
+
+        return currentSlide;
     }
 
 

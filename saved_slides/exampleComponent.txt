@@ -28,4 +28,5 @@ Note: this is a debugging file. It should not be deleted or edited. It contains 
     [
 
     ]
+    "selectedSlide": 0
 }
