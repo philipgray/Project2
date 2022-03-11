@@ -186,12 +186,6 @@ public class SlideDeck implements Iterable<Slide> {
         return currentSlide;
     }
 
-    /*
-    * Font, Fontsize, 
-    */
-
-
-
     /**
      * Updates the default slide (used to change the template)
      * 

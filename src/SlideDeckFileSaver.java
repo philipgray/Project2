@@ -13,6 +13,9 @@ import org.json.simple.*;
  */
 public class SlideDeckFileSaver {
     
+
+    //NOTE TODO: store which slide you left off on
+
     // These are the file locations that should not be overwritten,
     // because they are our templates
     File[] templateSaves = new File[] {
