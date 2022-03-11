@@ -190,12 +190,18 @@ public class PresentationWindow extends JPanel implements ActionListener {
         } else if (event.getSource() == saveAs) {
             final JFileChooser fileChooser = new JFileChooser();
             int file = fileChooser.showSaveDialog(this);
+            if (file == 1) {
+                slideDeck.saveAs(fileChooser.getSelectedFile());
+            }
         } else if (event.getSource() == save) {
             boolean operationComplete = slideDeck.save();
             if (!operationComplete) {
-
+                final JFileChooser fileChooser = new JFileChooser();
+                int file = fileChooser.showSaveDialog(this);
+                if (file == 1) {
+                    slideDeck.saveAs(fileChooser.getSelectedFile());
+                }
             }
-            return;
         } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
         }
