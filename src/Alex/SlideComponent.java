@@ -1,3 +1,4 @@
+package Alex;
 
 /**
  * Interfeace to define a slide component

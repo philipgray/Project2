@@ -1,3 +1,4 @@
+package Alex;
 
 /**
  * Enum to store different component types, that way they can be organized into individual arrays.

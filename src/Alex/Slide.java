@@ -1,3 +1,5 @@
+package Alex;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -23,10 +25,10 @@ public class Slide implements Iterable<SlideComponent> {
      * Constructs an empty slide for the slide deck.
      */
     public Slide(){
-        components = new ArrayList<SlideComponent>();
-        textComponents = new ArrayList<TextComponent>();
-        imageComponents = new ArrayList<ImageComponent>();
-        remainingComponents = new ArrayList<SlideComponent>();
+        components = new ArrayList<>();
+        textComponents = new ArrayList<>();
+        imageComponents = new ArrayList<>();
+        remainingComponents = new ArrayList<>();
     }
 
 
@@ -165,7 +167,7 @@ public class Slide implements Iterable<SlideComponent> {
      */
     @Override
     public String toString(){
-        String representation = "\nSlide: \nComponents:";
+        String representation = "\nAlex.Slide: \nComponents:";
         for(SlideComponent s : this){
             representation += "\n\t" + s;
         }

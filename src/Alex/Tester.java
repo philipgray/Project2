@@ -1,9 +1,9 @@
-import java.io.BufferedReader;
+package Alex;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Iterator;
 
 import org.json.simple.*;
@@ -216,7 +216,7 @@ public class Tester {
         }
 
         // Test slide's toString method
-        System.out.println("Slide.toString() = \n" + slide);
+        System.out.println("Alex.Slide.toString() = \n" + slide);
     }
 
     /**
@@ -239,7 +239,7 @@ public class Tester {
     }
 
     /**
-     * Test all functionality of the BulletList class
+     * Test all functionality of the Alex.BulletList class
      */
     private static void testBulletList(){
         BulletList bullets = new BulletList();

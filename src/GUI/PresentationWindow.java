@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 public class PresentationWindow extends JPanel implements ActionListener {
     MainWindow mw;
 
-    JButton newSlide, fontSelect, fontSize, createBullet, createSubBullet, insertLink, present;
+    JButton newSlide, fontSelect, fontSize, createBullet, createSubBullet, insertLink,
+            present, save, saveAs, backgroundColor, draw, nextSlide, previousSlide;
     DrawingPanel drawingPanel;
 
     public PresentationWindow(MainWindow mw) {
@@ -23,7 +24,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
          */
         GridBagConstraints constraints = new GridBagConstraints();
 
-        // New Slide Button --------------------------------------------------------------------
+        // New Alex.Slide Button --------------------------------------------------------------------
         newSlide = new JButton("New Slide");
         newSlide.addActionListener(this);
         newSlide.setToolTipText("Placeholder Text");
@@ -31,10 +32,11 @@ public class PresentationWindow extends JPanel implements ActionListener {
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridwidth = 3;
         constraints.gridheight = 3;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
         constraints.ipady = 60;
         constraints.ipadx = 50;
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
 
         add(newSlide, constraints);
         // Present Button --------------------------------------------------------------------------
@@ -42,15 +44,17 @@ public class PresentationWindow extends JPanel implements ActionListener {
         present.addActionListener(this);
         present.setToolTipText("Placeholder Text");
 
-        constraints.gridx = 3;
         constraints.insets = new Insets(0, 10, 0, 10);
+
+        constraints.gridx = 3;
 
         add(present, constraints);
 
-        // Font Select Button ----------------------------------------------------------------------
-        fontSelect = new JButton("Font");
-        fontSelect.addActionListener(this);
-        fontSelect.setToolTipText("Placeholder Text");
+        // Save Button
+
+        saveAs = new JButton("Save As...");
+        saveAs.addActionListener(this);
+        saveAs.setToolTipText("Placeholder Text");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.ipadx = 0;
@@ -62,12 +66,54 @@ public class PresentationWindow extends JPanel implements ActionListener {
         constraints.gridx = 6;
         constraints.gridy = 0;
 
+        add(saveAs, constraints);
+
+        // Save As Button --------------------------------------------------------------------------
+
+        save = new JButton("Save");
+        save.addActionListener(this);
+        save.setToolTipText("Placeholder Text");
+
+        constraints.gridy = 1;
+
+        add(save, constraints);
+
+        // Background Color ------------------------------------------------------------------------
+
+        backgroundColor = new JButton("Background Color");
+        backgroundColor.addActionListener(this);
+        backgroundColor.setToolTipText("Placeholder Text");
+
+        constraints.gridx = 7;
+        constraints.gridy = 0;
+
+        add(backgroundColor, constraints);
+
+        // Drawing Button --------------------------------------------------------------------------
+
+        draw = new JButton("Draw");
+        draw.addActionListener(this);
+        draw.setToolTipText("Placeholder Text");
+
+        constraints.gridy = 1;
+
+        add(draw, constraints);
+
+        // Font Select Button ----------------------------------------------------------------------
+        fontSelect = new JButton("Font");
+        fontSelect.addActionListener(this);
+        fontSelect.setToolTipText("Placeholder Text");
+
+        constraints.gridx = 8;
+        constraints.gridy = 0;
+
         add(fontSelect, constraints);
 
         // FontSize Button --------------------------------------------------------------------------
         fontSize = new JButton("Font Size");
         fontSize.addActionListener(this);
         fontSize.setToolTipText("Placeholder Text");
+
         constraints.gridy = 1;
 
         add(fontSize, constraints);
@@ -76,9 +122,9 @@ public class PresentationWindow extends JPanel implements ActionListener {
         createBullet = new JButton("Create Bullet");
         createBullet.addActionListener(this);
         createBullet.setToolTipText("Placeholder Text");
-        constraints.fill = GridBagConstraints.NONE;
 
-        constraints.gridx = 7;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.gridx = 9;
         constraints.gridy = 0;
 
         add(createBullet, constraints);
@@ -88,10 +134,28 @@ public class PresentationWindow extends JPanel implements ActionListener {
         createSubBullet.addActionListener(this);
         createSubBullet.setToolTipText("Placeholder Text");
 
-        constraints.gridx = 7;
         constraints.gridy = 1;
 
         add(createSubBullet, constraints);
+
+        // Next Slide Button ------------------------------------------------------------------
+        nextSlide = new JButton("Next Slide");
+        nextSlide.addActionListener(this);
+        nextSlide.setToolTipText("Placeholder Text");
+
+        constraints.gridx = 10;
+        constraints.gridy = 0;
+
+        add(nextSlide, constraints);
+
+        // Previous Slide Button ---------------------------------------------------------------
+        previousSlide = new JButton("Previous Slide");
+        previousSlide.addActionListener(this);
+        previousSlide.setToolTipText("Placeholder Text");
+
+        constraints.gridy = 1;
+
+        add(previousSlide, constraints);
 
         // Trying something here! --------------------------------------------------------------
         drawingPanel = new DrawingPanel();
@@ -113,6 +177,10 @@ public class PresentationWindow extends JPanel implements ActionListener {
             System.out.println("newSlide!");
         } else if (event.getSource() == present) {
             System.out.println("present!");
+        } else if (event.getSource() == saveAs) {
+            System.out.println("saveAs");
+        } else if (event.getSource() == save) {
+            System.out.println("save");
         } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
         }

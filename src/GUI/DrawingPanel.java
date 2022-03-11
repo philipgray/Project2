@@ -16,7 +16,5 @@ public class DrawingPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         graphics = (Graphics2D) g;
-
-        g.drawString("THIS IS OBVIOUSLY A WORK IN PROGRESS", 100, 100);
     }
 }

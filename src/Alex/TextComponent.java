@@ -1,3 +1,4 @@
+package Alex;
 
 /**
  * A text component stores text in a unique format
@@ -20,13 +21,13 @@ public abstract class TextComponent extends SlideComponent {
     }
 
     /**
-     * Returns a string containing the TextComponent's text
+     * Returns a string containing the Alex.TextComponent's text
      * @return the text representation of the string
      */
     public abstract String getText();
 
     /**
-     * Changes the text in the TextComponent
+     * Changes the text in the Alex.TextComponent
      * @param text the new text for the text box
      */
     public abstract void setText(String text);

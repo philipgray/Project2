@@ -1,3 +1,5 @@
+package Alex;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,7 +8,7 @@ import java.io.BufferedWriter;
 import org.json.simple.*;
 
 /**
- * Encodes a slide deck object as a JSON file to store Slide Decks on the computer.
+ * Encodes a slide deck object as a JSON file to store Alex.Slide Decks on the computer.
  * 
  * @author Alex Wills
  * @date 7 March 2022
@@ -20,7 +22,7 @@ public class SlideDeckFileSaver {
     };
 
     /**
-     * Saves a SlideDeck as a JSON at the specified file path
+     * Saves a Alex.SlideDeck as a JSON at the specified file path
      * 
      * @param toSave the slide deck to save
      * @param saveLocation the .json location to save the slide deck
@@ -46,7 +48,7 @@ public class SlideDeckFileSaver {
 
 
     /**
-     * Converts a SlideDeck object into a JSONObject
+     * Converts a Alex.SlideDeck object into a JSONObject
      * 
      * @param toSave the slide deck to save
      * @return the JSONObject to write to a .json file
@@ -71,7 +73,7 @@ public class SlideDeckFileSaver {
     /**
      * Encodes a slide into a JSONObject
      * 
-     * @param slide the Slide to save as a JSON
+     * @param slide the Alex.Slide to save as a JSON
      * @return the slide as a JSONObject
      */
     private static JSONObject encodeSlide(Slide slide){
@@ -117,7 +119,7 @@ public class SlideDeckFileSaver {
 
 
     /**
-     * Converts a SlideComponent into a JSON object
+     * Converts a Alex.SlideComponent into a JSON object
      * @param component the component to convert
      * @param type the type of object the component is
      * @return JSONObject representing the component

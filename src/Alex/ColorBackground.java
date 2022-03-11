@@ -1,7 +1,9 @@
+package Alex;
+
 import java.awt.Color;
 
 /**
- * Background for a slide that is a solid color
+ * Alex.Background for a slide that is a solid color
  * 
  * @author Alex Wills
  * @date 7 March 2022

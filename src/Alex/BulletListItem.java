@@ -1,3 +1,4 @@
+package Alex;
 
 /**
  * Item to store in a bullet list. Can be any kind of text component, at any level of the bullet list.
