@@ -21,6 +21,9 @@ public class SlideDeck implements Iterable<Slide> {
 
     private File saveLocation;
 
+    private Slide currentSlide;
+    private int currentIndex;
+
     /**
      * Creates a slide deck with a specific defaultSlide
      * 
@@ -29,6 +32,8 @@ public class SlideDeck implements Iterable<Slide> {
     public SlideDeck(Slide defaultSlide){
         slides = new ArrayList<Slide>();
         this.defaultSlide = defaultSlide;
+        currentIndex = 0;
+        currentSlide = null;
     }
     
     /**
@@ -96,6 +101,65 @@ public class SlideDeck implements Iterable<Slide> {
     }
 
 
+    /**
+     * Gets the currently selected slide
+     * 
+     * @return the currently selected slide. Null if there are no slides
+     */
+    public Slide getCurrentSlide(){
+
+        // If no slide is selected, select the first one if possible.
+        if(currentSlide == null && slides.size() > 0){
+            currentSlide = slides.get(0);
+        }
+
+        return currentSlide;
+    }
+
+    /**
+     * Removes the current slide, unless it is the only slide in the slide deck
+     * 
+     * @return true if the current slide is deleted (there must be at least one other slide in the deck)
+     */
+    public boolean removeCurrentSlide(){
+        boolean success = slides.size() > 1;
+
+        // Only remove slide if there is another slide besides the current one
+        if(success){
+            slides.remove(currentIndex);
+            
+            // Go to the previous slide (as long as it isn't the first slide)
+            previousSlide();
+        }
+
+        return success;
+    }
+
+    /**
+     * Move to the next slide in the deck. If the current slide is the last slide, it stays at this slide
+     * 
+     * @return the next slide in the deck
+     */
+    public Slide nextSlide(){
+        // Only go to the next slide if there is a slide after
+        if(currentIndex < slides.size() - 1){
+            currentIndex++;
+            currentSlide = slides.get(currentIndex);
+        }
+
+        return currentSlide;
+    }
+
+    public Slide previousSlide(){
+        // Only go back if it's possible
+        if(currentIndex > 0){
+            currentIndex--;
+            currentSlide = slides.get(currentIndex);
+        }
+
+        return currentSlide;
+    }
+
     /*
     * Font, Fontsize, 
     */
@@ -125,6 +189,20 @@ public class SlideDeck implements Iterable<Slide> {
      */
     public void addNewSlide(){
         this.slides.add( defaultSlide.cloneSlide() );
+    }
+
+    /**
+     * Adds a new empty slide based on the defaul slide, right after the currentSlide.
+     * It then selects and returns this new slide.
+     * 
+     * @return the newly added slide
+     */
+    public Slide addNewSlideHere(){
+        currentIndex++;
+        slides.add( currentIndex, defaultSlide.cloneSlide() );
+        currentSlide = slides.get(currentIndex);
+        
+        return currentSlide;
     }
 
     /**
