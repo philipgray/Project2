@@ -24,6 +24,28 @@
     },
     "slides":
     [
-
-    ]
+        {
+            "components":
+            [
+                {
+                    "topY":0,
+                    "topX":0,
+                    "bottomX":0,
+                    "bottomY":0,
+                    "type":"Text",
+                    "content":"/fs=100/Click to edit text."
+                }
+            ],
+            "background":
+            {
+                "topY":0,
+                "topX":0,
+                "bottomX":0,
+                "bottomY":0,
+                "type":"Color",
+                "content":"200 200 200"
+            }
+        }
+    ],
+    "selectedSlide": 0
 }
