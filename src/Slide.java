@@ -16,6 +16,7 @@ public class Slide implements Iterable<SlideComponent> {
     // Array lists containing specific components
     private ArrayList<TextComponent> textComponents;
     private ArrayList<ImageComponent> imageComponents;
+    private ArrayList<BulletList> listComponents;
     private ArrayList<SlideComponent> remainingComponents;
 
     private Background background;
@@ -31,6 +32,7 @@ public class Slide implements Iterable<SlideComponent> {
         textComponents = new ArrayList<TextComponent>();
         imageComponents = new ArrayList<ImageComponent>();
         remainingComponents = new ArrayList<SlideComponent>();
+        listComponents = new ArrayList<BulletList>();
     }
 
 
@@ -42,12 +44,17 @@ public class Slide implements Iterable<SlideComponent> {
     public void addComponent(SlideComponent newComponent){
         this.components.add(newComponent);
 
+        ComponentType type = newComponent.getType();
+
         // Add component to a list based on its type
-        if (newComponent.getType() == ComponentType.Text){
+        if (type == ComponentType.Text){
             this.textComponents.add( (TextComponent) newComponent);
 
-        } else if (newComponent.getType() == ComponentType.Image){
+        } else if (type == ComponentType.Image){
             this.imageComponents.add( (ImageComponent) newComponent);
+
+        } else if (type == ComponentType.BulletList){
+            this.listComponents.add( (BulletList) newComponent);
 
         } else {
             this.remainingComponents.add( newComponent );
@@ -62,13 +69,17 @@ public class Slide implements Iterable<SlideComponent> {
     public void removeComponent(SlideComponent toRemove){
 
         this.components.remove(toRemove);
+        ComponentType type = toRemove.getType();
 
         // Remove the component from its sublist
-        if (toRemove.getType() == ComponentType.Text){
+        if (type == ComponentType.Text){
             this.textComponents.remove(toRemove);
 
-        } else if (toRemove.getType() == ComponentType.Image){
+        } else if (type == ComponentType.Image){
             this.imageComponents.remove(toRemove);
+
+        } else if (type == ComponentType.BulletList){
+            this.listComponents.remove(toRemove);
 
         } else {
             this.remainingComponents.remove(toRemove);
@@ -199,6 +210,15 @@ public class Slide implements Iterable<SlideComponent> {
      */
     public ArrayList<ImageComponent> getImageComponents(){
         return imageComponents;
+    }
+
+    /**
+     * Returns a list of all the slide's list components
+     * 
+     * @return ArrayList of all BulletList components on this slide
+     */
+    public ArrayList<BulletList> getListComponents(){
+        return listComponents;
     }
 
     /**

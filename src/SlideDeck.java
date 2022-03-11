@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.Font;
+import java.io.File;
 
 /**
  * SlideDecks are made up of many slides
@@ -18,6 +19,8 @@ public class SlideDeck implements Iterable<Slide> {
 
     private Font slideFont;
 
+    private File saveLocation;
+
     /**
      * Creates a slide deck with a specific defaultSlide
      * 
@@ -27,11 +30,7 @@ public class SlideDeck implements Iterable<Slide> {
         slides = new ArrayList<Slide>();
         this.defaultSlide = defaultSlide;
     }
-
-    /*
-    * Font, Fontsize, 
-    */
-
+    
     /**
      * Creates a slide deck without a specific defaultSlide.
      * The defaultSlide will be set to a blank slide.
@@ -39,6 +38,68 @@ public class SlideDeck implements Iterable<Slide> {
     public SlideDeck(){
         this(new Slide());
     }
+
+    /**
+     * Open a slide deck from a JSON file. If the file is in the SlideTemplates folder (really if "SlideTemplates" is anywhere
+     * in the path), it will not remember where it came from (so you can't overwrite templates unintentionally). Otherwise,
+     * it will remember where it came from so you can easily save.
+     * 
+     * @param fileLocation the file path of a JSON file with slide information.
+     * @return the slide deck contained in the JSON file
+     */
+    public static SlideDeck openSlideFile(File fileLocation){
+        SlideDeck deck = SlideDeckFileLoader.loadSlideDeck(fileLocation);
+
+        // Do not allow user to save over the templates!
+        if( fileLocation.getAbsolutePath().contains("SlideTemplates")){
+            deck.saveLocation = null;
+        } else {
+            // If it's not a template, remember where it was opened so you can quickly save
+            deck.saveLocation = fileLocation;
+        }
+
+        return deck;
+    }
+
+    /**
+     * Saves this file to the location stored in this slide deck. If the silde deck does not have a save location,
+     * it will return false.
+     * 
+     * @return True if it saves the slide, false if there is nowhere specified to save the slide
+     */
+    public boolean save(){
+
+        boolean success;
+
+        // Only save if there is already a location to save it to
+        if(saveLocation == null){
+            success = false;
+
+        } else {
+            // If there is already a location, quickly save this deck
+            success = true;
+            SlideDeckFileSaver.saveSlideDeck(this, saveLocation);
+        }
+
+        return success;
+    }
+
+    /**
+     * Save this deck in a specied location. This will also store the save location
+     * so that in the future you can call .save() without specifying a location
+     * 
+     * @param saveLocation the File location to save the slide deck
+     */
+    public void saveAs(File saveLocation){
+        this.saveLocation = saveLocation;
+        save();
+    }
+
+
+    /*
+    * Font, Fontsize, 
+    */
+
 
 
     /**
