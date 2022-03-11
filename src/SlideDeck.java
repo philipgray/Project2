@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Font;
 import java.io.File;
 
 /**
@@ -16,8 +15,6 @@ public class SlideDeck implements Iterable<Slide> {
     // When a new slide is created, this defaultSlide is copied to the list.
     // This defaultSlide is determined by the template, and can be changed.
     private Slide defaultSlide;
-
-    private Font slideFont;
 
     private File saveLocation;
 
@@ -282,23 +279,6 @@ public class SlideDeck implements Iterable<Slide> {
         this.slides.remove(toRemove);
     }
     
-    /**
-     * Gets the font used in this slide deck
-     * 
-     * @return the slide deck font
-     */
-    public Font getFont(){
-        return this.slideFont;
-    }
-
-    /**
-     * Set the font used in this slide deck
-     * 
-     * @param newFont the new font to set
-     */
-    public void setFont(Font newFont){
-        this.slideFont = newFont;
-    }
 
     // Iterator interface
     @Override
