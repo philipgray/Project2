@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class PresentationWindow extends JPanel implements ActionListener {
     MainWindow mw;
@@ -187,9 +188,14 @@ public class PresentationWindow extends JPanel implements ActionListener {
         } else if (event.getSource() == present) {
             System.out.println("present!");
         } else if (event.getSource() == saveAs) {
-            System.out.println("saveAs");
+            final JFileChooser fileChooser = new JFileChooser();
+            int file = fileChooser.showSaveDialog(this);
         } else if (event.getSource() == save) {
-            System.out.println("save");
+            boolean operationComplete = slideDeck.save();
+            if (!operationComplete) {
+
+            }
+            return;
         } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
         }
