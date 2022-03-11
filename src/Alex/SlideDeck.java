@@ -2,7 +2,6 @@ package Alex;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Font;
 import java.io.File;
 
 /**
@@ -20,8 +19,6 @@ public class SlideDeck implements Iterable<Slide> {
 
 
     private Slide defaultSlide;
-
-    private Font slideFont;
 
     private File saveLocation;
 
@@ -64,6 +61,12 @@ public class SlideDeck implements Iterable<Slide> {
         } else {
             // If it's not a template, remember where it was opened so you can quickly save
             deck.saveLocation = fileLocation;
+        }
+
+        // Make sure there is a slide
+        if(deck.getNumSlides() == 0 ){
+            deck.addNewSlide();
+            deck.getCurrentSlide();
         }
 
         return deck;
@@ -113,6 +116,15 @@ public class SlideDeck implements Iterable<Slide> {
     }
 
     /**
+     * This is the current index the slide is on.
+     * 
+     * @return the current index
+     */
+    public int getCurrentIndex(){
+        return this.currentIndex;
+    }
+
+    /**
      * Gets the currently selected slide
      * 
      * @return the currently selected slide. Null if there are no slides
@@ -122,6 +134,7 @@ public class SlideDeck implements Iterable<Slide> {
         // If no slide is selected, select the first one if possible.
         if(currentSlide == null && slides.size() > 0){
             currentSlide = slides.get(0);
+            currentIndex = 0;
         }
 
         return currentSlide;
@@ -161,6 +174,11 @@ public class SlideDeck implements Iterable<Slide> {
         return currentSlide;
     }
 
+    /**
+     * Goes to the previous slide in the deck
+     * 
+     * @return the previous slide
+     */
     public Slide previousSlide(){
         // Only go back if it's possible
         if(currentIndex > 0){
@@ -264,23 +282,6 @@ public class SlideDeck implements Iterable<Slide> {
         this.slides.remove(toRemove);
     }
     
-    /**
-     * Gets the font used in this slide deck
-     * 
-     * @return the slide deck font
-     */
-    public Font getFont(){
-        return this.slideFont;
-    }
-
-    /**
-     * Set the font used in this slide deck
-     * 
-     * @param newFont the new font to set
-     */
-    public void setFont(Font newFont){
-        this.slideFont = newFont;
-    }
 
     // Iterator interface
     @Override

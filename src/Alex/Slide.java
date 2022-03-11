@@ -20,6 +20,7 @@ public class Slide implements Iterable<SlideComponent> {
     private ArrayList<ImageComponent> imageComponents;
     private ArrayList<BulletList> listComponents;
     private ArrayList<SlideComponent> remainingComponents;
+    
 
     private Background background;
 

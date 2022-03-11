@@ -1,4 +1,4 @@
-package Alex;
+import java.awt.Font;
 
 /**
  * A text component stores text in a unique format
@@ -9,6 +9,8 @@ package Alex;
 public abstract class TextComponent extends SlideComponent {
 
     private int fontSize;
+    private Font font;
+    private static Font defaultFont = Font.getFont( Font.DIALOG );
 
     /**
      * Initialize text component with top left and bottom right coordinates 
@@ -19,17 +21,18 @@ public abstract class TextComponent extends SlideComponent {
      */
     public TextComponent(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY) {
         super(topLeftX, topLeftY, bottomRightX, bottomRightY, ComponentType.Text);
-        fontSize = 12;
+        fontSize = 16;
+        this.font = TextComponent.defaultFont;
     }
 
     /**
-     * Returns a string containing the Alex.TextComponent's text
+     * Returns a string containing the TextComponent's text
      * @return the text representation of the string
      */
     public abstract String getText();
 
     /**
-     * Changes the text in the Alex.TextComponent
+     * Changes the text in the TextComponent
      * @param text the new text for the text box
      */
     public abstract void setText(String text);
@@ -37,9 +40,17 @@ public abstract class TextComponent extends SlideComponent {
     /**
      * Sets the font size of this text
      * @param fontSize the font size (in pts) of this text
+     * @return true if the font is too small! Use this return to display a warning
      */
-    public void setFontSize(int fontSize){
+    public boolean setFontSize(int fontSize){
         this.fontSize = fontSize;
+        boolean tooSmall = false;
+
+        if(fontSize < 15){
+            tooSmall = true;
+        }
+
+        return tooSmall;
     }
 
     /**
@@ -48,6 +59,23 @@ public abstract class TextComponent extends SlideComponent {
      */
     public int getFontSize(){
         return this.fontSize;
+    }
+
+    /**
+     * Returns the font for this text
+     * @return the text font
+     */
+    public Font getFont(){
+        return this.font;
+    }
+
+    /**
+     * Changes the font of all the text
+     * 
+     * @param font the font of this text object
+     */
+    public void setFont(Font font){
+        this.font = font;
     }
 
     /**
