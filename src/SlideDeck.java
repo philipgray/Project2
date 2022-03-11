@@ -63,6 +63,12 @@ public class SlideDeck implements Iterable<Slide> {
             deck.saveLocation = fileLocation;
         }
 
+        // Make sure there is a slide
+        if(deck.getNumSlides() == 0 ){
+            deck.addNewSlide();
+            deck.getCurrentSlide();
+        }
+
         return deck;
     }
 
@@ -110,6 +116,15 @@ public class SlideDeck implements Iterable<Slide> {
     }
 
     /**
+     * This is the current index the slide is on.
+     * 
+     * @return the current index
+     */
+    public int getCurrentIndex(){
+        return this.currentIndex;
+    }
+
+    /**
      * Gets the currently selected slide
      * 
      * @return the currently selected slide. Null if there are no slides
@@ -119,6 +134,7 @@ public class SlideDeck implements Iterable<Slide> {
         // If no slide is selected, select the first one if possible.
         if(currentSlide == null && slides.size() > 0){
             currentSlide = slides.get(0);
+            currentIndex = 0;
         }
 
         return currentSlide;
@@ -158,6 +174,11 @@ public class SlideDeck implements Iterable<Slide> {
         return currentSlide;
     }
 
+    /**
+     * Goes to the previous slide in the deck
+     * 
+     * @return the previous slide
+     */
     public Slide previousSlide(){
         // Only go back if it's possible
         if(currentIndex > 0){
