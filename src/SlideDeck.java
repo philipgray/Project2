@@ -100,6 +100,14 @@ public class SlideDeck implements Iterable<Slide> {
         save();
     }
 
+    /**
+     * Returns the number of slides in this slide deck
+     * 
+     * @return the number of slides in the deck
+     */
+    public int getNumSlides(){
+        return this.slides.size();
+    }
 
     /**
      * Gets the currently selected slide
