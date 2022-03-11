@@ -121,6 +121,36 @@ public abstract class SlideComponent {
         return new int[] {bottomRightXCoord, bottomRightYCoord};
     }
 
+    /**
+     * For loading and cloning components. Some compnents have a tag, like text <p>
+     * e.g. /fs=12/ <p>
+     * for font size = 12 <p>
+     * 
+     * This method returns the string after the = sign.
+     * 
+     * @param tag the string representing the tag
+     * @param container the larger string containing the tag and other content
+     * @return the string between the equal sign and the end of the tag
+     */
+    protected String evaluateTag(String tag, String container){
+        
+        String value = "";
+
+        // Make sure the string has the tag
+        if(container.contains("/" + tag + "=")){
+
+            // Get the index after the = sign and the index before the second /
+            int tagStartIndex = container.indexOf( "/" + tag + "=");
+            int valueIndex = tagStartIndex + tag.length() + 2;
+            int valueEndIndex = container.indexOf("/", valueIndex);
+
+            // The value is between these indices
+            value = container.substring(valueIndex, valueEndIndex);
+        }
+
+        return value;
+    }
+
     @Override
     public String toString(){
         String str = "Component type: " + this.componentType;

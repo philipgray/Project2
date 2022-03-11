@@ -21,3 +21,6 @@ https://www.geeksforgeeks.org/java-program-to-open-input-url-in-system-default-b
 
 BufferedImage use:
 Lab 3 from Professor Eaton's OOP class in 2021
+
+Font class:
+https://docs.oracle.com/javase/7/docs/api/java/awt/Font.html#createFont(int,%20java.io.File)

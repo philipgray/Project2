@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.image.BufferedImage;
 
 /**
  * A slide for a presentation. Contains multiple slide components
@@ -15,9 +16,13 @@ public class Slide implements Iterable<SlideComponent> {
     // Array lists containing specific components
     private ArrayList<TextComponent> textComponents;
     private ArrayList<ImageComponent> imageComponents;
+    private ArrayList<BulletList> listComponents;
     private ArrayList<SlideComponent> remainingComponents;
 
     private Background background;
+
+    // True if the slide should have a small numer at the bottom of the screen.
+    private boolean showNumber = true;
 
     /**
      * Constructs an empty slide for the slide deck.
@@ -27,6 +32,7 @@ public class Slide implements Iterable<SlideComponent> {
         textComponents = new ArrayList<TextComponent>();
         imageComponents = new ArrayList<ImageComponent>();
         remainingComponents = new ArrayList<SlideComponent>();
+        listComponents = new ArrayList<BulletList>();
     }
 
 
@@ -38,12 +44,17 @@ public class Slide implements Iterable<SlideComponent> {
     public void addComponent(SlideComponent newComponent){
         this.components.add(newComponent);
 
+        ComponentType type = newComponent.getType();
+
         // Add component to a list based on its type
-        if (newComponent.getType() == ComponentType.Text){
+        if (type == ComponentType.Text){
             this.textComponents.add( (TextComponent) newComponent);
 
-        } else if (newComponent.getType() == ComponentType.Image){
+        } else if (type == ComponentType.Image){
             this.imageComponents.add( (ImageComponent) newComponent);
+
+        } else if (type == ComponentType.BulletList){
+            this.listComponents.add( (BulletList) newComponent);
 
         } else {
             this.remainingComponents.add( newComponent );
@@ -58,13 +69,17 @@ public class Slide implements Iterable<SlideComponent> {
     public void removeComponent(SlideComponent toRemove){
 
         this.components.remove(toRemove);
+        ComponentType type = toRemove.getType();
 
         // Remove the component from its sublist
-        if (toRemove.getType() == ComponentType.Text){
+        if (type == ComponentType.Text){
             this.textComponents.remove(toRemove);
 
-        } else if (toRemove.getType() == ComponentType.Image){
+        } else if (type == ComponentType.Image){
             this.imageComponents.remove(toRemove);
+
+        } else if (type == ComponentType.BulletList){
+            this.listComponents.remove(toRemove);
 
         } else {
             this.remainingComponents.remove(toRemove);
@@ -99,6 +114,58 @@ public class Slide implements Iterable<SlideComponent> {
         return this.background;
     }
 
+    /**
+     * Should this slide have a number at the bottom of the screen?
+     * The number is determined by the SlideDeck array list index.
+     * 
+     * @return true if the slide should have a number at the bottom of the slide
+     */
+    public boolean shouldShowNumber(){
+        return showNumber;
+    }
+
+    /**
+     * Set the slide to not show its number at the bottom of the screen.
+     * (Only changes the showNumber variable)
+     */
+    public void hideNumber(){
+        showNumber = false;
+    }
+
+    /**
+     * Sets the slide to show its number at the bottom of the screen.
+     * (Only changes the showNubmer variable)
+     */
+    public void showNumber(){
+        showNumber = true;
+    }
+
+    /**
+     * Toggles the slide's showNumber field
+     */
+    public void toggleShowNumber(){
+        showNumber = !showNumber;
+    }
+
+
+    /**
+     * Draws the slide as a buffered image and returns the product for presenting and thumbnails.
+     * 
+     * @return BufferedImage representation of the slide
+     */
+    public BufferedImage getSlideImage(int slideNumber, int width, int height){
+        //TODO: Slide as buffered image
+        // Store the slide in a BufferedImage
+        BufferedImage slideImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+
+        // If we are showing the number, add a small number at the bottom
+        if(showNumber){
+
+        }
+
+        return slideImg;
+    }
 
     /**
      * Clones this slide and returns a copy.
@@ -143,6 +210,15 @@ public class Slide implements Iterable<SlideComponent> {
      */
     public ArrayList<ImageComponent> getImageComponents(){
         return imageComponents;
+    }
+
+    /**
+     * Returns a list of all the slide's list components
+     * 
+     * @return ArrayList of all BulletList components on this slide
+     */
+    public ArrayList<BulletList> getListComponents(){
+        return listComponents;
     }
 
     /**
