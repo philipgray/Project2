@@ -1,5 +1,7 @@
 package GUI;
 
+import Alex.SlideDeck;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,9 +13,14 @@ public class PresentationWindow extends JPanel implements ActionListener {
     JButton newSlide, fontSelect, fontSize, createBullet, createSubBullet, insertLink,
             present, save, saveAs, backgroundColor, draw, nextSlide, previousSlide;
     DrawingPanel drawingPanel;
+    SlideDeck slideDeck;
 
-    public PresentationWindow(MainWindow mw) {
+    public PresentationWindow(MainWindow mw, SlideDeck slideDeck) {
         this.mw = mw;
+        this.slideDeck = slideDeck;
+
+        System.out.println(slideDeck.getNumSlides());
+
         GridBagLayout layout = new GridBagLayout();
         setLayout(layout);
         setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
@@ -156,6 +163,8 @@ public class PresentationWindow extends JPanel implements ActionListener {
         constraints.gridy = 1;
 
         add(previousSlide, constraints);
+
+        previousSlide.setEnabled(false);
 
         // Trying something here! --------------------------------------------------------------
         drawingPanel = new DrawingPanel();

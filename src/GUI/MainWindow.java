@@ -14,8 +14,6 @@ import Alex.*;
 public class MainWindow {
     JFrame frame;
     JPanel currentPanel;
-
-    SlideDeck slideDeck;
     /**
      * hi
      * https://stackoverflow.com/questions/3680221/how-can-i-get-screen-resolution-in-java
@@ -29,10 +27,12 @@ public class MainWindow {
         frame.setVisible(true);
     }
 
+    /*
     public void setSlideDeck(SlideDeck slideDeck) {
         this.slideDeck = slideDeck;
         System.out.println("Loaded slideDeck");
     }
+    */
 
     public void openStartWindow() {
         currentPanel = new StartWindow(this);
@@ -46,10 +46,9 @@ public class MainWindow {
         frame.pack();
     }
 
-    public void openPresentationWindow() {
-        currentPanel = new PresentationWindow(this);
+    public void openPresentationWindow(SlideDeck slideDeck) {
+        currentPanel = new PresentationWindow(this, slideDeck);
         frame.setContentPane(currentPanel);
-        frame.setLocationRelativeTo(null); // centers the frame in the middle of the user's screen
         frame.pack();
     }
 

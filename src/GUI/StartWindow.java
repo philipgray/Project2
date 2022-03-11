@@ -75,8 +75,7 @@ public class StartWindow extends JPanel implements ActionListener {
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
-                mw.setSlideDeck(loadSlideDeck(file));
-                mw.openPresentationWindow();
+                mw.openPresentationWindow(loadSlideDeck(file));
             } else {
                 System.out.println("closed window");
             }

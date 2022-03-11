@@ -17,6 +17,8 @@ public class SlideDeck implements Iterable<Slide> {
     
     // When a new slide is created, this defaultSlide is copied to the list.
     // This defaultSlide is determined by the template, and can be changed.
+
+
     private Slide defaultSlide;
 
     private Font slideFont;
@@ -26,24 +28,23 @@ public class SlideDeck implements Iterable<Slide> {
     private Slide currentSlide;
     private int currentIndex;
 
+    public SlideDeck() {
+        slides = new ArrayList<>();
+
+    }
+
+
+
     /**
      * Creates a slide deck with a specific defaultSlide
      * 
      * @param defaultSlide the slide to copy into new slides
      */
     public SlideDeck(Slide defaultSlide){
-        slides = new ArrayList<Slide>();
+        slides = new ArrayList<>();
         this.defaultSlide = defaultSlide;
         currentIndex = 0;
         currentSlide = null;
-    }
-    
-    /**
-     * Creates a slide deck without a specific defaultSlide.
-     * The defaultSlide will be set to a blank slide.
-     */
-    public SlideDeck(){
-        this(new Slide());
     }
 
     /**
@@ -92,7 +93,7 @@ public class SlideDeck implements Iterable<Slide> {
     }
 
     /**
-     * Save this deck in a specied location. This will also store the save location
+     * Save this deck in a specified location. This will also store the save location
      * so that in the future you can call .save() without specifying a location
      * 
      * @param saveLocation the File location to save the slide deck
