@@ -68,6 +68,9 @@ public class SlideDeckFileSaver {
 
         jsonDeck.put("slides", slides);
 
+        // Store the slide you left off on
+        jsonDeck.put("selectedSlide", toSave.getCurrentIndex());
+
         return jsonDeck;
     }
 
