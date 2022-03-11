@@ -1,6 +1,8 @@
 package Alex;
 
 import org.json.simple.*;
+
+import java.awt.Color;
 import java.io.File;
 import java.io.FileReader;
 
@@ -117,8 +119,14 @@ public class SlideDeckFileLoader {
         }
 
         // Get the background, or create a blank one
-        component = (JSONObject) slideJSON.get("background");
-        newSlide.setBackground( (Background) decodeComponentJSON( component ));
+        if(slideJSON.containsKey("background") && slideJSON.get("background") != null){
+            component = (JSONObject) slideJSON.get("background");
+            newSlide.setBackground( (Background) decodeComponentJSON( component ));
+
+        } else {
+            // If there is no background in the save file, make a plain background
+            newSlide.setBackground(new ColorBackground(Color.WHITE));
+        }
 
         return newSlide;
     }
@@ -147,12 +155,17 @@ public class SlideDeckFileLoader {
         // NOTE: This is a good place for the command pattern
         // Encapsulating methods so that when you add new component types, you can easily add the decoding logic for the JSON
         if(type.equals("Text")){
-            newComponent = new PureText(content);
+            newComponent = new PureText();
+            newComponent.setContent(content);
         }
         else if (type.equals("Color")){
             newComponent = new ColorBackground(0, 0, 0);
             newComponent.setContent(content);
             
+        } else if (type.equals("BulletList")){
+            newComponent = new BulletList();
+            newComponent.setContent(content);
+
         } else {
             // For defaulting purposes, unsupported comopnent types will display an error as a text object
             newComponent = new PureText("Could not load this object from the save.");
