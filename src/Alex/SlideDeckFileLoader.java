@@ -2,8 +2,11 @@ package Alex;
 import org.json.simple.*;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 import org.json.simple.parser.JSONParser;
 
@@ -94,7 +97,7 @@ public class SlideDeckFileLoader {
 
         // Select the slide you left off on
         if(slideFileIn.containsKey("selectedSlide")){
-            int selectedIndex = (int) slideFileIn.get("selectedSlide");
+            int selectedIndex = Math.toIntExact( (long) slideFileIn.get("selectedSlide"));
             slideDeckOut.getSlide(selectedIndex);
         }
         
@@ -156,12 +159,34 @@ public class SlideDeckFileLoader {
         int bottomY = Math.toIntExact((long) componentJSON.get("bottomY"));
         String content = (String) componentJSON.get("content");
 
+        // Get rotation if possible
+        int rotation = 0;
+        if(componentJSON.containsKey("rotation")){
+            rotation = Math.toIntExact( (long)componentJSON.get("rotation") );
+        }
+
         // Create component based on what the type is
         // NOTE: This is a good place for the command pattern
         // Encapsulating methods so that when you add new component types, you can easily add the decoding logic for the JSON
         if(type.equals("Text")){
             newComponent = new PureText();
             newComponent.setContent(content);
+
+            // Get the font if possible
+            if(componentJSON.containsKey("fontFile")){
+                String filePath = (String) componentJSON.get("fontFile");
+                File fontFile = new File(filePath);
+
+                // Only set the font if we can successfully load the file
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+                    ((TextComponent)newComponent).setFont(font, fontFile);
+
+                } catch (FontFormatException | IOException e) {
+                    e.printStackTrace();
+                }
+                
+            }
         }
         else if (type.equals("Color")){
             newComponent = new ColorBackground(0, 0, 0);
@@ -171,6 +196,10 @@ public class SlideDeckFileLoader {
             newComponent = new BulletList();
             newComponent.setContent(content);
 
+        } else if (type.equals("Line")) {
+            newComponent = new LineComponent(0, 0, 0, 0);
+            newComponent.setContent(content);
+        
         } else {
             // For defaulting purposes, unsupported comopnent types will display an error as a text object
             newComponent = new PureText("Could not load this object from the save.");
@@ -179,6 +208,7 @@ public class SlideDeckFileLoader {
         // Set component coordinates
         newComponent.setTopLeftCoord(topX, topY);
         newComponent.setBottomRightCoord(bottomX, bottomY);
+        newComponent.setRotation(rotation);
         return newComponent;
     }
 

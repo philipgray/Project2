@@ -2,6 +2,9 @@ package Alex;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.File;
+import java.io.IOException;
+import java.awt.Font;
+import java.awt.FontFormatException;
 
 /**
  * SlideDecks are made up of many slides
@@ -22,16 +25,22 @@ public class SlideDeck implements Iterable<Slide> {
     private Slide currentSlide;
     private int currentIndex;
 
+    private File currentFontFile;
+    private Font currentFont;
+
     /**
      * Creates a slide deck with a specific defaultSlide
      * 
      * @param defaultSlide the slide to copy into new slides
      */
     public SlideDeck(Slide defaultSlide){
-        slides = new ArrayList<Slide>();
+        this.slides = new ArrayList<>();
+        this.slides.add(defaultSlide);
         this.defaultSlide = defaultSlide;
-        currentIndex = 0;
-        currentSlide = null;
+        this.currentSlide = defaultSlide;
+        this.currentIndex = 0;
+
+        this.saveLocation = null;
     }
     
     /**
@@ -102,6 +111,43 @@ public class SlideDeck implements Iterable<Slide> {
     public void saveAs(File saveLocation){
         this.saveLocation = saveLocation;
         save();
+    }
+
+    public boolean saveLocationExists() {
+        return this.saveLocation != null;
+    }
+
+    /**
+     * Sets the font using a File with the font in it (should be a .ttf file)
+     * 
+     * @param fontFile file where the font is (.ttf)
+     */
+    public void setFont(File fontFile){
+        this.currentFontFile = fontFile;
+        try {
+            this.currentFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+        } catch (FontFormatException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Return the font that is currently selected
+     * 
+     * @return the current font
+     */
+    public Font getFont(){
+        return currentFont;
+    }
+
+    /**
+     * Return the file of the font currently selected
+     * 
+     * @return the current font's file
+     */
+    public File getFontFile(){
+        return currentFontFile;
     }
 
     /**

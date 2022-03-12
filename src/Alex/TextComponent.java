@@ -1,5 +1,6 @@
 package Alex;
 import java.awt.Font;
+import java.io.File;
 
 /**
  * A text component stores text in a unique format
@@ -11,6 +12,7 @@ public abstract class TextComponent extends SlideComponent {
 
     private int fontSize;
     private Font font;
+    private File fontFile;
     private static Font defaultFont = Font.getFont( Font.DIALOG );
 
     /**
@@ -74,9 +76,21 @@ public abstract class TextComponent extends SlideComponent {
      * Changes the font of all the text
      * 
      * @param font the font of this text object
+     * @param fontFile the location of the font file (so that the font can be saved with the component)
      */
-    public void setFont(Font font){
+    public void setFont(Font font, File fontFile){
         this.font = font;
+        this.fontFile = fontFile;
+    }
+
+
+    /**
+     * Returns the file of the font (used for saving the text component)
+     * 
+     * @return the file where this component's font is
+     */
+    public File getFontFile(){
+        return this.fontFile;
     }
 
     /**
