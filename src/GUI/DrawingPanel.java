@@ -8,7 +8,7 @@ public class DrawingPanel extends JPanel {
     Graphics2D graphics;
 
     public DrawingPanel() {
-        setSize(500, 750);
+        setSize(500, 250);
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLACK));
     }

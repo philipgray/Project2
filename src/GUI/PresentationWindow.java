@@ -20,7 +20,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         this.mw = mw;
         this.slideDeck = slideDeck;
 
-        System.out.println(slideDeck.getNumSlides());
+        System.out.println("There are " +slideDeck.getNumSlides()+" slides loaded.");
 
         GridBagLayout layout = new GridBagLayout();
         setLayout(layout);
@@ -165,7 +165,6 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         add(previousSlide, constraints);
 
-        previousSlide.setEnabled(false);
 
         // Trying something here! --------------------------------------------------------------
         drawingPanel = new DrawingPanel();
@@ -177,33 +176,54 @@ public class PresentationWindow extends JPanel implements ActionListener {
         constraints.insets = new Insets(10, 10, 10, 10);
 
         constraints.ipadx = 1000;
-        constraints.ipady = 750;
+        constraints.ipady = 250;
 
         add(drawingPanel, constraints);
+
+        this.setNextAndPrevious();
+    }
+
+    private void setNextAndPrevious() {
+        System.out.println("Current Index: "+slideDeck.getCurrentIndex());
+        System.out.println("Number of Slides: "+slideDeck.getNumSlides());
+
+        previousSlide.setEnabled(slideDeck.getCurrentIndex() != 0);
+        nextSlide.setEnabled(slideDeck.getCurrentIndex() < slideDeck.getNumSlides() - 1);
+    }
+
+    private void saveAsDialog() {
+        final JFileChooser fileChooser = new JFileChooser();
+        int file = fileChooser.showSaveDialog(this);
+        System.out.println("File Chooser output: "+file);
+        if (file == 0) {
+            slideDeck.saveAs(fileChooser.getSelectedFile());
+            System.out.println("should have saved");
+        }
     }
 
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == newSlide) {
             System.out.println("newSlide!");
+            slideDeck.addNewSlide();
         } else if (event.getSource() == present) {
             System.out.println("present!");
         } else if (event.getSource() == saveAs) {
-            final JFileChooser fileChooser = new JFileChooser();
-            int file = fileChooser.showSaveDialog(this);
-            if (file == 1) {
-                slideDeck.saveAs(fileChooser.getSelectedFile());
-            }
+            saveAsDialog();
         } else if (event.getSource() == save) {
             boolean operationComplete = slideDeck.save();
             if (!operationComplete) {
-                final JFileChooser fileChooser = new JFileChooser();
-                int file = fileChooser.showSaveDialog(this);
-                if (file == 1) {
-                    slideDeck.saveAs(fileChooser.getSelectedFile());
-                }
+                saveAsDialog();
             }
         } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
+        } else if (event.getSource() == nextSlide) {
+            slideDeck.nextSlide();
+            this.setNextAndPrevious();
+
+        } else if (event.getSource() == previousSlide) {
+            slideDeck.previousSlide();
+            this.setNextAndPrevious();
         }
+
     }
 }

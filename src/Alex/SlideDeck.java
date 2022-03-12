@@ -28,10 +28,11 @@ public class SlideDeck implements Iterable<Slide> {
      * @param defaultSlide the slide to copy into new slides
      */
     public SlideDeck(Slide defaultSlide){
-        slides = new ArrayList<Slide>();
+        slides = new ArrayList<>();
+        slides.add(defaultSlide);
         this.defaultSlide = defaultSlide;
         currentIndex = 0;
-        currentSlide = null;
+        currentSlide = defaultSlide;
     }
     
     /**
