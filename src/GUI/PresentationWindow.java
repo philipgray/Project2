@@ -212,14 +212,15 @@ public class PresentationWindow extends JPanel implements ActionListener {
         if (event.getSource() == newSlide) {
             System.out.println("newSlide!");
             slideDeck.addNewSlide();
+            this.setNextAndPrevious();
         } else if (event.getSource() == present) {
             System.out.println("present!");
         } else if (event.getSource() == saveAs) {
-            saveAsDialog();
+            this.saveAsDialog();
         } else if (event.getSource() == save) {
             boolean operationComplete = slideDeck.save();
             if (!operationComplete) {
-                saveAsDialog();
+                this.saveAsDialog();
             }
         } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
