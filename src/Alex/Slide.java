@@ -2,6 +2,7 @@ package Alex;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.image.BufferedImage;
+import java.awt.Color;
 
 /**
  * A slide for a presentation. Contains multiple slide components
@@ -10,6 +11,8 @@ import java.awt.image.BufferedImage;
  * @date 2 March 2022
  */
 public class Slide implements Iterable<SlideComponent> {
+
+    private static Background defaultBackground = new ColorBackground(Color.WHITE);
 
     // Array list containing all components
     private ArrayList<SlideComponent> components;
@@ -40,6 +43,9 @@ public class Slide implements Iterable<SlideComponent> {
         remainingComponents = new ArrayList<SlideComponent>();
         listComponents = new ArrayList<BulletList>();
         lineComponents = new ArrayList<LineComponent>();
+
+        // Default background
+        this.background = Slide.defaultBackground;
     }
 
 
