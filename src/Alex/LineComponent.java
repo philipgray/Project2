@@ -1,5 +1,7 @@
 package Alex;
 
+import java.awt.Color;
+
 /**
  * Line component has a start point and endpoint
  * 
@@ -14,6 +16,10 @@ public class LineComponent extends SlideComponent{
     protected int endX;
     protected int endY;
 
+    protected int width;
+
+    protected Color color;
+
     /**
      * Creates a line with the given starting and end points
      * 
@@ -26,6 +32,60 @@ public class LineComponent extends SlideComponent{
         super(0, 0, 0, 0, ComponentType.Line);
         this.setStartPoint(startX, startY);
         this.setEndPoint(endX, endY);
+
+        this.color = Color.BLACK;
+        this.width = 5;
+    }
+
+    /**
+     * Creates a line with a specific width and color
+     * @param startX starting X
+     * @param startY starting Y
+     * @param endX ending X
+     * @param endY ending Y
+     * @param width with of the line
+     * @param color color of the line
+     */
+    public LineComponent(int startX, int startY, int endX, int endY, int width, Color color){
+        this(startX, startY, endX, endY);
+        this.width = width;
+        this.color = color;
+    }
+
+    /**
+     * Get the width of this line
+     * 
+     * @return width of line component
+     */
+    public int getWidth(){
+        return this.width;
+    }
+
+    /**
+     * Change the width of this component
+     * 
+     * @param width new width of line
+     */
+    public void setWidth(int width){
+        this.width = width;
+    }
+
+    /**
+     * Get the color of this line
+     * 
+     * @return this line's color
+     */
+    public Color getColor(){
+        return this.color;
+    }
+
+    /**
+     * Change the color of this component
+     * 
+     * @param color the new color of this line
+     */
+    public void setColor(Color color){
+        this.color = color;
     }
 
     /**
@@ -101,7 +161,11 @@ public class LineComponent extends SlideComponent{
 
     @Override
     public SlideComponent cloneComponent() {
-        return new LineComponent(this.startX, this.startY, this.endX,  this.endY);
+        LineComponent newLine = new LineComponent(this.startX, this.startY, this.endX,  this.endY);
+        newLine.color = new Color( this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+        newLine.width = this.width;
+
+        return newLine;
     }
 
     /**

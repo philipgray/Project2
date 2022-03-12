@@ -29,7 +29,8 @@ public class SlideDeckFileLoader {
     public static SlideDeck loadSlideDeck(File file) {
         
         // New deck to load the slides into
-        SlideDeck deck = new SlideDeck();
+        // I pass in an empty slide so it does not add a new one automatically.
+        SlideDeck deck = new SlideDeck(new Slide());
 
         // Try loading the file. If the file does not load, this funciton will return an empty slide
         try {
@@ -198,6 +199,15 @@ public class SlideDeckFileLoader {
 
         } else if (type.equals("Line")) {
             newComponent = new LineComponent(0, 0, 0, 0);
+
+            // If the component has color, update those values
+            if (componentJSON.containsKey("width") && componentJSON.containsKey("color")) {
+                int width = Math.toIntExact( (long) componentJSON.get("width"));
+                String color = (String) componentJSON.get("color");
+                String[] rgb = color.split(" ");
+                Color lineColor = new Color( Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+            }
+
             newComponent.setContent(content);
         
         } else {

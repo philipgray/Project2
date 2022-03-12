@@ -148,6 +148,13 @@ public class SlideDeckFileSaver {
             if(fontFile != null){
                 jsonComponent.put("fontFile", fontFile.getAbsolutePath() );
             }
+            
+        } else if (type.equals("Line")) {
+            LineComponent line = ((LineComponent) component);
+            // Lines should also store color and width
+            jsonComponent.put("width", line.getWidth());
+            String color = line.getColor().getRed() + " " + line.getColor().getGreen() + " " + line.getColor().getBlue();
+            jsonComponent.put("color", color);
         }
 
 

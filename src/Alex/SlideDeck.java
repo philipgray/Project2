@@ -27,6 +27,9 @@ public class SlideDeck implements Iterable<Slide> {
 
     private File currentFontFile;
     private Font currentFont;
+    private Font[] availableFonts;
+    private File[] availableFontFiles;
+    private String[] availableFontNames;
 
 
     /**
@@ -43,6 +46,8 @@ public class SlideDeck implements Iterable<Slide> {
         this.currentSlide = defaultSlide;
         this.currentIndex = 0;
         this.saveLocation = null;
+
+        // Load in the existing fonts
     }
     
     /**
@@ -122,21 +127,31 @@ public class SlideDeck implements Iterable<Slide> {
     public boolean saveLocationExists() {
         return this.saveLocation != null;
     }
-
+    
     /**
-     * Sets the font using a File with the font in it (should be a .ttf file)
+     * Provides a list of all available font names.
+     * The index for the font names is the same as the index for the font objects and font files
      * 
-     * @param fontFile file where the font is (.ttf)
+     * @return String[] containing the font names.
      */
-    public void setFont(File fontFile){
-        this.currentFontFile = fontFile;
-        try {
-            this.currentFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
-        } catch (FontFormatException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+    public String[] getAvailableFontNames(){
+        return this.availableFontNames;
+    }
+    
+    /**
+     * Change the currently selected font. Font indices correspond to those
+     * found in <code> this.getAvailableFontNames() </code>
+     *
+     * @param fontIndex the index of the font you want
+     */
+    public void chooseFont(int fontIndex){
+        // Ensure the index is not out of bounds
+        if(fontIndex > 0 && fontIndex < this.availableFonts.length){
+            this.currentFont = availableFonts[fontIndex];
+            this.currentFontFile = availableFontFiles[fontIndex];
         }
     }
+
 
     /**
      * Return the font that is currently selected
@@ -334,6 +349,43 @@ public class SlideDeck implements Iterable<Slide> {
         this.slides.remove(toRemove);
     }
     
+
+    /**
+     * Helper method to load in all of the fonts and font files into the array
+     */
+    private void loadFonts(){
+
+        // Load all the font files
+        availableFontFiles = new File[] {
+            new File("fonts/akaashnormal.ttf").getAbsoluteFile(),
+            new File("fonts/Kalpurush-Regular.ttf").getAbsoluteFile(),
+            new File("fonts/Mukti-Book.ttf").getAbsoluteFile(),
+            new File("fonts/Nikosh-Regular_jvTyYV3.ttf").getAbsoluteFile(),
+            new File("fonts/Nirmala.ttf").getAbsoluteFile()
+        };
+
+        // Unpack all of these fonts into Font objects
+        availableFonts = new Font[ availableFontFiles.length ];
+        for(int i = 0; i < availableFontFiles.length; i++){
+            
+            try {
+                availableFonts[i] = Font.createFont(Font.TRUETYPE_FONT, availableFontFiles[i]);
+            } catch (FontFormatException | IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        // Store the names of the fonts
+        availableFontNames = new String[] {
+            "Akaash",
+            "Kalpurush",
+            "Mukti-Book",
+            "Nikosh",
+            "Nirmala"
+        };
+        
+    }
 
     // Iterator interface
     @Override
