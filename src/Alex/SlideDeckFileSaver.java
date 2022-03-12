@@ -140,6 +140,7 @@ public class SlideDeckFileSaver {
         jsonComponent.put("topY", component.getTopLeftCoord()[1]);
         jsonComponent.put("bottomX", component.getBottomRightCoord()[0]);
         jsonComponent.put("bottomY", component.getBottomRightCoord()[1]);
+        jsonComponent.put("rotation", component.getRotation());
 
 
         return jsonComponent;

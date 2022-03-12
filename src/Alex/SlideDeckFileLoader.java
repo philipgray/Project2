@@ -94,7 +94,7 @@ public class SlideDeckFileLoader {
 
         // Select the slide you left off on
         if(slideFileIn.containsKey("selectedSlide")){
-            int selectedIndex = (int) slideFileIn.get("selectedSlide");
+            int selectedIndex = Math.toIntExact( (long) slideFileIn.get("selectedSlide"));
             slideDeckOut.getSlide(selectedIndex);
         }
         
@@ -156,6 +156,12 @@ public class SlideDeckFileLoader {
         int bottomY = Math.toIntExact((long) componentJSON.get("bottomY"));
         String content = (String) componentJSON.get("content");
 
+        // Get rotation if possible
+        int rotation = 0;
+        if(componentJSON.containsKey("rotation")){
+            rotation = Math.toIntExact( (long)componentJSON.get("rotation") );
+        }
+
         // Create component based on what the type is
         // NOTE: This is a good place for the command pattern
         // Encapsulating methods so that when you add new component types, you can easily add the decoding logic for the JSON
@@ -179,6 +185,7 @@ public class SlideDeckFileLoader {
         // Set component coordinates
         newComponent.setTopLeftCoord(topX, topY);
         newComponent.setBottomRightCoord(bottomX, bottomY);
+        newComponent.setRotation(rotation);
         return newComponent;
     }
 

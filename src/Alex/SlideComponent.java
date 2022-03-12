@@ -15,6 +15,8 @@ public abstract class SlideComponent {
 
     protected ComponentType componentType;
 
+    protected int rotation;
+
     /**
      * Initializes slide component with coordinates for the corners
      * @param topLeftX X coord of top left corner
@@ -27,6 +29,25 @@ public abstract class SlideComponent {
         this.setTopLeftCoord(topLeftX, topLeftY);
         this.setBottomRightCoord(bottomRightX, bottomRightY);
         this.componentType = type;
+        this.rotation = 0;
+    }
+
+    /**
+     * Returns the rotation of this object in degrees
+     * 
+     * @return rotation of the object
+     */
+    public int getRotation(){
+        return this.rotation;
+    }
+
+    /**
+     * Set the rotation of this object
+     * 
+     * @param rotation the rotation of this object (in degrees)
+     */
+    public void setRotation(int rotation){
+        this.rotation = rotation;
     }
 
     /**
