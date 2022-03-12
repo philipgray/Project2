@@ -9,6 +9,7 @@
 package GUI;
 
 import javax.swing.*;
+import Alex.*;
 
 public class MainWindow {
     JFrame frame;
@@ -26,6 +27,13 @@ public class MainWindow {
         frame.setVisible(true);
     }
 
+    /*
+    public void setSlideDeck(SlideDeck slideDeck) {
+        this.slideDeck = slideDeck;
+        System.out.println("Loaded slideDeck");
+    }
+    */
+
     public void openStartWindow() {
         currentPanel = new StartWindow(this);
         frame.setContentPane(currentPanel);
@@ -38,10 +46,9 @@ public class MainWindow {
         frame.pack();
     }
 
-    public void openPresentationWindow() {
-        currentPanel = new PresentationWindow(this);
+    public void openPresentationWindow(SlideDeck slideDeck) {
+        currentPanel = new PresentationWindow(this, slideDeck);
         frame.setContentPane(currentPanel);
-        frame.setLocationRelativeTo(null); // centers the frame in the middle of the user's screen
         frame.pack();
     }
 

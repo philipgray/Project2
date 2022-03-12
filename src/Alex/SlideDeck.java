@@ -34,10 +34,13 @@ public class SlideDeck implements Iterable<Slide> {
      * @param defaultSlide the slide to copy into new slides
      */
     public SlideDeck(Slide defaultSlide){
-        slides = new ArrayList<Slide>();
+        this.slides = new ArrayList<>();
+        this.slides.add(defaultSlide);
         this.defaultSlide = defaultSlide;
-        currentIndex = 0;
-        currentSlide = null;
+        this.currentSlide = defaultSlide;
+        this.currentIndex = 0;
+
+        this.saveLocation = null;
     }
     
     /**
@@ -108,6 +111,10 @@ public class SlideDeck implements Iterable<Slide> {
     public void saveAs(File saveLocation){
         this.saveLocation = saveLocation;
         save();
+    }
+
+    public boolean saveLocationExists() {
+        return this.saveLocation != null;
     }
 
     /**
