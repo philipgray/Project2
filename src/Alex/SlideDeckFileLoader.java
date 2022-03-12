@@ -1,5 +1,4 @@
 package Alex;
-
 import org.json.simple.*;
 
 import java.awt.Color;
@@ -9,7 +8,7 @@ import java.io.FileReader;
 import org.json.simple.parser.JSONParser;
 
 /**
- * Class to manage loading files. Loads a JSON file to create a Alex.SlideDeck object.z
+ * Class to manage loading files. Loads a JSON file to create a SlideDeck object.z
  * 
  * @author Alex Wills
  * @date 5 March 2022
@@ -21,8 +20,8 @@ public class SlideDeckFileLoader {
      * Loads a slide deck from a JSON file
      * 
      * @param file the JSON file to load
-     * @return a new slide deck with all the slides and elements specified by the JSON file,
-     * or an empty slide deck, if the file fails to load.
+     * @return a new slide deck with all of the slides and elements specified by the JSON file,
+     * or an empty slide deck, if the file fails to laod.
      */
     public static SlideDeck loadSlideDeck(File file) {
         
@@ -74,11 +73,11 @@ public class SlideDeckFileLoader {
     }
 
     /**
-     * Decodes a JSON file to convert it into a Alex.SlideDeck. Does this by adding all slides specified by the JSON
+     * Decodes a JSON file to convert it into a SlideDeck. Does this by adding all slides specified by the JSON
      * to the specified slide deck.
      * 
-     * @param slideFileIn JSONObject containing Alex.Slide Information
-     * @param slideDeckOut the Alex.SlideDeck object to modify according to the json
+     * @param slideFileIn JSONObject containing Slide Information
+     * @param slideDeckOut the SlideDeck object to modify according to the json
      */
     private static void decodeSlideDeckJSON(JSONObject slideFileIn, SlideDeck slideDeckOut){
         
@@ -102,13 +101,13 @@ public class SlideDeckFileLoader {
     }
 
     /**
-     * Decodes a JSON representation of a slide into a Alex.Slide
+     * Decodes a JSON representation of a slide into a Slide
      * 
      * @param slideJSON contains information about the slide.
      * It should contain a list of components, and each component should have a 
      * type, content, topX, topY, bottomX, and bottomY
      * 
-     * @return Alex.Slide object specified by the JSON
+     * @return Slide object specified by the JSON
      */
     private static Slide decodeSlideJSON(JSONObject slideJSON){
         Slide newSlide = new Slide();
@@ -143,7 +142,7 @@ public class SlideDeckFileLoader {
      * 
      * @param componentJSON contatins information about the component's type, coordinates,
      * and content
-     * @return a Alex.SlideComponent specified by the JSON
+     * @return a SlideComponent specified by the JSON
      */
     private static SlideComponent decodeComponentJSON(JSONObject componentJSON){
         SlideComponent newComponent;

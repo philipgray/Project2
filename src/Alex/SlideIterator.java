@@ -1,10 +1,9 @@
 package Alex;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Iterator to iterate over Slides, so that you can use the Alex.SlideDeck in a for-each loop
+ * Iterator to iterate over Slides, so that you can use the SlideDeck in a for-each loop
  * 
  * @author Alex Wills
  * @date 4 March 2022
