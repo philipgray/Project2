@@ -1,4 +1,4 @@
-
+package Alex;
 /**
  * Defines the background of a slide
  * 
