@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 
 
 import java.awt.Desktop;
+import java.awt.Color;
 import java.net.URI;
 
 import GUI.*;
@@ -101,6 +102,7 @@ public class Tester {
         list.indentItem();
 
         list.setFontSize(20);
+        selectedSlide.addComponent(new LineComponent(0, 0, 20, 20, 12, Color.BLUE));
 
         deck.setDefaultSlide(selectedSlide);
 
