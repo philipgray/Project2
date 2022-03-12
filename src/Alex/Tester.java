@@ -67,7 +67,7 @@ public class Tester {
     private static void testFileLoadEditSave(){
 
         // Load file
-        File file = new File("saved_slides/defaultSlide.json");
+        File file = new File("saved_slides/SlideTemplates/defaultSlide.json");
         file = file.getAbsoluteFile();
         SlideDeck deck = SlideDeckFileLoader.loadSlideDeck(file);
 
@@ -106,10 +106,14 @@ public class Tester {
 
         deck.addNewSlide();
 
+        System.out.println("Save? " + deck.save());
+
         // Save file
         File outFile = new File("saved_slides/example_output.json");
         outFile = outFile.getAbsoluteFile();
-        SlideDeckFileSaver.saveSlideDeck(deck, outFile);
+        deck.saveAs(outFile);
+
+        System.out.println("Save now? " + deck.save());
 
         // Confirm save by loading file again
         SlideDeck loaded = SlideDeckFileLoader.loadSlideDeck(outFile);

@@ -28,27 +28,33 @@ public class SlideDeck implements Iterable<Slide> {
     private File currentFontFile;
     private Font currentFont;
 
+
     /**
      * Creates a slide deck with a specific defaultSlide
+     * 
+     * <p>
+     * Use this constructor when loading a slide
      * 
      * @param defaultSlide the slide to copy into new slides
      */
     public SlideDeck(Slide defaultSlide){
         this.slides = new ArrayList<>();
-        this.slides.add(defaultSlide);
         this.defaultSlide = defaultSlide;
         this.currentSlide = defaultSlide;
         this.currentIndex = 0;
-
         this.saveLocation = null;
     }
     
     /**
      * Creates a slide deck without a specific defaultSlide.
-     * The defaultSlide will be set to a blank slide.
+     * The defaultSlide will be set to a blank slide. This method will also go ahead and add a new slide.
+     * <p>
+     * Use this constructor to start a slide from scratch
      */
     public SlideDeck(){
         this(new Slide());
+        this.addNewSlide();
+        this.getCurrentSlide();
     }
 
     /**
