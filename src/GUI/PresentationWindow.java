@@ -76,6 +76,9 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         add(saveAs, constraints);
 
+
+
+
         // Save As Button --------------------------------------------------------------------------
 
         save = new JButton("Save");
@@ -85,6 +88,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         constraints.gridy = 1;
 
         add(save, constraints);
+        save.setEnabled(slideDeck.saveLocationExists());
 
         // Background Color ------------------------------------------------------------------------
 
@@ -167,7 +171,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
 
         // Trying something here! --------------------------------------------------------------
-        drawingPanel = new DrawingPanel();
+        drawingPanel = new DrawingPanel(slideDeck.getCurrentSlide());
 
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.gridheight = GridBagConstraints.REMAINDER;
@@ -181,6 +185,8 @@ public class PresentationWindow extends JPanel implements ActionListener {
         add(drawingPanel, constraints);
 
         this.setNextAndPrevious();
+
+
     }
 
     private void setNextAndPrevious() {
@@ -198,6 +204,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         if (file == 0) {
             slideDeck.saveAs(fileChooser.getSelectedFile());
             System.out.println("should have saved");
+            save.setEnabled(true);
         }
     }
 
