@@ -15,8 +15,6 @@ import org.json.simple.*;
 public class SlideDeckFileSaver {
     
 
-    //NOTE TODO: store which slide you left off on
-
     // These are the file locations that should not be overwritten,
     // because they are our templates
     File[] templateSaves = new File[] {
@@ -141,6 +139,16 @@ public class SlideDeckFileSaver {
         jsonComponent.put("bottomX", component.getBottomRightCoord()[0]);
         jsonComponent.put("bottomY", component.getBottomRightCoord()[1]);
         jsonComponent.put("rotation", component.getRotation());
+
+        // If the object is a text object, save the location of its font
+        if(type.equals("Text")){
+            File fontFile = ((TextComponent)component).getFontFile();
+
+            // Only save the font if the component has a font
+            if(fontFile != null){
+                jsonComponent.put("fontFile", fontFile.getAbsolutePath() );
+            }
+        }
 
 
         return jsonComponent;

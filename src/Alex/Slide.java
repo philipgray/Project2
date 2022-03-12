@@ -18,6 +18,7 @@ public class Slide implements Iterable<SlideComponent> {
     private ArrayList<TextComponent> textComponents;
     private ArrayList<ImageComponent> imageComponents;
     private ArrayList<BulletList> listComponents;
+    private ArrayList<LineComponent> lineComponents;
     private ArrayList<SlideComponent> remainingComponents;
 
     /*
@@ -38,6 +39,7 @@ public class Slide implements Iterable<SlideComponent> {
         imageComponents = new ArrayList<ImageComponent>();
         remainingComponents = new ArrayList<SlideComponent>();
         listComponents = new ArrayList<BulletList>();
+        lineComponents = new ArrayList<LineComponent>();
     }
 
 
@@ -60,6 +62,9 @@ public class Slide implements Iterable<SlideComponent> {
 
         } else if (type == ComponentType.BulletList){
             this.listComponents.add( (BulletList) newComponent);
+        
+        } else if (type == ComponentType.Line){
+            this.lineComponents.add ( (LineComponent) newComponent);
 
         } else {
             this.remainingComponents.add( newComponent );
@@ -85,6 +90,9 @@ public class Slide implements Iterable<SlideComponent> {
 
         } else if (type == ComponentType.BulletList){
             this.listComponents.remove(toRemove);
+
+        } else if (type == ComponentType.Line){
+            this.lineComponents.remove(toRemove);
 
         } else {
             this.remainingComponents.remove(toRemove);
@@ -224,6 +232,15 @@ public class Slide implements Iterable<SlideComponent> {
      */
     public ArrayList<BulletList> getListComponents(){
         return listComponents;
+    }
+
+    /**
+     * Gets all of the line components in this slide
+     * 
+     * @return array list with this slide's line components
+     */
+    public ArrayList<LineComponent> getLineComponents(){
+        return lineComponents;
     }
 
     /**
