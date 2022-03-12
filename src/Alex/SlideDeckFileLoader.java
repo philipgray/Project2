@@ -199,6 +199,15 @@ public class SlideDeckFileLoader {
 
         } else if (type.equals("Line")) {
             newComponent = new LineComponent(0, 0, 0, 0);
+
+            // If the component has color, update those values
+            if (componentJSON.containsKey("width") && componentJSON.containsKey("color")) {
+                int width = Math.toIntExact( (long) componentJSON.get("width"));
+                String color = (String) componentJSON.get("color");
+                String[] rgb = color.split(" ");
+                Color lineColor = new Color( Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+            }
+
             newComponent.setContent(content);
         
         } else {
