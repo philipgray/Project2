@@ -203,7 +203,6 @@ public class PresentationWindow extends JPanel implements ActionListener {
         System.out.println("File Chooser output: "+file);
         if (file == 0) {
             slideDeck.saveAs(fileChooser.getSelectedFile());
-            System.out.println("should have saved");
             save.setEnabled(true);
         }
     }
@@ -212,6 +211,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         if (event.getSource() == newSlide) {
             System.out.println("newSlide!");
             slideDeck.addNewSlide();
+            this.setNextAndPrevious();
         } else if (event.getSource() == present) {
             System.out.println("present!");
         } else if (event.getSource() == saveAs) {
