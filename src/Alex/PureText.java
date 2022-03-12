@@ -1,3 +1,4 @@
+package Alex;
 
 /**
  * A text component that only contains text
