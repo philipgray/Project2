@@ -29,7 +29,8 @@ public class SlideDeckFileLoader {
     public static SlideDeck loadSlideDeck(File file) {
         
         // New deck to load the slides into
-        SlideDeck deck = new SlideDeck();
+        // I pass in an empty slide so it does not add a new one automatically.
+        SlideDeck deck = new SlideDeck(new Slide());
 
         // Try loading the file. If the file does not load, this funciton will return an empty slide
         try {
