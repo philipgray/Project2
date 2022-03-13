@@ -53,3 +53,11 @@ https://spring.io/guides/gs/maven/#scratch
 Making a PDF with PDFBox:
 https://www.tutorialspoint.com/pdfbox/pdfbox_creating_a_pdf_document.htm
 
+iText library:
+https://github.com/itext/itext7
+
+Using iText:
+https://www.tutorialspoint.com/itext/itext_overview.htm
+
+Logger library? Required for iText:
+https://stackoverflow.com/questions/9030065/classnotfoundexception-org-slf4j-loggerfactory

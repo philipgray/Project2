@@ -57,23 +57,32 @@ public class Tester {
         Slide slide = deck.getSlide(0);
         slide.hideNumber();
 
-        // This is a good way to get the buffered image
-        BufferedImage img = deck.getCurrentSlide().getSlideImage(deck.getCurrentIndex());
+        // // This is a good way to get the buffered image
+        // BufferedImage img = deck.getCurrentSlide().getSlideImage(deck.getCurrentIndex());
+        // BufferedImage[] imgs = new BufferedImage[deck.getNumSlides()];
 
-        // This is a way to get all of the slide images (ex: for saving the PDF, or maybe for slide previews)
-        for(int i = 0; i < deck.getNumSlides(); i++){
-            slide = deck.getSlide(i);
-            img = slide.getSlideImage(deck.getCurrentIndex());
-            
-            // Here i'm just writing the image to a folder to see the output
-            try {
-                ImageIO.write(img, "png", new File("slide_pdfs/slideimg" + deck.getCurrentIndex() + ".png"));
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
+        // // This is a way to get all of the slide images (ex: for saving the PDF, or maybe for slide previews)
+        // for(int i = 0; i < deck.getNumSlides(); i++){
+        //     slide = deck.getSlide(i);
+        //     img = slide.getSlideImage(deck.getCurrentIndex());
+        //     imgs[i] = img;
 
+        //     // Here i'm just writing the image to a folder to see the output
+        //     try {
+        //         ImageIO.write(img, "png", new File("slide_pdfs/slideimg" + deck.getCurrentIndex() + ".png"));
+
+
+        //     } catch (IOException e) {
+        //         // TODO Auto-generated catch block
+        //         e.printStackTrace();
+        //     }
+
+        // }
+        
+        // PDFSaver.savePDF(imgs, new File("slide_pdfs/test2.pdf"));
+
+        // Everything is now in a single method
+        deck.savePDF(new File("slide_pdfs/test3.pdf"));
     }
 
     private static void testLinks(){
