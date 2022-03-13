@@ -285,6 +285,11 @@ public class SlideDeck implements Iterable<Slide> {
         if(currentIndex > 0){
             currentIndex--;
             currentSlide = slides.get(currentIndex);
+
+        } else {
+            // Otherwise make sure we are at index 0
+            currentIndex = 0;
+            currentSlide = slides.get(currentIndex);
         }
 
         return currentSlide;
