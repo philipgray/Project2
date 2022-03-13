@@ -221,15 +221,20 @@ public class PresentationWindow extends JPanel implements ActionListener {
             if (!operationComplete) {
                 this.saveAsDialog();
             }
+        }  else if (event.getSource() == draw) {
+            drawingPanel.updateState(DrawingState.DRAW);
+            System.out.println("drawing mode");
         } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
         } else if (event.getSource() == nextSlide) {
             slideDeck.nextSlide();
             this.setNextAndPrevious();
+            drawingPanel.updateSlide(slideDeck.getCurrentSlide());
 
         } else if (event.getSource() == previousSlide) {
             slideDeck.previousSlide();
             this.setNextAndPrevious();
+            drawingPanel.updateSlide(slideDeck.getCurrentSlide());
         }
 
     }
