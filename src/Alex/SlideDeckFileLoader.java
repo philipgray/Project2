@@ -137,6 +137,18 @@ public class SlideDeckFileLoader {
             newSlide.setBackground(new ColorBackground(Color.WHITE));
         }
 
+        // See if we should show the slide number, default to true
+        boolean showSlideNum = true;
+        if(slideJSON.containsKey("showSlideNumber")){
+            showSlideNum = 1 == (long)slideJSON.get("showSlideNumber");
+        }
+        if(showSlideNum){
+            newSlide.showNumber();
+
+        } else {
+            newSlide.hideNumber();
+        }
+
         return newSlide;
     }
 

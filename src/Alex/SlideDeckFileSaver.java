@@ -99,6 +99,17 @@ public class SlideDeckFileSaver {
         type = slide.getBackground().getType().toString();
         jsonSlide.put("background", encodeSingleComponent(slide.getBackground(), type));
 
+        // Add showSlideNumber status
+        int showNumber;
+        if(slide.shouldShowNumber()){
+            showNumber = 1;
+        } else {
+            showNumber = 0;
+        }
+        jsonSlide.put("showSlideNumber", showNumber);
+
+
+
         return jsonSlide;
     }
 
