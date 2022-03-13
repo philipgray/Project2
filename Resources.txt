@@ -27,3 +27,10 @@ https://docs.oracle.com/javase/7/docs/api/java/awt/Font.html#createFont(int,%20j
 
 Bengali Fonts:
 https://www.easybengalityping.com/bangla/fonts
+
+Limiting File Format in the File Chooser:
+https://stackoverflow.com/questions/15771949/how-do-i-make-jfilechooser-only-accept-txt
+https://docs.oracle.com/javase/7/docs/api/javax/swing/filechooser/FileNameExtensionFilter.html
+
+Disabling "All Files" view in file chooser:
+https://stackoverflow.com/questions/22705189/disable-all-files-when-using-filenameextensionfilter-in-java
