@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.image.BufferedImage;
 
 /**
  * SlideDecks are made up of many slides
@@ -129,6 +130,25 @@ public class SlideDeck implements Iterable<Slide> {
         return this.saveLocation != null;
     }
     
+
+    /**
+     * Saves this slide deck as a pdf
+     * 
+     * @param saveLocation file location ending in .pdf to save the file
+     */
+    public void savePDF(File saveLocation){
+        
+        BufferedImage[] slideImgs = new BufferedImage[ this.getNumSlides() ];
+
+        // Create the array of images
+        for(int i = 0; i < this.getNumSlides(); i++){
+            slideImgs[i] = slides.get(i).getSlideImage(i);  // Here we access the array directly to avoid messing with currentIndex and currentSlide
+        }
+
+        // Save to pdf
+        PDFSaver.savePDF(slideImgs, saveLocation);
+    }
+
     /**
      * Provides a list of all available font names.
      * The index for the font names is the same as the index for the font objects and font files
