@@ -206,6 +206,9 @@ public class SlideDeckFileLoader {
                 String color = (String) componentJSON.get("color");
                 String[] rgb = color.split(" ");
                 Color lineColor = new Color( Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+
+                ((LineComponent)newComponent).setColor(lineColor);
+                ((LineComponent)newComponent).setWidth(width);;
             }
 
             newComponent.setContent(content);
