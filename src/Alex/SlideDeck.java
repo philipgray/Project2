@@ -138,6 +138,18 @@ public class SlideDeck implements Iterable<Slide> {
      */
     public void savePDF(File saveLocation){
         
+        BufferedImage[] slideImgs = getSlideImages();
+
+        // Save to pdf
+        PDFSaver.savePDF(slideImgs, saveLocation);
+    }
+
+    /**
+     * Gets an array of all the slide images
+     * 
+     * @return Array of slide images
+     */
+    public BufferedImage[] getSlideImages(){
         BufferedImage[] slideImgs = new BufferedImage[ this.getNumSlides() ];
 
         // Create the array of images
@@ -145,8 +157,7 @@ public class SlideDeck implements Iterable<Slide> {
             slideImgs[i] = slides.get(i).getSlideImage(i);  // Here we access the array directly to avoid messing with currentIndex and currentSlide
         }
 
-        // Save to pdf
-        PDFSaver.savePDF(slideImgs, saveLocation);
+        return slideImgs;
     }
 
     /**
