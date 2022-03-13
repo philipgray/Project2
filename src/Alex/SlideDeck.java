@@ -43,11 +43,12 @@ public class SlideDeck implements Iterable<Slide> {
     public SlideDeck(Slide defaultSlide){
         this.slides = new ArrayList<>();
         this.defaultSlide = defaultSlide;
-        this.currentSlide = defaultSlide;
+        this.currentSlide = null;
         this.currentIndex = 0;
         this.saveLocation = null;
 
         // Load in the existing fonts
+        this.loadFonts();
     }
     
     /**
@@ -279,6 +280,8 @@ public class SlideDeck implements Iterable<Slide> {
      */
     public void addNewSlide(){
         this.slides.add( defaultSlide.cloneSlide() );
+        currentIndex = this.slides.size() - 1;
+        currentSlide = slides.get(currentIndex);
     }
 
     /**
