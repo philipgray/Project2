@@ -46,3 +46,7 @@ https://kodejava.org/how-do-i-change-the-cursor-shape/
 
 Creating a custom cursor with Toolkit:
 https://docs.oracle.com/javase/10/docs/api/java/awt/Toolkit.html#createCustomCursor(java.awt.Image,java.awt.Point,java.lang.String)
+
+Getting started with Maven:
+https://spring.io/guides/gs/maven/#scratch
+
