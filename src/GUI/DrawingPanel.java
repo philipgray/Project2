@@ -50,11 +50,11 @@ public class DrawingPanel extends JPanel {
         
         // Change the cursor
         if(drawingState == DrawingState.DRAW){
-            //this.setCursor( pencilCursor );
+            this.setCursor( pencilCursor );
         } else if (drawingState == DrawingState.TEXT){
-            // this.setCursor(new Cursor( Cursor.TEXT_CURSOR));
+            this.setCursor(new Cursor( Cursor.TEXT_CURSOR));
         } else {
-            // this.setCursor(new Cursor( Cursor.DEFAULT_CURSOR ));
+            this.setCursor(new Cursor( Cursor.DEFAULT_CURSOR ));
         }
     }
 
