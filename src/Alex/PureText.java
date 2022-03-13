@@ -8,7 +8,7 @@ package Alex;
  */
 public class PureText extends TextComponent {
 
-    private String text;
+    protected String text;
 
     /**
      * Creates a text object with starting text

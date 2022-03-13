@@ -209,6 +209,10 @@ public class SlideDeckFileLoader {
             }
 
             newComponent.setContent(content);
+
+        } else if (type.equals("Link")) {
+            newComponent = new BrowserLinkComponent("");
+            newComponent.setContent(content);
         
         } else {
             // For defaulting purposes, unsupported comopnent types will display an error as a text object

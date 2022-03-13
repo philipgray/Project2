@@ -22,6 +22,7 @@ public class Slide implements Iterable<SlideComponent> {
     private ArrayList<ImageComponent> imageComponents;
     private ArrayList<BulletList> listComponents;
     private ArrayList<LineComponent> lineComponents;
+    private ArrayList<BrowserLinkComponent> linkComponents;
     private ArrayList<SlideComponent> remainingComponents;
 
     /*
@@ -72,6 +73,9 @@ public class Slide implements Iterable<SlideComponent> {
         } else if (type == ComponentType.Line){
             this.lineComponents.add ( (LineComponent) newComponent);
 
+        } else if (type == ComponentType.Link) {
+            this.linkComponents.add( (BrowserLinkComponent) newComponent);
+
         } else {
             this.remainingComponents.add( newComponent );
         }
@@ -98,6 +102,9 @@ public class Slide implements Iterable<SlideComponent> {
             this.listComponents.remove(toRemove);
 
         } else if (type == ComponentType.Line){
+            this.lineComponents.remove(toRemove);
+
+        } else if (type == ComponentType.Link) {
             this.lineComponents.remove(toRemove);
 
         } else {
