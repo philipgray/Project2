@@ -210,7 +210,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == newSlide) {
             System.out.println("newSlide!");
-            slideDeck.addNewSlide();
+            slideDeck.addNewSlideHere();
             this.setNextAndPrevious();
             drawingPanel.updateSlide(slideDeck.getCurrentSlide());
 
