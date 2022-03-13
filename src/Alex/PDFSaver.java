@@ -5,10 +5,6 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Table;
 import com.lowagie.text.pdf.PdfWriter;
-import org.pdfbox.exceptions.COSVisitorException;
-import org.pdfbox.pdmodel.PDDocument;
-import org.pdfbox.pdmodel.PDPage;
-import org.pdfbox.pdmodel.edit.PDPageContentStream;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
