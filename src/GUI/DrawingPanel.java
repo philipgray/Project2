@@ -28,7 +28,7 @@ public class DrawingPanel extends JPanel {
     MainWindow mw;
 
     public DrawingPanel(Slide currentSlide) {
-        setSize(500, 250);
+        // setSize(500, 750);
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLACK));
         this.currentSlide = currentSlide;
@@ -51,6 +51,10 @@ public class DrawingPanel extends JPanel {
         } else {
             this.setCursor(new Cursor( Cursor.DEFAULT_CURSOR ));
         }
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.setBackground(backgroundColor);
     }
 
     protected void paintComponent(Graphics g) {
