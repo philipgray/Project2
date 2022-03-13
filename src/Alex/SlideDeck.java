@@ -240,18 +240,24 @@ public class SlideDeck implements Iterable<Slide> {
      * 
      * @return true if the current slide is deleted (there must be at least one other slide in the deck)
      */
-    public boolean removeCurrentSlide(){
-        boolean success = slides.size() > 1;
+    public void removeCurrentSlide(){
 
         // Only remove slide if there is another slide besides the current one
-        if(success){
+        if( this.canDeleteSlide() ){
             slides.remove(currentIndex);
             
             // Go to the previous slide (as long as it isn't the first slide)
             previousSlide();
         }
+    }
 
-        return success;
+    /**
+     * Checks if there are more than 1 slides in the deck, meaning we can delete a slide.
+     * 
+     * @return True if .removeCurrentSlide will success (i.e. there are more than 1 slides)
+     */
+    public boolean canDeleteSlide(){
+        return slides.size() > 1;
     }
 
     /**

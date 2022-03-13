@@ -61,3 +61,6 @@ https://www.tutorialspoint.com/itext/itext_overview.htm
 
 Logger library? Required for iText:
 https://stackoverflow.com/questions/9030065/classnotfoundexception-org-slf4j-loggerfactory
+
+Nice overview of Java Swing components:
+https://web.mit.edu/6.005/www/sp14/psets/ps4/java-6-tutorial/components.html
