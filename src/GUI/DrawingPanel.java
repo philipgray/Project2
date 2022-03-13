@@ -22,7 +22,7 @@ public class DrawingPanel extends JPanel {
 
     String pencilCursorFile = new File("images/PencilCursor.png").getAbsolutePath();
     Image pencilIcon = new ImageIcon(pencilCursorFile).getImage();
-    Cursor pencilCursor = Toolkit.getDefaultToolkit().createCustomCursor(pencilIcon, new Point(0, 43), "Drawing Pencil");
+    Cursor pencilCursor = Toolkit.getDefaultToolkit().createCustomCursor(pencilIcon, new Point(0, 0), "Drawing Pencil");
 
     int clickX1, clickX2, clickY1, clickY2;
 
