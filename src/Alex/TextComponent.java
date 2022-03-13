@@ -50,7 +50,9 @@ public abstract class TextComponent extends SlideComponent {
         boolean tooSmall = false;
 
         // Update font size
-        this.font = this.font.deriveFont((float)fontSize);
+        if(this.font != null){
+            this.font = this.font.deriveFont((float)fontSize);
+        }
 
         if(fontSize < 15){
             tooSmall = true;
@@ -72,6 +74,12 @@ public abstract class TextComponent extends SlideComponent {
      * @return the text font
      */
     public Font getFont(){
+       
+        // Default font
+        if(font == null){
+            font = BengaliFont.getBengaliFont().deriveFont(fontSize);
+        }
+        
         return this.font;
     }
 

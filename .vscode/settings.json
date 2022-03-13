@@ -1,0 +1,12 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "lib/itext7-commons-7.2.2-SNAPSHOT-javadoc.jar",
+            "lib/itext7-io-7.2.2-SNAPSHOT-javadoc.jar",
+            "lib/itext7-kernel-7.2.2-SNAPSHOT-javadoc.jar"
+        ]
+    }
+}
