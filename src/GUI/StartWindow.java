@@ -4,6 +4,8 @@ import Alex.SlideDeck;
 import com.sun.tools.javac.Main;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,6 +72,15 @@ public class StartWindow extends JPanel implements ActionListener {
         } else if (event.getSource() == load) {
             System.out.println("clicked load");
             final JFileChooser fileChooser = new JFileChooser();
+
+            // Customize file chooser for slide deck purpose
+            File saveLocation = new File("saved_slides").getAbsoluteFile();
+            fileChooser.setCurrentDirectory(saveLocation);
+            
+            // Limit to json files
+            FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("Slide Deck Files", "json");
+            fileChooser.setFileFilter(fileFilter);
+            fileChooser.setAcceptAllFileFilterUsed(false);
             int returnVal = fileChooser.showOpenDialog(StartWindow.this);
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {

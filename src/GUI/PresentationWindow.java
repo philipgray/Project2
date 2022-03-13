@@ -3,6 +3,8 @@ package GUI;
 import Alex.SlideDeck;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +17,8 @@ public class PresentationWindow extends JPanel implements ActionListener {
             present, save, saveAs, backgroundColor, draw, nextSlide, previousSlide;
     DrawingPanel drawingPanel;
     SlideDeck slideDeck;
+
+    private static final File saveLocation = new File("saved_slides").getAbsoluteFile();
 
     public PresentationWindow(MainWindow mw, SlideDeck slideDeck) {
         this.mw = mw;
@@ -199,10 +203,25 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
     private void saveAsDialog() {
         final JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(PresentationWindow.saveLocation);
+        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("Slide Deck Files", "json");
+        fileChooser.setFileFilter(fileFilter);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        
+
         int file = fileChooser.showSaveDialog(this);
         System.out.println("File Chooser output: "+file);
         if (file == 0) {
-            slideDeck.saveAs(fileChooser.getSelectedFile());
+            File whereToSave = fileChooser.getSelectedFile();
+            String savePath = whereToSave.getAbsolutePath();
+
+            // Make sure it saves as a json file
+            if(! savePath.substring(savePath.length() - 5).equals(".json")){
+                whereToSave = new File (whereToSave.getAbsolutePath() + ".json");
+            }
+
+            System.out.println(whereToSave);
+            slideDeck.saveAs(whereToSave);
             save.setEnabled(true);
         }
     }
