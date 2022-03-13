@@ -20,6 +20,11 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
     JButton newSlide, fontSelect, fontSize, createBullet, createSubBullet, insertLink,
             present, save, saveAs, backgroundColor, draw, nextSlide, previousSlide, text;
+
+    String locationText;
+
+    JLabel testing;
+
     DrawingPanel drawingPanel;
     SlideDeck slideDeck;
 
@@ -178,6 +183,12 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         add(previousSlide, constraints);
 
+        // ????
+        locationText = "Slide: "+slideDeck.getCurrentIndex()+1+"/"+slideDeck.getNumSlides();
+        testing = new JLabel(locationText);
+
+        constraints.gridy = 2;
+        add(testing, constraints);
 
         // Trying something here! --------------------------------------------------------------
         drawingPanel = new DrawingPanel(slideDeck.getCurrentSlide());
@@ -194,11 +205,15 @@ public class PresentationWindow extends JPanel implements ActionListener {
         add(drawingPanel, constraints);
 
         this.setNextAndPrevious();
+    }
 
-
+    private void updateLocationText() {
+        this.locationText = "Slide: "+(slideDeck.getCurrentIndex()+1)+"/"+slideDeck.getNumSlides();
+        testing.setText(locationText);
     }
 
     private void setNextAndPrevious() {
+        updateLocationText();
         System.out.println("Current Index: "+slideDeck.getCurrentIndex());
         System.out.println("Number of Slides: "+slideDeck.getNumSlides());
 
@@ -237,6 +252,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
             slideDeck.addNewSlideHere();
             this.setNextAndPrevious();
             drawingPanel.updateSlide(slideDeck.getCurrentSlide());
+            updateLocationText();
 
         } else if (event.getSource() == present) {
             System.out.println("present!");
@@ -252,7 +268,6 @@ public class PresentationWindow extends JPanel implements ActionListener {
             System.out.println("drawing mode");
         }  else if (event.getSource() == text) {
             drawingPanel.updateState(DrawingState.TEXT);
-            // enableKeyListener();
             System.out.println("text mode");
         } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
