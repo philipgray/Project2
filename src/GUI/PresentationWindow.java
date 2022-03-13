@@ -253,6 +253,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         add(drawingPanel, constraints);
 
         this.setNextAndPrevious();
+        this.deleteLogic();
     }
 
     private void updateLocationText() {
@@ -287,6 +288,10 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         previousSlide.setEnabled(slideDeck.getCurrentIndex() != 0);
         nextSlide.setEnabled(slideDeck.getCurrentIndex() < slideDeck.getNumSlides() - 1);
+    }
+
+    private void deleteLogic() {
+        deleteSlide.setEnabled(slideDeck.canDeleteSlide());
     }
 
     private void saveAsDialog() {
@@ -344,7 +349,8 @@ public class PresentationWindow extends JPanel implements ActionListener {
             slideDeck.addNewSlideHere();
             this.setNextAndPrevious();
             drawingPanel.updateSlide(slideDeck.getCurrentSlide());
-            updateLocationText();
+            this.updateLocationText();
+            this.deleteLogic();
 
         } else if (event.getSource() == present) {
             System.out.println("present!");
@@ -368,6 +374,14 @@ public class PresentationWindow extends JPanel implements ActionListener {
         }  else if (event.getSource() == text) {
             drawingPanel.updateState(DrawingState.TEXT);
             System.out.println("text mode");
+
+        }  else if (event.getSource() == deleteSlide) {
+            if (slideDeck.canDeleteSlide()) {
+                slideDeck.removeCurrentSlide();
+                drawingPanel.updateSlide(slideDeck.getCurrentSlide());
+            }
+            this.setNextAndPrevious();
+            this.deleteLogic();
 
         }  else if (event.getSource() == fontSelect) {
 
