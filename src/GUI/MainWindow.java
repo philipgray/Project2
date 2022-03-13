@@ -11,6 +11,9 @@ package GUI;
 import javax.swing.*;
 import Alex.*;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 public class MainWindow {
     JFrame frame;
     JPanel currentPanel;

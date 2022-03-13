@@ -1,17 +1,18 @@
 package GUI;
 
-import Alex.LineComponent;
-import Alex.Slide;
-import Alex.SlideComponent;
-import Alex.SlideDeck;
+import Alex.*;
+import Alex.TextComponent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.io.File;
+import java.security.Key;
 
 public class DrawingPanel extends JPanel {
 
@@ -24,13 +25,16 @@ public class DrawingPanel extends JPanel {
 
     int clickX1, clickX2, clickY1, clickY2;
 
+    MainWindow mw;
+
     public DrawingPanel(Slide currentSlide) {
         setSize(500, 250);
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLACK));
         this.currentSlide = currentSlide;
         this.drawingState = DrawingState.NONE;
-        addMouseListener(new MouseHandler());
+        this.addMouseListener(new MouseHandler());
+        setFocusable(true);
     }
 
     public void updateSlide(Slide currentSlide) {
@@ -53,12 +57,19 @@ public class DrawingPanel extends JPanel {
         super.paintComponent(g);
         graphics = (Graphics2D) g;
 
-        for (LineComponent component : currentSlide.getLineComponents()) {
-            graphics.setColor(component.getColor());
-            graphics.setStroke(new BasicStroke(component.getWidth()));
-            int[] start = component.getStartPoint();
-            int[] end = component.getEndPoint();
-            graphics.draw(new Line2D.Double(start[0], start[1], end[0], end[1]));
+        for (SlideComponent component : currentSlide) {
+            if (component.getType() == ComponentType.Line) {
+                LineComponent lineComponent = (LineComponent) component;
+                graphics.setColor(lineComponent.getColor());
+                graphics.setStroke(new BasicStroke(lineComponent.getWidth()));
+                int[] start = lineComponent.getStartPoint();
+                int[] end = lineComponent.getEndPoint();
+                graphics.draw(new Line2D.Double(start[0], start[1], end[0], end[1]));
+            } else if (component.getType() == ComponentType.Text) {
+                TextComponent textComponent = (TextComponent) component;
+                int[] coords = textComponent.getTopLeftCoord();
+                graphics.drawString(textComponent.getText(), coords[0], coords[1]);
+            }
         }
     }
 
@@ -74,14 +85,27 @@ public class DrawingPanel extends JPanel {
         return output;
     }
 
+    public void removeText(InvisibleTextField textField) {
+        SlideComponent test = new PureText(textField.getText());
+        test.setTopLeftCoord(textField.getX(), textField.getY());
+        currentSlide.addComponent(test);
+        remove(textField);
+        repaint();
+    }
+
     private class MouseHandler extends MouseAdapter {
 
         public void mousePressed(MouseEvent event) {
             clickX1 = event.getX();
             clickY1 = event.getY();
-            System.out.println(drawingState);
             if (drawingState == DrawingState.DRAW) {
                 addMouseMotionListener(this);
+            }
+            if (drawingState == DrawingState.TEXT) {
+                InvisibleTextField tf = new InvisibleTextField(DrawingPanel.this);
+                tf.setLocation(event.getPoint());
+                add(tf);
+                tf.requestFocusInWindow();
             }
         }
 
@@ -93,9 +117,7 @@ public class DrawingPanel extends JPanel {
          **/
 
         public void mouseDragged(MouseEvent event) {
-            System.out.println(drawingState);
             if (drawingState == DrawingState.DRAW) {
-                System.out.println("drawing?");
                 clickX1 = event.getX();
                 clickY1 = event.getY();
                 clickX2 = clickX1;
