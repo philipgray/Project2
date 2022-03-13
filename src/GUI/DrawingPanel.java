@@ -10,12 +10,16 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
+import java.io.File;
 
 public class DrawingPanel extends JPanel {
 
     Graphics2D graphics;
     Slide currentSlide;
     DrawingState drawingState;
+
+    String pencilCursorFile = new File("images/PencilCursor.png").getAbsolutePath();
+    Cursor pencilCursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(pencilCursorFile).getImage(), new Point(0, 30), "Drawing Pencil");
 
     int clickX1, clickX2, clickY1, clickY2;
 
@@ -35,6 +39,13 @@ public class DrawingPanel extends JPanel {
 
     public void updateState(DrawingState drawingState) {
         this.drawingState = drawingState;
+        
+        // Change the cursor
+        if(drawingState == DrawingState.DRAW){
+            this.setCursor( pencilCursor );
+        } else {
+            this.setCursor(new Cursor( Cursor.DEFAULT_CURSOR ));
+        }
     }
 
     protected void paintComponent(Graphics g) {
