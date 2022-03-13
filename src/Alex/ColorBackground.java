@@ -33,6 +33,23 @@ public class ColorBackground extends Background {
         this.color = new Color(color.getRed(), color.getGreen(), color.getBlue());
     }
 
+
+    /**
+     * Returns the color
+     * @return the color
+     */
+    public Color getColor(){
+        return this.color;
+    }
+
+    /**
+     * Change the color
+     * @param color the new background color
+     */
+    public void setColor(Color color){
+        this.color = color;
+    }
+
     @Override
     public SlideComponent cloneComponent() {
         return new ColorBackground(color);
