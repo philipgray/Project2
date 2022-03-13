@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
+import java.awt.Graphics2D;
+
+import GUI.DrawingPanel;
 
 /**
  * A slide for a presentation. Contains multiple slide components
@@ -13,6 +16,9 @@ import java.awt.Color;
 public class Slide implements Iterable<SlideComponent> {
 
     private static Background defaultBackground = new ColorBackground(Color.WHITE);
+
+    // This drawing panel has all the code to draw the slide, so we use it to make the BufferedImage
+    private static DrawingPanel imageMaker = null;
 
     // Array list containing all components
     private ArrayList<SlideComponent> components;
@@ -177,16 +183,36 @@ public class Slide implements Iterable<SlideComponent> {
     /**
      * Draws the slide as a buffered image and returns the product for presenting and thumbnails.
      * 
+     * @param slideNumber the index of the slide (pass it in from the slide deck)
      * @return BufferedImage representation of the slide
      */
-    public BufferedImage getSlideImage(int slideNumber, int width, int height){
-        //TODO: Slide as buffered image
-        // Store the slide in a BufferedImage
-        BufferedImage slideImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    public BufferedImage getSlideImage(int slideNumber){
+        
+        // If this is the first time using the drawing panel, we have to initialize it
+        if(imageMaker == null){
+            imageMaker = new DrawingPanel(this);
+
+            // NOTE: this size comes from PresentationWindow, when we set the drawing panel's constraints.
+            // The size of this DrawingPanel must be the same as the size used when editing presentations.
+            imageMaker.setSize(1000, 250);
+        }
+
+        // Set the slide
+        imageMaker.updateSlide(this);
+
+        // Draw the image
+        BufferedImage slideImg = imageMaker.paintBufferedImage();
 
 
         // If we are showing the number, add a small number at the bottom
         if(showNumber){
+            // Put number at bottom left
+            int x = 5;
+            int y = slideImg.getHeight() - 5;
+            Graphics2D imgGraphics = slideImg.createGraphics();
+            imgGraphics.setFont(BengaliFont.getBengaliFont().deriveFont(12));
+            imgGraphics.setColor(Color.BLACK);
+            imgGraphics.drawString("" + slideNumber, x, y);
 
         }
 
