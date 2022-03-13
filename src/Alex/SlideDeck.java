@@ -173,6 +173,15 @@ public class SlideDeck implements Iterable<Slide> {
         }
     }
 
+    /**
+     * Returns all loaded fonts
+     * 
+     * @return array list containing available fonts
+     */
+    public Font[] getAllFonts(){
+        return availableFonts;
+    }
+
 
     /**
      * Return the font that is currently selected
