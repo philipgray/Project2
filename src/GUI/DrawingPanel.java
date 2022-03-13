@@ -21,7 +21,8 @@ public class DrawingPanel extends JPanel {
     DrawingState drawingState;
 
     String pencilCursorFile = new File("images/PencilCursor.png").getAbsolutePath();
-    Cursor pencilCursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(pencilCursorFile).getImage(), new Point(0, 30), "Drawing Pencil");
+    Image pencilIcon = new ImageIcon(pencilCursorFile).getImage();
+    Cursor pencilCursor = Toolkit.getDefaultToolkit().createCustomCursor(pencilIcon, new Point(0, 43), "Drawing Pencil");
 
     int clickX1, clickX2, clickY1, clickY2;
 
@@ -48,6 +49,8 @@ public class DrawingPanel extends JPanel {
         // Change the cursor
         if(drawingState == DrawingState.DRAW){
             this.setCursor( pencilCursor );
+        } else if (drawingState == DrawingState.TEXT){
+            this.setCursor(new Cursor( Cursor.TEXT_CURSOR));
         } else {
             this.setCursor(new Cursor( Cursor.DEFAULT_CURSOR ));
         }
