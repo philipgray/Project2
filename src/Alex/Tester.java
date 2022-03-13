@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Iterator;
 
+import javax.imageio.ImageIO;
+
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
@@ -14,6 +16,8 @@ import org.json.simple.parser.JSONParser;
 import java.awt.Desktop;
 import java.awt.Color;
 import java.net.URI;
+
+import java.awt.image.BufferedImage;
 
 import GUI.*;
 
@@ -40,8 +44,37 @@ public class Tester {
 
         // testFileLoadEditSave();
         // testLinks();
+
+        // Test slide PNG
+        testSlidePNG();
     }
 
+
+    private static void testSlidePNG(){
+        SlideDeck deck = SlideDeck.openSlideFile(new File("saved_slides/my amazing slideshow.json"));
+        
+        // Turn off the number for slide 0
+        Slide slide = deck.getSlide(0);
+        slide.hideNumber();
+
+        // This is a good way to get the buffered image
+        BufferedImage img = deck.getCurrentSlide().getSlideImage(deck.getCurrentIndex());
+
+        // This is a way to get all of the slide images (ex: for saving the PDF, or maybe for slide previews)
+        for(int i = 0; i < deck.getNumSlides(); i++){
+            slide = deck.getSlide(i);
+            img = slide.getSlideImage(deck.getCurrentIndex());
+            
+            // Here i'm just writing the image to a folder to see the output
+            try {
+                ImageIO.write(img, "png", new File("slide_pdfs/slideimg" + deck.getCurrentIndex() + ".png"));
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+    }
 
     private static void testLinks(){
         BrowserLinkComponent youtube = new BrowserLinkComponent("www.youtube.com");
