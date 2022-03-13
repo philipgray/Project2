@@ -22,7 +22,9 @@ public class DrawingPanel extends JPanel {
 
     String pencilCursorFile = new File("images/PencilCursor.png").getAbsolutePath();
     Image pencilIcon = new ImageIcon(pencilCursorFile).getImage();
+
     Cursor pencilCursor = Toolkit.getDefaultToolkit().createCustomCursor(pencilIcon, new Point(0, 0), "Drawing Pencil");
+
 
     int clickX1, clickX2, clickY1, clickY2;
 
@@ -71,6 +73,9 @@ public class DrawingPanel extends JPanel {
                 graphics.setStroke(new BasicStroke(lineComponent.getWidth()));
                 int[] start = lineComponent.getStartPoint();
                 int[] end = lineComponent.getEndPoint();
+
+                Line2D.Double t = new Line2D.Double();
+
                 graphics.draw(new Line2D.Double(start[0], start[1], end[0], end[1]));
             } else if (component.getType() == ComponentType.Text) {
                 TextComponent textComponent = (TextComponent) component;
