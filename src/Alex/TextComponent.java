@@ -49,6 +49,9 @@ public abstract class TextComponent extends SlideComponent {
         this.fontSize = fontSize;
         boolean tooSmall = false;
 
+        // Update font size
+        this.font = this.font.deriveFont((float)fontSize);
+
         if(fontSize < 15){
             tooSmall = true;
         }
@@ -79,7 +82,7 @@ public abstract class TextComponent extends SlideComponent {
      * @param fontFile the location of the font file (so that the font can be saved with the component)
      */
     public void setFont(Font font, File fontFile){
-        this.font = font;
+        this.font = font.deriveFont((float)this.fontSize);
         this.fontFile = fontFile;
     }
 
@@ -118,13 +121,13 @@ public abstract class TextComponent extends SlideComponent {
             int fontSizeIndex = content.indexOf("/fs=") + 4;    
             int fontSizeEndIndex = content.indexOf("/", fontSizeIndex);
             String fontSizeStr = content.substring(fontSizeIndex, fontSizeEndIndex);
-            this.fontSize = Integer.parseInt(fontSizeStr);
+            this.setFontSize( Integer.parseInt(fontSizeStr) );
             
             // Trim the font size tag from the content string
             content = content.substring(fontSizeEndIndex + 1);
 
         } else {
-            this.fontSize = 12;
+            this.setFontSize(15);
         }
 
         setText(content);       

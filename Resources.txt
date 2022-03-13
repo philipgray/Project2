@@ -34,3 +34,15 @@ https://docs.oracle.com/javase/7/docs/api/javax/swing/filechooser/FileNameExtens
 
 Disabling "All Files" view in file chooser:
 https://stackoverflow.com/questions/22705189/disable-all-files-when-using-filenameextensionfilter-in-java
+
+Setting tooltip font:
+https://www.tutorialspoint.com/customize-the-tooltip-font-color-background-and-foreground-color-in-java
+
+Changing general look and feel with UIManager:
+https://docs.oracle.com/javase/8/docs/api/javax/swing/UIManager.html
+
+Intro to changing cursor:
+https://kodejava.org/how-do-i-change-the-cursor-shape/
+
+Creating a custom cursor with Toolkit:
+https://docs.oracle.com/javase/10/docs/api/java/awt/Toolkit.html#createCustomCursor(java.awt.Image,java.awt.Point,java.lang.String)

@@ -1,6 +1,7 @@
 package GUI;
 
 import Alex.SlideDeck;
+import Alex.BengaliFont;
 import com.sun.tools.javac.Main;
 
 import javax.swing.*;
@@ -28,10 +29,11 @@ public class StartWindow extends JPanel implements ActionListener {
 
         // Add in image
         ImageIcon icon = new ImageIcon("images/jcc.png");
-        title = new JLabel("Join Climbing Club!\n<Insert Join Climbing Club here in Bengali>", icon, JLabel.CENTER);
+        title = new JLabel("Join Climbing Club! ক্লাইম্বিং ক্লাবে যোগ দিন! ", icon, JLabel.CENTER);
         // Format the text
         title.setHorizontalTextPosition(JLabel.CENTER);
         title.setVerticalTextPosition(JLabel.BOTTOM);
+        title.setFont(BengaliFont.getBengaliFont());
 
         add(title, BorderLayout.PAGE_START);
 

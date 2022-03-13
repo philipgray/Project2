@@ -20,7 +20,7 @@ public class BengaliFont {
         // If the font isn't initialized, initialize it
         if(bengaliFont == null){
             try {
-                bengaliFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/akaashnormal.ttf").getAbsoluteFile());
+                bengaliFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/Kalpurush-Regular.ttf").getAbsoluteFile());
                 bengaliFont = bengaliFont.deriveFont(20f);
             } catch (FontFormatException | IOException e) {
                 // TODO Auto-generated catch block
