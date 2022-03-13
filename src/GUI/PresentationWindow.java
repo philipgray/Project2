@@ -247,8 +247,8 @@ public class PresentationWindow extends JPanel implements ActionListener {
         constraints.gridy = 4;
         constraints.insets = new Insets(10, 10, 10, 10);
 
-        constraints.ipadx = 1000;
-        constraints.ipady = 750;
+        constraints.ipadx = 1280;
+        constraints.ipady = 720;
 
         add(drawingPanel, constraints);
 
