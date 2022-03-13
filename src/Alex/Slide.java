@@ -194,7 +194,7 @@ public class Slide implements Iterable<SlideComponent> {
 
             // NOTE: this size comes from PresentationWindow, when we set the drawing panel's constraints.
             // The size of this DrawingPanel must be the same as the size used when editing presentations.
-            imageMaker.setSize(1000, 250);
+            imageMaker.setSize(1280, 720);
         }
 
         // Set the slide
