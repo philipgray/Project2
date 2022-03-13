@@ -38,14 +38,14 @@ public class Tester {
 
         // testLinksInBrowser();
 
-        testFileLoadEditSave();
-
-        // testGUIPrototype();
+        // testFileLoadEditSave();
+        // testLinks();
     }
 
 
-    private static void testGUIPrototype(){
-        
+    private static void testLinks(){
+        BrowserLinkComponent youtube = new BrowserLinkComponent("www.youtube.com");
+        youtube.openURL();
     }
 
     /**
