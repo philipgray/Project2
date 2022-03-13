@@ -50,3 +50,6 @@ https://docs.oracle.com/javase/10/docs/api/java/awt/Toolkit.html#createCustomCur
 Getting started with Maven:
 https://spring.io/guides/gs/maven/#scratch
 
+Making a PDF with PDFBox:
+https://www.tutorialspoint.com/pdfbox/pdfbox_creating_a_pdf_document.htm
+

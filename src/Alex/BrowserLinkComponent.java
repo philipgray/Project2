@@ -1,5 +1,7 @@
 package Alex;
 
+import org.pdfbox.pdmodel.PDDocument;
+
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
