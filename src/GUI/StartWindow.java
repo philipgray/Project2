@@ -1,6 +1,6 @@
 package GUI;
 
-import Alex.SlideDeckFileLoader;
+import Alex.SlideDeck;
 import com.sun.tools.javac.Main;
 
 import javax.swing.*;
@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import static Alex.SlideDeckFileLoader.loadSlideDeck;
 
 public class StartWindow extends JPanel implements ActionListener {
     protected JButton open, load;
@@ -75,7 +74,7 @@ public class StartWindow extends JPanel implements ActionListener {
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
-                mw.openPresentationWindow(loadSlideDeck(file));
+                mw.openPresentationWindow(SlideDeck.openSlideFile(file));
             } else {
                 System.out.println("closed window");
             }
