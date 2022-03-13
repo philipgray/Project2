@@ -2,13 +2,16 @@ package GUI;
 
 import Alex.SlideDeck;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 public class PresentationWindow extends JPanel implements ActionListener {
     MainWindow mw;
