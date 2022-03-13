@@ -7,6 +7,7 @@ import Alex.SlideDeck;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
@@ -59,6 +60,18 @@ public class DrawingPanel extends JPanel {
             int[] end = component.getEndPoint();
             graphics.draw(new Line2D.Double(start[0], start[1], end[0], end[1]));
         }
+    }
+
+    /**
+     * Paint this panel onto a Buffered Image
+     * @param output the BufferedImage to paint to
+     */
+    public BufferedImage paintBufferedImage(){
+        BufferedImage output = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+
+        paintComponent(output.createGraphics());
+
+        return output;
     }
 
     private class MouseHandler extends MouseAdapter {
