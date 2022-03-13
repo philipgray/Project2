@@ -241,6 +241,13 @@ public class Slide implements Iterable<SlideComponent> {
         // Copy the background
         clone.setBackground((Background) this.background.cloneComponent());
 
+        // Copy number status
+        if(this.shouldShowNumber()){
+            clone.showNumber();
+        } else {
+            clone.hideNumber();
+        }
+
         return clone;
     }
 
