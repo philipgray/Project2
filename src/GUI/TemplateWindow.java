@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class TemplateWindow extends JPanel implements ActionListener {
 
@@ -68,11 +69,11 @@ public class TemplateWindow extends JPanel implements ActionListener {
         add(blankPresentation, constraints);
 
         // Template 1 Button -----------------------------------------------------------------------
-        templateOne = new JButton("Template 1", icon);
+        templateOne = new JButton("Stars", new ImageIcon("images/starsTemplate.png"));
         templateOne.setVerticalTextPosition(AbstractButton.BOTTOM);
         templateOne.setHorizontalTextPosition(AbstractButton.CENTER);
         templateOne.addActionListener(this);
-        templateOne.setToolTipText("টেমপ্লেট এক");
+        templateOne.setToolTipText("তারা");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 1;
@@ -138,6 +139,7 @@ public class TemplateWindow extends JPanel implements ActionListener {
             mw.openStartWindow();
         } else if (event.getSource() == templateOne) {
             System.out.println("templateOne!");
+            mw.openPresentationWindow( SlideDeck.openSlideFile( new File("saved_slides/SlideTemplates/Stars.json").getAbsoluteFile()));
         } else if (event.getSource() == templateTwo) {
             System.out.println("templateTwo!");
         } else if (event.getSource() == templateThree) {
