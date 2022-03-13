@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +19,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
     MainWindow mw;
 
     JButton newSlide, fontSelect, fontSize, createBullet, createSubBullet, insertLink,
-            present, save, saveAs, backgroundColor, draw, nextSlide, previousSlide;
+            present, save, saveAs, backgroundColor, draw, nextSlide, previousSlide, text;
     DrawingPanel drawingPanel;
     SlideDeck slideDeck;
 
@@ -138,18 +140,18 @@ public class PresentationWindow extends JPanel implements ActionListener {
         add(fontSize, constraints);
 
         // CreateBullet Button ------------------------------------------------------
-        createBullet = new JButton("Create Bullet");
-        createBullet.addActionListener(this);
-        createBullet.setToolTipText("Placeholder Text");
+        text = new JButton("Text");
+        text.addActionListener(this);
+        text.setToolTipText("Placeholder Text");
 
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridx = 9;
         constraints.gridy = 0;
 
-        add(createBullet, constraints);
+        add(text, constraints);
 
         // Create Sub-Bullet Button ------------------------------------------------------
-        createSubBullet = new JButton("Create Sub-Bullet");
+        createSubBullet = new JButton("Bulleted List");
         createSubBullet.addActionListener(this);
         createSubBullet.setToolTipText("Placeholder Text");
 
@@ -248,6 +250,10 @@ public class PresentationWindow extends JPanel implements ActionListener {
         }  else if (event.getSource() == draw) {
             drawingPanel.updateState(DrawingState.DRAW);
             System.out.println("drawing mode");
+        }  else if (event.getSource() == text) {
+            drawingPanel.updateState(DrawingState.TEXT);
+            // enableKeyListener();
+            System.out.println("text mode");
         } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
         } else if (event.getSource() == nextSlide) {
