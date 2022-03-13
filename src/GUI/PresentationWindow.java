@@ -37,7 +37,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         GridBagConstraints constraints = new GridBagConstraints();
 
         // New Alex.Slide Button --------------------------------------------------------------------
-        newSlide = new JButton("New Slide");
+        newSlide = new JButton("Add New Slide");
         newSlide.addActionListener(this);
         newSlide.setToolTipText("Placeholder Text");
 

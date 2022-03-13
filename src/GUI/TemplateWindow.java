@@ -70,11 +70,11 @@ public class TemplateWindow extends JPanel implements ActionListener {
         add(blankPresentation, constraints);
 
         // Template 1 Button -----------------------------------------------------------------------
-        templateOne = new JButton("Stars", new ImageIcon("images/starsTemplate.png"));
+        templateOne = new JButton("Stars Template", new ImageIcon("images/starsTemplate.png"));
         templateOne.setVerticalTextPosition(AbstractButton.BOTTOM);
         templateOne.setHorizontalTextPosition(AbstractButton.CENTER);
         templateOne.addActionListener(this);
-        templateOne.setToolTipText("তারা");
+        templateOne.setToolTipText("তারা টেমপ্লেট");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 1;
