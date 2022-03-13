@@ -5,6 +5,7 @@
 package GUI;
 
 import Alex.SlideDeck;
+import Alex.BengaliFont;
 import com.sun.tools.javac.Main;
 
 import javax.swing.*;

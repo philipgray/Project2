@@ -53,6 +53,10 @@ public class MainWindow {
     }
 
     public static void main(String[] args) {
+        
+        // Support Bengali tooltips
+        UIManager.put("ToolTip.font", BengaliFont.getBengaliFont());
+
         SwingUtilities.invokeLater(() -> {
             MainWindow mainWindow = new MainWindow();
             mainWindow.createGUI();
