@@ -19,7 +19,7 @@ import java.io.IOException;
 public class PresentationWindow extends JPanel implements ActionListener {
     MainWindow mw;
 
-    JButton newSlide, fontSelect, fontSize, createBullet, createSubBullet, insertLink,
+    JButton newSlide, fontSelect, textSize, createBullet, createSubBullet, insertLink,
             present, save, saveAs, backgroundColor, draw, nextSlide, previousSlide, text,
             savePDF, deleteSlide, slideCountButton;
 
@@ -183,13 +183,13 @@ public class PresentationWindow extends JPanel implements ActionListener {
         add(fontSelect, constraints);
 
         // FontSize Button --------------------------------------------------------------------------
-        fontSize = new JButton("Font Size");
-        fontSize.addActionListener(this);
-        fontSize.setToolTipText("Placeholder Text");
+        textSize = new JButton("Text Size");
+        textSize.addActionListener(this);
+        textSize.setToolTipText("Placeholder Text");
 
         constraints.gridy = 1;
 
-        add(fontSize, constraints);
+        add(textSize, constraints);
 
         // CreateBullet Button ------------------------------------------------------
         text = new JButton("Text");
@@ -369,7 +369,15 @@ public class PresentationWindow extends JPanel implements ActionListener {
             drawingPanel.updateState(DrawingState.TEXT);
             System.out.println("text mode");
 
-        } else if (event.getSource() == fontSelect) {
+        }  else if (event.getSource() == fontSelect) {
+
+            JFontChooser fontChooser = new JFontChooser();
+            int result = fontChooser.showDialog(this);
+            if (result == JFontChooser.OK_OPTION) {
+               //  slideDeck.getCurrentSlide().setFont() = fontChooser.getSelectedFont();
+            }
+
+    } else if (event.getSource() == fontSelect) {
             System.out.println("fontSelect!");
         } else if (event.getSource() == backgroundColor) {
                 Color newColor = JColorChooser.showDialog(this, "Choose Background Color", Color.WHITE);
