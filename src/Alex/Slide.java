@@ -258,6 +258,7 @@ public class Slide implements Iterable<SlideComponent> {
         return remainingComponents;
     }
 
+
     // Iterable interface
     @Override
     public Iterator<SlideComponent> iterator() {

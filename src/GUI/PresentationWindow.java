@@ -212,6 +212,8 @@ public class PresentationWindow extends JPanel implements ActionListener {
             System.out.println("newSlide!");
             slideDeck.addNewSlide();
             this.setNextAndPrevious();
+            drawingPanel.updateSlide(slideDeck.getCurrentSlide());
+
         } else if (event.getSource() == present) {
             System.out.println("present!");
         } else if (event.getSource() == saveAs) {
