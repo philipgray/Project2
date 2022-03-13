@@ -66,6 +66,14 @@ public class DrawingPanel extends JPanel {
         super.paintComponent(g);
         graphics = (Graphics2D) g;
 
+        // Paint the background first
+        if(currentSlide.getBackground().getType() == ComponentType.Color){
+            Color bg = ((ColorBackground)currentSlide.getBackground()).getColor();
+            g.setColor(bg);
+            g.fillRect(0, 0, 1300, 740);
+            g.setColor(Color.BLACK);
+        }
+
         for (SlideComponent component : currentSlide) {
             if (component.getType() == ComponentType.Line) {
                 LineComponent lineComponent = (LineComponent) component;

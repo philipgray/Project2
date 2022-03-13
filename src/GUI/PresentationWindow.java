@@ -1,5 +1,6 @@
 package GUI;
 
+import Alex.ColorBackground;
 import Alex.Slide;
 import Alex.SlideDeck;
 
@@ -395,7 +396,9 @@ public class PresentationWindow extends JPanel implements ActionListener {
             System.out.println("fontSelect!");
         } else if (event.getSource() == backgroundColor) {
                 Color newColor = JColorChooser.showDialog(this, "Choose Background Color", Color.WHITE);
-                drawingPanel.setBackgroundColor(newColor);
+                slideDeck.getCurrentSlide().setBackground(new ColorBackground(newColor));
+                drawingPanel.updateSlide(slideDeck.getCurrentSlide());
+                // drawingPanel.setBackgroundColor(newColor);
         } else if (event.getSource() == nextSlide) {
             slideDeck.nextSlide();
             this.setNextAndPrevious();
