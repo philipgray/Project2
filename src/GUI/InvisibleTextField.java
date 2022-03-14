@@ -1,5 +1,3 @@
-// https://stackoverflow.com/questions/33949537/drawing-text-from-keyboard-input-on-a-canvas?rq=1
-
 package GUI;
 
 import java.awt.*;
@@ -8,6 +6,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
+
+/**
+ * Taken from:
+ * https://stackoverflow.com/questions/33949537/drawing-text-from-keyboard-input-on-a-canvas?rq=1
+ *
+ * With slight modifications. Used for inline text writing.
+ */
 public class InvisibleTextField extends JTextField
         implements ActionListener, FocusListener, MouseListener, DocumentListener
 {

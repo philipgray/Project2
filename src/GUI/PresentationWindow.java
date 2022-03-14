@@ -19,6 +19,12 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+
+/**
+ * PresentationWindow
+ *
+ * The brains of the actual presentation program.
+ */
 public class PresentationWindow extends JPanel implements ActionListener {
     MainWindow mw;
 
@@ -37,6 +43,11 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
     private static final File saveLocation = new File("saved_slides").getAbsoluteFile();
 
+    /**
+     * Constructs our Presentation Window
+     * @param mw MainWindow Which is the JFrame that the presentation window is a part of.
+     * @param slideDeck SlideDeck The SlideDeck attached to the presentation.
+     */
     public PresentationWindow(MainWindow mw, SlideDeck slideDeck) {
         this.mw = mw;
         this.slideDeck = slideDeck;
@@ -276,6 +287,9 @@ public class PresentationWindow extends JPanel implements ActionListener {
         this.deleteLogic();
     }
 
+    /**
+     * Updates the GUI on what slide you're on.
+     */
     private void updateLocationText() {
         this.locationText = "Slide: "+(slideDeck.getCurrentIndex()+1)+"/"+slideDeck.getNumSlides();
         positionLabel.setText(locationText);
@@ -285,7 +299,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
      * Show or Hide
      * Method used for determining whether we're showing counting this slide in presentation view.
      *
-     * @param currentSlide
+     * @param currentSlide Slide The current slide that you are viewing.
      */
     private void showOrHide(Slide currentSlide) {
         if (currentSlide.shouldShowNumber()) {
@@ -301,6 +315,10 @@ public class PresentationWindow extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * This is the logic for the next and previous slide buttons. Checks to see whether we can go forward or back
+     * If we can't disables the buttons.
+     */
     private void setNextAndPrevious() {
         updateLocationText();
         System.out.println("Current Index: "+slideDeck.getCurrentIndex());
@@ -310,10 +328,16 @@ public class PresentationWindow extends JPanel implements ActionListener {
         nextSlide.setEnabled(slideDeck.getCurrentIndex() < slideDeck.getNumSlides() - 1);
     }
 
+    /**
+     * Enables / Disables the delete SlideButton depending on whether you can actually do that operation.
+     */
     private void deleteLogic() {
         deleteSlide.setEnabled(slideDeck.canDeleteSlide());
     }
 
+    /**
+     * Updates the GUI depending on what tool is selected.
+     */
     private void toolLogic() {
         if (drawingState == DrawingState.DRAW) {
             toolSelected.setText("Tool Selected: Drawing");
@@ -324,6 +348,10 @@ public class PresentationWindow extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * The saveAsDialog box.
+     * Prompts the user for a file location.
+     */
     private void saveAsDialog() {
         final JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(PresentationWindow.saveLocation);
@@ -349,6 +377,10 @@ public class PresentationWindow extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * The savePDFDialog box.
+     * Prompts the user for a file location.
+     */
     private void savePDFDialog() {
         final JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(PresentationWindow.saveLocation);
@@ -373,6 +405,9 @@ public class PresentationWindow extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * The textSize slider, uses JSlider and JOptionsPane.
+     */
     private void createSlider() {
         int fontMin = 5;
         int fontMax = 50;
@@ -419,6 +454,10 @@ public class PresentationWindow extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Detects buttonPresses and does the associated action.
+     * @param event ActionEvent the event that occurred.
+     */
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == newSlide) {
             System.out.println("newSlide!");

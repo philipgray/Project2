@@ -1,11 +1,3 @@
-/*
- * For fullscreen, and getting window size.
- * Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
- * double height = screenSize.getHeight();
- * double width = screenSize.getWidth();
- * frame.setSize((int) (width / 1.5), (int) (height / 1.5));
- */
-
 package GUI;
 
 import javax.swing.*;
@@ -14,13 +6,14 @@ import Alex.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Main Window is the foundation of everything!
+ * It's a JFrame that can open all the other windows.
+ */
 public class MainWindow {
     JFrame frame;
     JPanel currentPanel;
-    /**
-     * hi
-     * https://stackoverflow.com/questions/3680221/how-can-i-get-screen-resolution-in-java
-     */
+
     private void createGUI() {
         frame = new JFrame("LearningMyFriend");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,13 +22,6 @@ public class MainWindow {
         openStartWindow();
         frame.setVisible(true);
     }
-
-    /*
-    public void setSlideDeck(SlideDeck slideDeck) {
-        this.slideDeck = slideDeck;
-        System.out.println("Loaded slideDeck");
-    }
-    */
 
     public void openStartWindow() {
         currentPanel = new StartWindow(this);

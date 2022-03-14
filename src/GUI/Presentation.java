@@ -71,10 +71,7 @@ public class Presentation {
     }
 
     /**
-     * https://stackoverflow.com/questions/4216123/how-to-scale-a-bufferedimage
-     * THANK YOU
-     *
-     * 
+     * Determines whether the user can go left or right.
      * @param direction
      * @return
      */
@@ -86,6 +83,10 @@ public class Presentation {
         } else return false;
     }
 
+    /**
+     * https://stackoverflow.com/questions/4216123/how-to-scale-a-bufferedimage
+     * For the below two
+     */
     public static BufferedImage scaleBicubic(BufferedImage before, double scale) {
         final int interpolation = AffineTransformOp.TYPE_BICUBIC;
         return scale(before, scale, interpolation);
