@@ -2,6 +2,7 @@ package GUI;
 
 import Alex.*;
 import Alex.TextComponent;
+import org.w3c.dom.Text;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +18,7 @@ import java.security.Key;
 public class DrawingPanel extends JPanel {
 
     Graphics2D graphics;
+    SlideDeck slideDeck;
     Slide currentSlide;
     DrawingState drawingState;
 
@@ -28,13 +30,24 @@ public class DrawingPanel extends JPanel {
 
     int clickX1, clickX2, clickY1, clickY2;
 
-    MainWindow mw;
-
     public DrawingPanel(Slide currentSlide) {
-        // setSize(500, 750);
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLACK));
         this.currentSlide = currentSlide;
+        this.drawingState = DrawingState.NONE;
+        this.addMouseListener(new MouseHandler());
+        setFocusable(true);
+    }
+
+    /**
+     * Because we had to have two :)
+     * @param deck
+     */
+    public DrawingPanel(SlideDeck deck) {
+        setBackground(Color.WHITE);
+        setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLACK));
+        this.slideDeck = deck;
+        this.currentSlide = slideDeck.getCurrentSlide(); // WHY
         this.drawingState = DrawingState.NONE;
         this.addMouseListener(new MouseHandler());
         setFocusable(true);
@@ -83,12 +96,12 @@ public class DrawingPanel extends JPanel {
                 int[] end = lineComponent.getEndPoint();
 
                 Line2D.Double t = new Line2D.Double();
-
                 graphics.draw(new Line2D.Double(start[0], start[1], end[0], end[1]));
             } else if (component.getType() == ComponentType.Text) {
                 TextComponent textComponent = (TextComponent) component;
                 int[] coords = textComponent.getTopLeftCoord();
-                graphics.drawString(textComponent.getText(), coords[0], coords[1] + 10);
+                graphics.setFont(textComponent.getFont());
+                graphics.drawString(textComponent.getText(), coords[0], coords[1] - 10);
             }
         }
     }
@@ -106,7 +119,7 @@ public class DrawingPanel extends JPanel {
     }
 
     public void removeText(InvisibleTextField textField) {
-        SlideComponent textComponent = new PureText(textField.getText());
+        TextComponent textComponent = new PureText(textField.getText());
 
         int x1 = textField.getX();
         int y1 = textField.getY();
@@ -116,6 +129,7 @@ public class DrawingPanel extends JPanel {
 
         textComponent.setTopLeftCoord(textField.getX(), textField.getY());
         textComponent.setBottomRightCoord(x2, y2);
+        textComponent.setFont(slideDeck.getCurrentFont());
 
         currentSlide.addComponent(textComponent);
         remove(textField);
@@ -133,6 +147,7 @@ public class DrawingPanel extends JPanel {
             if (drawingState == DrawingState.TEXT) {
 
                 InvisibleTextField tf = new InvisibleTextField(DrawingPanel.this);
+                tf.setFont(slideDeck.getFont());
                 tf.setLocation(event.getPoint());
                 add(tf);
                 tf.requestFocusInWindow();

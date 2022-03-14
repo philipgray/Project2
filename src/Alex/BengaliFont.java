@@ -21,7 +21,7 @@ public class BengaliFont {
         if(bengaliFont == null){
             try {
                 bengaliFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/Kalpurush-Regular.ttf").getAbsoluteFile());
-                bengaliFont = bengaliFont.deriveFont(20f);
+                bengaliFont = bengaliFont.deriveFont(15f);
             } catch (FontFormatException | IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

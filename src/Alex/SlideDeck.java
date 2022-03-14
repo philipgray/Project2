@@ -50,6 +50,7 @@ public class SlideDeck implements Iterable<Slide> {
 
         // Load in the existing fonts
         this.loadFonts();
+        chooseFont(0);
     }
     
     /**
@@ -182,6 +183,24 @@ public class SlideDeck implements Iterable<Slide> {
             this.currentFont = availableFonts[fontIndex];
             this.currentFontFile = availableFontFiles[fontIndex];
         }
+    }
+
+    /**
+     * setter method for fonts!
+     * @param font
+     */
+    public void setCurrentFont(Font font) {
+        this.currentFont = font;
+    }
+
+    /**
+     * WHY WAS THIS NOT A METHOD ALREADY???
+     *
+     * Returns the SlideDeck's currentFont.
+     * @return Font the currentFont in the SlideDeck.
+     */
+    public Font getCurrentFont() {
+        return this.currentFont;
     }
 
     /**

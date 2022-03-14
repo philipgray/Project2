@@ -94,6 +94,10 @@ public abstract class TextComponent extends SlideComponent {
         this.fontFile = fontFile;
     }
 
+    public void setFont(Font font){
+        this.font = font;
+    }
+
 
     /**
      * Returns the file of the font (used for saving the text component)

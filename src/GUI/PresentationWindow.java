@@ -6,6 +6,8 @@ import Alex.SlideDeck;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
@@ -26,10 +28,12 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
     String locationText;
 
-    JLabel positionLabel, slideCount;
+    JLabel positionLabel, slideCount, toolSelected;
 
     DrawingPanel drawingPanel;
     SlideDeck slideDeck;
+
+    DrawingState drawingState;
 
     private static final File saveLocation = new File("saved_slides").getAbsoluteFile();
 
@@ -52,7 +56,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         // New Alex.Slide Button --------------------------------------------------------------------
         newSlide = new JButton("Add New Slide");
         newSlide.addActionListener(this);
-        newSlide.setToolTipText("Placeholder Text");
+        newSlide.setToolTipText("নতুন স্লাইড যোগ করুন");
 
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridwidth = 3;
@@ -67,7 +71,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         // Present Button --------------------------------------------------------------------------
         present = new JButton("Present");
         present.addActionListener(this);
-        present.setToolTipText("Placeholder Text");
+        present.setToolTipText("বর্তমান");
 
         constraints.insets = new Insets(0, 10, 0, 10);
 
@@ -79,7 +83,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         saveAs = new JButton("Save As...");
         saveAs.addActionListener(this);
-        saveAs.setToolTipText("Placeholder Text");
+        saveAs.setToolTipText("সংরক্ষণ করুন...");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.ipadx = 0;
@@ -97,7 +101,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         save = new JButton("Save");
         save.addActionListener(this);
-        save.setToolTipText("Placeholder Text");
+        save.setToolTipText("উপস্থাপনা সংরক্ষণ করুন");
 
         constraints.gridy = 1;
 
@@ -154,7 +158,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         backgroundColor = new JButton("Background Color");
         backgroundColor.addActionListener(this);
-        backgroundColor.setToolTipText("Placeholder Text");
+        backgroundColor.setToolTipText("পেছনের রং");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
@@ -163,17 +167,29 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         add(backgroundColor, constraints);
 
+        // text side button
+
+        textSize = new JButton("Text Size");
+        textSize.addActionListener(this);
+        textSize.setToolTipText("অক্ষরের আকার");
+
+        constraints.gridy = constraints.gridy + 1;
+
+        add(textSize, constraints);
+
         // Drawing Button --------------------------------------------------------------------------
 
-        draw = new JButton("Draw");
+        draw = new JButton("Drawing Tool");
         draw.addActionListener(this);
         draw.setToolTipText("অঙ্কন টুল");
 
-        constraints.gridy = 1;
+        constraints.gridx = constraints.gridx + 1;
+        constraints.gridy = 0;
 
         add(draw, constraints);
 
         // Font Select Button ----------------------------------------------------------------------
+        /**
         fontSelect = new JButton("Font");
         fontSelect.addActionListener(this);
         fontSelect.setToolTipText("Placeholder Text");
@@ -182,27 +198,29 @@ public class PresentationWindow extends JPanel implements ActionListener {
         constraints.gridy = 0;
 
         add(fontSelect, constraints);
-
-        // FontSize Button --------------------------------------------------------------------------
-        textSize = new JButton("Text Size");
-        textSize.addActionListener(this);
-        textSize.setToolTipText("Placeholder Text");
-
-        constraints.gridy = 1;
-
-        add(textSize, constraints);
+         **/
 
         // CreateBullet Button ------------------------------------------------------
-        text = new JButton("Text");
+        text = new JButton("Text Tool");
         text.addActionListener(this);
-        text.setToolTipText("Placeholder Text");
+        text.setToolTipText("টেক্সট টুল");
 
-        constraints.gridx = constraints.gridx + 1;
-        constraints.gridy = 0;
+        constraints.gridy = constraints.gridy + 1;
 
         add(text, constraints);
 
+        // FontSize Button --------------------------------------------------------------------------
+
+
+        // Information JLabel
+
+        toolSelected = new JLabel("Tool Selected: None");
+        constraints.gridy = constraints.gridy + 1;
+
+        add(toolSelected, constraints);
+
         // Create Sub-Bullet Button ------------------------------------------------------
+        /**
         createSubBullet = new JButton("Bulleted List");
         createSubBullet.addActionListener(this);
         createSubBullet.setToolTipText("Placeholder Text");
@@ -210,7 +228,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         constraints.gridy = 1;
 
         add(createSubBullet, constraints);
-
+        **/
         // Next Slide Button ------------------------------------------------------------------
         nextSlide = new JButton("Next Slide");
         nextSlide.addActionListener(this);
@@ -240,7 +258,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
 
         // Trying something here! --------------------------------------------------------------
-        drawingPanel = new DrawingPanel(slideDeck.getCurrentSlide());
+        drawingPanel = new DrawingPanel(slideDeck);
 
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.gridheight = GridBagConstraints.REMAINDER;
@@ -253,6 +271,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         add(drawingPanel, constraints);
 
+        slideDeck.setCurrentFont(new Font("Serif", Font.PLAIN, 15));
         this.setNextAndPrevious();
         this.deleteLogic();
     }
@@ -293,6 +312,16 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
     private void deleteLogic() {
         deleteSlide.setEnabled(slideDeck.canDeleteSlide());
+    }
+
+    private void toolLogic() {
+        if (drawingState == DrawingState.DRAW) {
+            toolSelected.setText("Tool Selected: Drawing");
+        } else if (drawingState == DrawingState.TEXT) {
+            toolSelected.setText("Tool Selected: Text");
+        } else {
+            toolSelected.setText("Tool Selected: None");
+        }
     }
 
     private void saveAsDialog() {
@@ -344,6 +373,52 @@ public class PresentationWindow extends JPanel implements ActionListener {
         }
     }
 
+    private void createSlider() {
+        int fontMin = 5;
+        int fontMax = 50;
+        int fontInit = 15;
+
+        JSlider fontSlider = new JSlider(fontMin, fontMax, fontInit);
+
+        fontSlider.setMajorTickSpacing(5);
+        fontSlider.setMinorTickSpacing(1);
+
+        fontSlider.setPaintTicks(true);
+        fontSlider.setPaintLabels(true);
+
+
+        JLabel test = new JLabel("The quick brown fox...");
+        test.setPreferredSize(new Dimension(500, 100));
+
+        JPanel sliderPanel = new JPanel();
+        sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
+
+        sliderPanel.add(test);
+        sliderPanel.add(fontSlider);
+
+
+        fontSlider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                JSlider source = (JSlider) e.getSource();
+                if (!source.getValueIsAdjusting()) {
+                    int fontSize = source.getValue();
+                    test.setFont(new Font("Serif", Font.PLAIN, fontSize));
+                    }
+                }
+        });
+
+        int answer = JOptionPane.showOptionDialog(this, sliderPanel,
+                "Choose a font size!", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, null, null);
+
+        if (JOptionPane.OK_OPTION == answer) {
+            int val = fontSlider.getValue();
+            slideDeck.setCurrentFont(new Font("Serif", Font.PLAIN, val));
+            System.out.println("Does this work");
+        }
+    }
+
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == newSlide) {
             System.out.println("newSlide!");
@@ -352,29 +427,40 @@ public class PresentationWindow extends JPanel implements ActionListener {
             drawingPanel.updateSlide(slideDeck.getCurrentSlide());
             this.updateLocationText();
             this.deleteLogic();
-
+            drawingState = DrawingState.NONE; // this is a bad practice
         } else if (event.getSource() == present) {
             System.out.println("present!");
             new Presentation(slideDeck.getSlideImages());
+            drawingState = DrawingState.NONE; // this is a bad practice
 
         } else if (event.getSource() == saveAs) {
             this.saveAsDialog();
+            drawingState = DrawingState.NONE; // this is a bad practice
+
 
         } else if (event.getSource() == save) {
             boolean operationComplete = slideDeck.save();
+            drawingState = DrawingState.NONE; // this is a bad practice
+
             if (!operationComplete) {
                 this.saveAsDialog();
             }
         } else if (event.getSource() == savePDF) {
             savePDFDialog();
+            drawingState = DrawingState.NONE; // this is a bad practice
+
         } else if (event.getSource() == slideCountButton) {
             showOrHide(slideDeck.getCurrentSlide());
+            drawingState = DrawingState.NONE; // this is a bad practice
+
         }  else if (event.getSource() == draw) {
-            drawingPanel.updateState(DrawingState.DRAW);
-            System.out.println("drawing mode");
+            drawingState = DrawingState.DRAW;
+            drawingPanel.updateState(drawingState);
+
 
         }  else if (event.getSource() == text) {
-            drawingPanel.updateState(DrawingState.TEXT);
+            drawingState = DrawingState.TEXT;
+            drawingPanel.updateState(drawingState);
             System.out.println("text mode");
 
         }  else if (event.getSource() == deleteSlide) {
@@ -384,17 +470,22 @@ public class PresentationWindow extends JPanel implements ActionListener {
             }
             this.setNextAndPrevious();
             this.deleteLogic();
+            drawingState = DrawingState.NONE; // this is a bad practice
+
 
         }  else if (event.getSource() == fontSelect) {
 
             JFontChooser fontChooser = new JFontChooser();
             int result = fontChooser.showDialog(this);
-            if (result == JFontChooser.OK_OPTION) {
-               //  slideDeck.getCurrentSlide().setFont() = fontChooser.getSelectedFont();
-            }
+            drawingState = DrawingState.NONE; // this is a bad practice
 
-    } else if (event.getSource() == fontSelect) {
+
+        } else if (event.getSource() == textSize) {
             System.out.println("fontSelect!");
+            createSlider();
+            drawingState = DrawingState.NONE; // this is a bad practice
+
+
         } else if (event.getSource() == backgroundColor) {
                 Color newColor = JColorChooser.showDialog(this, "Choose Background Color", Color.WHITE);
                 slideDeck.getCurrentSlide().setBackground(new ColorBackground(newColor));
@@ -404,12 +495,15 @@ public class PresentationWindow extends JPanel implements ActionListener {
             slideDeck.nextSlide();
             this.setNextAndPrevious();
             drawingPanel.updateSlide(slideDeck.getCurrentSlide());
+            drawingState = DrawingState.NONE; // this is a bad practice
+
 
         } else if (event.getSource() == previousSlide) {
             slideDeck.previousSlide();
             this.setNextAndPrevious();
             drawingPanel.updateSlide(slideDeck.getCurrentSlide());
+            drawingState = DrawingState.NONE; // this is a bad practice
         }
-
+        toolLogic();
     }
 }
