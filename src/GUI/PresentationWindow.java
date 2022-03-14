@@ -355,6 +355,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
 
         } else if (event.getSource() == present) {
             System.out.println("present!");
+            new Presentation(slideDeck.getSlideImages());
 
         } else if (event.getSource() == saveAs) {
             this.saveAsDialog();
