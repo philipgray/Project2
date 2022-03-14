@@ -243,7 +243,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         // Next Slide Button ------------------------------------------------------------------
         nextSlide = new JButton("Next Slide");
         nextSlide.addActionListener(this);
-        nextSlide.setToolTipText("Placeholder Text");
+        nextSlide.setToolTipText("পরবর্তী স্লাইড");
 
         constraints.gridx = constraints.gridx + 1;
         constraints.gridy = 0;
@@ -253,7 +253,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
         // Previous Slide Button ---------------------------------------------------------------
         previousSlide = new JButton("Previous Slide");
         previousSlide.addActionListener(this);
-        previousSlide.setToolTipText("Placeholder Text");
+        previousSlide.setToolTipText("পূর্ববর্তী স্লাইড");
 
         constraints.gridy = 1;
 
