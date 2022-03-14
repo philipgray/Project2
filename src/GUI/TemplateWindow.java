@@ -82,11 +82,11 @@ public class TemplateWindow extends JPanel implements ActionListener {
         add(templateOne, constraints);
 
         // Template 2 Button -----------------------------------------------------------------------
-        templateTwo = new JButton("Template 2", icon);
+        templateTwo = new JButton("Venn Diagrams Template", new ImageIcon("images/vennTemplate.png"));
         templateTwo.setVerticalTextPosition(AbstractButton.BOTTOM);
         templateTwo.setHorizontalTextPosition(AbstractButton.CENTER);
         templateTwo.addActionListener(this);
-        templateTwo.setToolTipText("টেমপ্লেট দুই");
+        templateTwo.setToolTipText("ভেন টেমপ্লেট");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 2;
@@ -94,11 +94,11 @@ public class TemplateWindow extends JPanel implements ActionListener {
         add(templateTwo, constraints);
 
         // Template 3 Button -----------------------------------------------------------------------
-        templateThree = new JButton("Template 3", icon);
+        templateThree = new JButton("Naval Template", new ImageIcon("images/navalTemplate.png"));
         templateThree.setVerticalTextPosition(AbstractButton.BOTTOM);
         templateThree.setHorizontalTextPosition(AbstractButton.CENTER);
         templateThree.addActionListener(this);
-        templateThree.setToolTipText("টেমপ্লেট তিন");
+        templateThree.setToolTipText("নৌ টেমপ্লেট");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 0;
@@ -106,11 +106,11 @@ public class TemplateWindow extends JPanel implements ActionListener {
         add(templateThree, constraints);
 
         // Template 4 Button -----------------------------------------------------------------------
-        templateFour = new JButton("Template 4", icon);
+        templateFour = new JButton("Science Template", new ImageIcon("images/scienceTemplate.png"));
         templateFour.setVerticalTextPosition(AbstractButton.BOTTOM);
         templateFour.setHorizontalTextPosition(AbstractButton.CENTER);
         templateFour.addActionListener(this);
-        templateFour.setToolTipText("টেমপ্লেট চার");
+        templateFour.setToolTipText("বিজ্ঞান টেমপ্লেট");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 1;
@@ -118,11 +118,11 @@ public class TemplateWindow extends JPanel implements ActionListener {
         add(templateFour, constraints);
 
         // Template 5 Button -----------------------------------------------------------------------
-        templateFive = new JButton("Template 5", icon);
+        templateFive = new JButton("Minimal Template", new ImageIcon("images/minimalTemplate.png"));
         templateFive.setVerticalTextPosition(AbstractButton.BOTTOM);
         templateFive.setHorizontalTextPosition(AbstractButton.CENTER);
         templateFive.addActionListener(this);
-        templateFive.setToolTipText("টটেমপ্লেট পাঁচ");
+        templateFive.setToolTipText("ন্যূনতম টেমপ্লেট");
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 2;
@@ -143,12 +143,16 @@ public class TemplateWindow extends JPanel implements ActionListener {
             mw.openPresentationWindow( SlideDeck.openSlideFile( new File("saved_slides/SlideTemplates/Stars.json").getAbsoluteFile()));
         } else if (event.getSource() == templateTwo) {
             System.out.println("templateTwo!");
+            mw.openPresentationWindow(SlideDeck.openSlideFile(new File("saved_slides/SlideTemplates/V3nn.json")));
         } else if (event.getSource() == templateThree) {
             System.out.println("templateThree!");
+            mw.openPresentationWindow(SlideDeck.openSlideFile(new File("saved_slides/SlideTemplates/Naval.json")));
         } else if (event.getSource() == templateFour) {
             System.out.println("templateFour!");
+            mw.openPresentationWindow(SlideDeck.openSlideFile(new File("saved_slides/SlideTemplates/Science.json")));
         } else if (event.getSource() == templateFive) {
             System.out.println("templateFive!");
+            mw.openPresentationWindow(SlideDeck.openSlideFile(new File("saved_slides/SlideTemplates/defaultSlide.json")));
         }
     }
 }
