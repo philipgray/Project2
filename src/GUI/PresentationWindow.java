@@ -316,6 +316,23 @@ public class PresentationWindow extends JPanel implements ActionListener {
     }
 
     /**
+     * Updates the button and status text for showing/hiding text numbers
+     * 
+     * @param currentSlide Current slide you are visiting
+      */
+    private void updateShowHideButton(Slide currentSlide){
+        if (currentSlide.shouldShowNumber()) {
+            slideCountButton.setText("Hide Slide Number");
+            slideCountButton.setToolTipText("স্লাইড কাউন্ট লুকান"); // hide
+            slideCount.setText("Slide Number: Shown");
+        } else {
+            slideCountButton.setText("Show Slide Number");
+            slideCountButton.setToolTipText("স্লাইড কাউন্ট দেখান"); // show
+            slideCount.setText("Slide Number: Hidden");
+        }
+    }
+
+    /**
      * This is the logic for the next and previous slide buttons. Checks to see whether we can go forward or back
      * If we can't disables the buttons.
      */
@@ -467,6 +484,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
             this.updateLocationText();
             this.deleteLogic();
             drawingState = DrawingState.NONE; // this is a bad practice
+            this.updateShowHideButton(slideDeck.getCurrentSlide());
         } else if (event.getSource() == present) {
             System.out.println("present!");
             new Presentation(slideDeck.getSlideImages());
@@ -510,7 +528,8 @@ public class PresentationWindow extends JPanel implements ActionListener {
             this.setNextAndPrevious();
             this.deleteLogic();
             drawingState = DrawingState.NONE; // this is a bad practice
-
+            this.updateShowHideButton(slideDeck.getCurrentSlide());
+            
 
         }  else if (event.getSource() == fontSelect) {
 
@@ -535,6 +554,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
             this.setNextAndPrevious();
             drawingPanel.updateSlide(slideDeck.getCurrentSlide());
             drawingState = DrawingState.NONE; // this is a bad practice
+            this.updateShowHideButton(slideDeck.getCurrentSlide());
 
 
         } else if (event.getSource() == previousSlide) {
@@ -542,6 +562,7 @@ public class PresentationWindow extends JPanel implements ActionListener {
             this.setNextAndPrevious();
             drawingPanel.updateSlide(slideDeck.getCurrentSlide());
             drawingState = DrawingState.NONE; // this is a bad practice
+            this.updateShowHideButton(slideDeck.getCurrentSlide());
         }
         toolLogic();
     }
